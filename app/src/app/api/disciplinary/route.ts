@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { logAudit } from '@/lib/audit'
+import { DisciplinaryStatus, Prisma } from '@prisma/client'
 
 // GET /api/disciplinary - Get all disciplinary procedures for tenant
 export async function GET(req: Request) {
@@ -34,13 +35,9 @@ export async function GET(req: Request) {
 
     const { searchParams } = new URL(req.url)
     const employeeId = searchParams.get('employeeId')
-    const status = searchParams.get('status')
+    const status = searchParams.get('status') as DisciplinaryStatus | null
 
-    const where: {
-      tenantId: string
-      employeeId?: string
-      status?: string
-    } = {
+    const where: Prisma.DisciplinaryProcedureWhereInput = {
       tenantId: membership.tenantId,
     }
 

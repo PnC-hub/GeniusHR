@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { logAudit } from '@/lib/audit'
+import { SafetyTrainingStatus, SafetyTrainingType, Prisma } from '@prisma/client'
 
 // GET /api/safety-training - Get all safety trainings for tenant
 export async function GET(req: Request) {
@@ -26,15 +27,10 @@ export async function GET(req: Request) {
 
     const { searchParams } = new URL(req.url)
     const employeeId = searchParams.get('employeeId')
-    const status = searchParams.get('status')
-    const type = searchParams.get('type')
+    const status = searchParams.get('status') as SafetyTrainingStatus | null
+    const type = searchParams.get('type') as SafetyTrainingType | null
 
-    const where: {
-      tenantId: string
-      employeeId?: string
-      status?: string
-      trainingType?: string
-    } = {
+    const where: Prisma.SafetyTrainingWhereInput = {
       tenantId: membership.tenantId,
     }
 

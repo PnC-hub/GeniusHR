@@ -4,6 +4,7 @@ import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { logAudit } from '@/lib/audit'
 import { randomBytes } from 'crypto'
+import { WhistleblowingStatus, WhistleblowingCategory, Prisma } from '@prisma/client'
 
 // Generate unique access code for anonymous reporting
 function generateAccessCode(): string {
@@ -39,14 +40,10 @@ export async function GET(req: Request) {
     }
 
     const { searchParams } = new URL(req.url)
-    const status = searchParams.get('status')
-    const category = searchParams.get('category')
+    const status = searchParams.get('status') as WhistleblowingStatus | null
+    const category = searchParams.get('category') as WhistleblowingCategory | null
 
-    const where: {
-      tenantId: string
-      status?: string
-      category?: string
-    } = {
+    const where: Prisma.WhistleblowingReportWhereInput = {
       tenantId: membership.tenantId,
     }
 
