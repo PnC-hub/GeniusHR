@@ -132,8 +132,8 @@ export default async function SettingsPage() {
             <h2 className="text-lg font-semibold text-gray-900 mb-4">{group.title}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {group.items.map((item) => {
-                const disabled = item.adminOnly && !isAdmin
-                const isPremium = item.premium && tenant.plan === 'STARTER'
+                const disabled = ('adminOnly' in item && item.adminOnly) && !isAdmin
+                const isPremium = ('premium' in item && item.premium) && tenant.plan === 'STARTER'
 
                 return (
                   <Link
@@ -151,12 +151,12 @@ export default async function SettingsPage() {
                       <div className="flex-1">
                         <div className="flex items-center gap-2">
                           <h3 className="font-semibold text-gray-900">{item.label}</h3>
-                          {item.adminOnly && (
+                          {'adminOnly' in item && item.adminOnly && (
                             <span className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded">
                               Admin
                             </span>
                           )}
-                          {item.premium && (
+                          {'premium' in item && item.premium && (
                             <span className="text-xs bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded">
                               Premium
                             </span>
