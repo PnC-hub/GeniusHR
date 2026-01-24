@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { getPlanLimits } from '@/lib/tenant'
+import { logAudit } from '@/lib/audit'
 
 export async function GET() {
   try {
@@ -119,6 +120,21 @@ export async function POST(req: Request) {
         }
       })
     }
+
+    // Log audit event
+    await logAudit({
+      tenantId: membership.tenantId,
+      userId: session.user.id,
+      action: 'CREATE',
+      entityType: 'Employee',
+      entityId: employee.id,
+      newValue: {
+        firstName,
+        lastName,
+        contractType,
+        hireDate,
+      },
+    })
 
     return NextResponse.json(employee, { status: 201 })
   } catch (error) {

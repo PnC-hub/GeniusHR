@@ -9,6 +9,8 @@ export default function RegisterPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [selectedPlan, setSelectedPlan] = useState('STARTER')
+  const [acceptedTerms, setAcceptedTerms] = useState(false)
+  const [acceptedPrivacy, setAcceptedPrivacy] = useState(false)
 
   const plans = [
     { id: 'STARTER', name: 'Starter', price: '€29', period: '/mese', employees: 'fino a 5 dipendenti' },
@@ -22,12 +24,20 @@ export default function RegisterPage() {
     setError('')
 
     const formData = new FormData(e.currentTarget)
+    if (!acceptedTerms || !acceptedPrivacy) {
+      setError('Devi accettare i Termini di Servizio e la Privacy Policy')
+      setLoading(false)
+      return
+    }
+
     const data = {
       studioName: formData.get('studioName'),
       ownerName: formData.get('ownerName'),
       email: formData.get('email'),
       password: formData.get('password'),
-      plan: selectedPlan
+      plan: selectedPlan,
+      acceptedTerms: true,
+      acceptedPrivacy: true
     }
 
     try {
@@ -136,9 +146,44 @@ export default function RegisterPage() {
                   />
                 </div>
 
+                {/* Terms and Privacy Checkboxes */}
+                <div className="space-y-3 pt-2">
+                  <label className="flex items-start gap-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={acceptedTerms}
+                      onChange={(e) => setAcceptedTerms(e.target.checked)}
+                      className="mt-1 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    />
+                    <span className="text-sm text-gray-600">
+                      Accetto i{' '}
+                      <Link href="/terms" target="_blank" className="text-blue-600 hover:underline">
+                        Termini di Servizio
+                      </Link>
+                      {' '}*
+                    </span>
+                  </label>
+
+                  <label className="flex items-start gap-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={acceptedPrivacy}
+                      onChange={(e) => setAcceptedPrivacy(e.target.checked)}
+                      className="mt-1 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    />
+                    <span className="text-sm text-gray-600">
+                      Ho letto e accetto la{' '}
+                      <Link href="/privacy" target="_blank" className="text-blue-600 hover:underline">
+                        Privacy Policy
+                      </Link>
+                      {' '}*
+                    </span>
+                  </label>
+                </div>
+
                 <button
                   type="submit"
-                  disabled={loading}
+                  disabled={loading || !acceptedTerms || !acceptedPrivacy}
                   className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading ? 'Registrazione in corso...' : 'Inizia Prova Gratuita'}

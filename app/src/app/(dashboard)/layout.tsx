@@ -21,6 +21,7 @@ export default async function DashboardLayout({
     { href: '/deadlines', icon: '⏰', label: 'Scadenze' },
     { href: '/performance', icon: '📊', label: 'Performance' },
     { href: '/onboarding', icon: '📋', label: 'Onboarding' },
+    { href: '/compliance', icon: '✅', label: 'Compliance' },
     { href: '/settings', icon: '⚙️', label: 'Impostazioni' }
   ]
 

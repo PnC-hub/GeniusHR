@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { CookieConsent } from "@/components/CookieConsent";
+import { DisclaimerBanner } from "@/components/DisclaimerBanner";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -20,7 +22,13 @@ export default function RootLayout({
   return (
     <html lang="it">
       <body className={`${inter.variable} antialiased`}>
-        {children}
+        <div className="flex min-h-screen flex-col">
+          <div className="flex-1">
+            {children}
+          </div>
+          <DisclaimerBanner />
+        </div>
+        <CookieConsent />
       </body>
     </html>
   );

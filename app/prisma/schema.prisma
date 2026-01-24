@@ -60,9 +60,10 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
-  accounts      Account[]
-  sessions      Session[]
-  tenantMembers TenantMember[]
+  accounts         Account[]
+  sessions         Session[]
+  tenantMembers    TenantMember[]
+  legalAcceptances LegalAcceptance[]
 }
 
 enum UserRole {
@@ -105,6 +106,8 @@ model Tenant {
   deadlines        Deadline[]
   performanceReviews PerformanceReview[]
   onboardingChecklists OnboardingChecklist[]
+  gdprConsents     GdprConsent[]
+  auditLogs        AuditLog[]
 
   // White-label parent (for consultants)
   parentTenantId   String?
@@ -185,6 +188,7 @@ model Employee {
   deadlines       Deadline[]
   performanceReviews PerformanceReview[]
   onboardingItems OnboardingItem[]
+  gdprConsents    GdprConsent[]
 
   @@index([tenantId])
 }
@@ -413,4 +417,145 @@ model Invoice {
   paidAt          DateTime?
 
   createdAt       DateTime @default(now())
+}
+
+// ============================================
+// LEGAL & COMPLIANCE (GDPR)
+// ============================================
+
+// Documenti legali versionati (Privacy Policy, ToS, DPA, Cookie Policy)
+model LegalDocument {
+  id          String            @id @default(cuid())
+  type        LegalDocumentType
+  version     String            // "1.0", "1.1", "2.0"
+  title       String
+  content     String            @db.Text
+  summary     String?           @db.Text // Riassunto modifiche per nuove versioni
+  effectiveAt DateTime
+  isActive    Boolean           @default(false)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  acceptances LegalAcceptance[]
+
+  @@unique([type, version])
+  @@index([type, isActive])
+}
+
+enum LegalDocumentType {
+  PRIVACY_POLICY
+  TERMS_OF_SERVICE
+  DPA
+  COOKIE_POLICY
+}
+
+// Tracking accettazione documenti legali da parte degli utenti
+model LegalAcceptance {
+  id              String   @id @default(cuid())
+  userId          String
+  legalDocumentId String
+
+  ipAddress       String?
+  userAgent       String?
+  acceptedAt      DateTime @default(now())
+
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  legalDocument   LegalDocument @relation(fields: [legalDocumentId], references: [id])
+
+  @@unique([userId, legalDocumentId])
+  @@index([userId])
+}
+
+// Consensi GDPR specifici per dipendenti
+model GdprConsent {
+  id          String          @id @default(cuid())
+  tenantId    String
+  employeeId  String
+
+  consentType GdprConsentType
+  granted     Boolean
+  purpose     String?         // Finalita specifica del consenso
+
+  grantedAt   DateTime?
+  revokedAt   DateTime?
+  expiresAt   DateTime?
+
+  // Tracciabilita raccolta consenso
+  collectedBy String?         // User ID di chi ha raccolto il consenso
+  method      String?         // "online", "paper", "verbal"
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  tenant      Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  employee    Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+
+  @@unique([employeeId, consentType])
+  @@index([tenantId])
+}
+
+enum GdprConsentType {
+  DATA_PROCESSING      // Trattamento dati personali base
+  HEALTH_DATA          // Dati sanitari (art. 9 GDPR)
+  MARKETING            // Comunicazioni marketing
+  THIRD_PARTY_SHARING  // Condivisione con terze parti
+  PHOTO_VIDEO          // Uso immagini/video
+}
+
+// Audit Log per tracciare tutte le operazioni (compliance GDPR Art. 32)
+model AuditLog {
+  id          String      @id @default(cuid())
+  tenantId    String
+  userId      String?     // Chi ha eseguito l'azione
+
+  action      AuditAction
+  entityType  String      // "Employee", "Document", "Consent", etc.
+  entityId    String
+
+  details     Json?       // Dettagli aggiuntivi
+  oldValue    Json?       // Valore precedente (per update/delete)
+  newValue    Json?       // Nuovo valore (per create/update)
+
+  ipAddress   String?
+  userAgent   String?
+
+  createdAt   DateTime @default(now())
+
+  tenant      Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId, createdAt])
+  @@index([entityType, entityId])
+  @@index([userId])
+}
+
+enum AuditAction {
+  CREATE
+  READ
+  UPDATE
+  DELETE
+  EXPORT
+  LOGIN
+  LOGOUT
+  CONSENT_GRANTED
+  CONSENT_REVOKED
+  DOCUMENT_SIGNED
+}
+
+// Cookie Consent per visitatori (GDPR compliant)
+model CookieConsent {
+  id          String   @id @default(cuid())
+  visitorId   String   @unique  // UUID generato client-side
+  userId      String?           // Se utente loggato
+
+  necessary   Boolean  @default(true)   // Sempre true, non disabilitabile
+  analytics   Boolean  @default(false)
+  marketing   Boolean  @default(false)
+  preferences Boolean  @default(false)
+
+  ipAddress   String?
+  userAgent   String?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
