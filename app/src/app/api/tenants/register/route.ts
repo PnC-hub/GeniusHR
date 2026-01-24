@@ -55,8 +55,12 @@ export async function POST(req: Request) {
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 12)
 
-    // Create Stripe customer
-    const stripeCustomer = await createCustomer(email, ownerName)
+    // Create Stripe customer (if Stripe is configured)
+    let stripeCustomerId: string | null = null
+    if (process.env.STRIPE_SECRET_KEY) {
+      const stripeCustomer = await createCustomer(email, ownerName)
+      stripeCustomerId = stripeCustomer.id
+    }
 
     // Create user and tenant
     const result = await prisma.$transaction(async (tx) => {
@@ -76,7 +80,7 @@ export async function POST(req: Request) {
           name: studioName,
           slug,
           plan: plan as 'STARTER' | 'PROFESSIONAL' | 'ENTERPRISE' | 'PARTNER',
-          stripeCustomerId: stripeCustomer.id,
+          stripeCustomerId,
           subscriptionStatus: 'TRIAL',
           trialEndsAt: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000), // 14 days
           members: {
@@ -91,12 +95,12 @@ export async function POST(req: Request) {
       return { user, tenant }
     })
 
-    // Create Stripe checkout session for subscription
+    // Create Stripe checkout session for subscription (if configured)
     const planConfig = PLANS[plan as keyof typeof PLANS]
 
-    if (planConfig.priceId) {
+    if (stripeCustomerId && planConfig.priceId && process.env.STRIPE_SECRET_KEY) {
       const checkoutSession = await createCheckoutSession({
-        customerId: stripeCustomer.id,
+        customerId: stripeCustomerId,
         priceId: planConfig.priceId,
         tenantId: result.tenant.id,
         successUrl: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard?success=true`,

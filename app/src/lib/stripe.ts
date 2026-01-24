@@ -1,8 +1,11 @@
 import Stripe from 'stripe'
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-12-15.clover'
-})
+// Initialize Stripe only if secret key is available
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY
+
+export const stripe = stripeSecretKey
+  ? new Stripe(stripeSecretKey, { apiVersion: '2025-12-15.clover' })
+  : null as unknown as Stripe
 
 export const PLANS = {
   STARTER: {
