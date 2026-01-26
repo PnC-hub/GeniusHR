@@ -20,7 +20,17 @@ jobs:
           command_timeout: 20m
           script: |
             cd /var/www/geniushr
+
+            # Show current commit before pull
+            echo "=== Before pull ==="
+            git log -1 --oneline
+
             git pull origin main
+
+            # Show commit after pull
+            echo "=== After pull ==="
+            git log -1 --oneline
+
             cd app
 
             # Stop and delete PM2 process completely
@@ -28,6 +38,9 @@ jobs:
 
             # Clean old build artifacts
             sudo rm -rf .next || rm -rf .next
+
+            # Also clean node_modules cache
+            rm -rf node_modules/.cache 2>/dev/null || true
 
             # Ensure correct ownership
             sudo chown -R geniusfast:geniusfast . 2>/dev/null || true
@@ -38,7 +51,19 @@ jobs:
             # Build the app
             npm run build
 
-            # Start fresh PM2 process with explicit port
+            # Verify the build includes signatures
+            echo "=== Checking build for signatures ==="
+            ls -la .next/server/app/\(dashboard\)/signatures/ 2>/dev/null || echo "signatures folder not found"
+
+            # Start fresh PM2 process
             PORT=3000 pm2 start npm --name "geniushr" -- start
 
+            # Show PM2 status
+            pm2 status
+
             pm2 save
+
+            # Test local route
+            sleep 5
+            echo "=== Testing local route ==="
+            curl -s -o /dev/null -w "%{http_code}" http://localhost:3000/signatures || echo "local test failed"
