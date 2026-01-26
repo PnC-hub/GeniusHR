@@ -23,14 +23,12 @@ jobs:
             git pull origin main
             cd app
 
-            # Kill all node/npm processes to start fresh
-            pm2 kill 2>/dev/null || true
-            pkill -f "node.*geniushr" 2>/dev/null || true
+            # Stop existing process gracefully
+            pm2 stop geniushr 2>/dev/null || true
+            pm2 delete geniushr 2>/dev/null || true
 
             # Clean old build artifacts
             sudo rm -rf .next || rm -rf .next
-
-            # Also clean node_modules cache
             rm -rf node_modules/.cache 2>/dev/null || true
 
             # Ensure correct ownership
@@ -42,22 +40,17 @@ jobs:
             # Build the app
             npm run build
 
-            # Show build directory to verify
-            echo "=== Build directory content ==="
-            ls -la .next/server/app/\(dashboard\)/
-
             # Start PM2 with explicit cwd
             pm2 start npm --name "geniushr" --cwd /var/www/geniushr/app -- start
-
             pm2 save
 
-            # Wait for server to fully start
-            sleep 15
+            # Wait for server to start
+            sleep 10
 
-            # Check PM2 logs for errors
+            # Show PM2 logs
             echo "=== PM2 logs ==="
-            pm2 logs geniushr --lines 20 --nostream
+            pm2 logs geniushr --lines 10 --nostream 2>&1 || echo "no logs"
 
             # Test the route
             echo "=== Testing localhost:3000/signatures ==="
-            curl -v http://localhost:3000/signatures 2>&1 | head -30
+            curl -s http://localhost:3000/signatures | head -50 || echo "curl failed"
