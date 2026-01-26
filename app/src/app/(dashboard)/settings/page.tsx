@@ -5,16 +5,28 @@ import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 
 export default async function SettingsPage() {
-  const session = await getServerSession(authOptions)
+  let session
+  try {
+    session = await getServerSession(authOptions)
+  } catch (e) {
+    console.error('Settings: Error getting session:', e)
+    redirect('/login')
+  }
 
   if (!session) {
     redirect('/login')
   }
 
-  const membership = await prisma.tenantMember.findFirst({
-    where: { userId: session.user.id },
-    include: { tenant: true }
-  })
+  let membership
+  try {
+    membership = await prisma.tenantMember.findFirst({
+      where: { userId: session.user.id },
+      include: { tenant: true }
+    })
+  } catch (e) {
+    console.error('Settings: Error getting membership:', e)
+    redirect('/onboarding')
+  }
 
   if (!membership) {
     redirect('/onboarding')
