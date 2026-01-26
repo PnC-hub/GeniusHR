@@ -1,29 +1,18 @@
-import { getServerSession } from 'next-auth'
-import { redirect } from 'next/navigation'
-import { authOptions } from '@/lib/auth'
-import { prisma } from '@/lib/prisma'
+'use client'
 
-export default async function SettingsPage() {
-  const session = await getServerSession(authOptions)
+import { useEffect, useState } from 'react'
 
-  if (!session) {
-    redirect('/login')
-  }
+export default function SettingsPage() {
+  const [loaded, setLoaded] = useState(false)
 
-  const membership = await prisma.tenantMember.findFirst({
-    where: { userId: session.user.id },
-    include: { tenant: true }
-  })
-
-  if (!membership) {
-    redirect('/onboarding')
-  }
+  useEffect(() => {
+    setLoaded(true)
+  }, [])
 
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold">Impostazioni</h1>
-      <p className="mt-2">Piano: {membership.tenant.plan}</p>
-      <p>Ruolo: {membership.role}</p>
+      <p className="mt-2">Client loaded: {loaded ? 'Yes' : 'No'}</p>
     </div>
   )
 }
