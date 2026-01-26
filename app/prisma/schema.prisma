@@ -116,6 +116,7 @@ model Tenant {
   // Procedura disciplinare Art. 7 L. 300/1970
   disciplinaryProcedures DisciplinaryProcedure[]
   disciplinaryCode       DisciplinaryCode?
+  disciplinaryCodeAcknowledgments DisciplinaryCodeAcknowledgment[]
 
   // Whistleblowing D.Lgs. 24/2023
   whistleblowingReports WhistleblowingReport[]
@@ -212,6 +213,7 @@ model Employee {
 
   // Procedura disciplinare
   disciplinaryProcedures DisciplinaryProcedure[]
+  disciplinaryCodeAcknowledgments DisciplinaryCodeAcknowledgment[]
 
   // Onboarding timeline
   onboardingTimelines OnboardingTimeline[]
@@ -811,6 +813,26 @@ model DisciplinaryCode {
   updatedAt   DateTime @updatedAt
 
   tenant      Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  acknowledgments DisciplinaryCodeAcknowledgment[]
+}
+
+model DisciplinaryCodeAcknowledgment {
+  id          String   @id @default(cuid())
+  tenantId    String
+  codeId      String
+  employeeId  String
+
+  acknowledgedAt DateTime @default(now())
+  method      String   @default("DIGITAL")  // DIGITAL, PAPER, EMAIL
+
+  createdAt   DateTime @default(now())
+
+  tenant      Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  code        DisciplinaryCode @relation(fields: [codeId], references: [id], onDelete: Cascade)
+  employee    Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+
+  @@unique([employeeId, codeId])
+  @@index([tenantId])
 }
 
 // ============================================

@@ -21,9 +21,11 @@ export default async function DashboardLayout({
     { href: '/deadlines', icon: '⏰', label: 'Scadenze' },
     { href: '/performance', icon: '📊', label: 'Performance' },
     { href: '/onboarding', icon: '📋', label: 'Onboarding' },
+    { href: '/probation', icon: '🎯', label: 'Periodo Prova' },
     { href: '/safety', icon: '🦺', label: 'Sicurezza' },
-    { href: '/compliance', icon: '✅', label: 'Compliance' },
+    { href: '/disciplinary', icon: '⚖️', label: 'Disciplinare' },
     { href: '/whistleblowing', icon: '📢', label: 'Whistleblowing' },
+    { href: '/compliance', icon: '✅', label: 'Compliance' },
     { href: '/settings', icon: '⚙️', label: 'Impostazioni' }
   ]
 
