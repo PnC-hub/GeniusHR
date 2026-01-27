@@ -14,6 +14,8 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url)
     const employeeId = searchParams.get('employeeId')
     const period = searchParams.get('period') // formato YYYY-MM
+    const year = searchParams.get('year')
+    const month = searchParams.get('month')
 
     // Get user and tenant
     const user = await prisma.user.findUnique({
@@ -38,8 +40,16 @@ export async function GET(request: NextRequest) {
       where.employeeId = employeeId
     }
 
+    // Period filters
     if (period) {
       where.period = period
+    } else if (year && month) {
+      const monthStr = month.padStart(2, '0')
+      where.period = `${year}-${monthStr}`
+    } else if (year) {
+      where.period = {
+        startsWith: year
+      }
     }
 
     const payslips = await prisma.payslip.findMany({
@@ -50,6 +60,7 @@ export async function GET(request: NextRequest) {
             id: true,
             firstName: true,
             lastName: true,
+            email: true,
             department: true,
           },
         },
@@ -63,7 +74,20 @@ export async function GET(request: NextRequest) {
       orderBy: { period: 'desc' },
     })
 
-    return NextResponse.json(payslips)
+    // Transform to match frontend interface
+    const transformed = payslips.map(p => {
+      const [year, month] = p.period.split('-')
+      return {
+        ...p,
+        month: parseInt(month),
+        year: parseInt(year),
+        grossAmount: p.grossAmount ? parseFloat(p.grossAmount.toString()) : 0,
+        netAmount: p.netAmount ? parseFloat(p.netAmount.toString()) : 0,
+        status: p.downloadedAt ? 'DOWNLOADED' : p.viewedAt ? 'VIEWED' : 'UPLOADED',
+      }
+    })
+
+    return NextResponse.json(transformed)
   } catch (error) {
     console.error('Error fetching payslips:', error)
     return NextResponse.json({ error: 'Errore interno' }, { status: 500 })

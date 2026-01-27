@@ -16,6 +16,7 @@ export async function GET(request: NextRequest) {
     const dateFrom = searchParams.get('dateFrom')
     const dateTo = searchParams.get('dateTo')
     const status = searchParams.get('status')
+    const anomalyOnly = searchParams.get('anomalyOnly') === 'true'
 
     // Get user and tenant
     const user = await prisma.user.findUnique({
@@ -54,6 +55,12 @@ export async function GET(request: NextRequest) {
       where.status = status
     }
 
+    if (anomalyOnly) {
+      where.anomalyType = {
+        not: null,
+      }
+    }
+
     const entries = await prisma.timeEntry.findMany({
       where,
       include: {
@@ -63,6 +70,7 @@ export async function GET(request: NextRequest) {
             firstName: true,
             lastName: true,
             department: true,
+            jobTitle: true,
           },
         },
       },
@@ -206,6 +214,9 @@ export async function POST(request: NextRequest) {
 
       const workedMinutes = totalMinutes - breakMinutes
 
+      // Calculate overtime (over 8 hours per day = 480 minutes)
+      const overtimeMinutes = workedMinutes > 480 ? workedMinutes - 480 : 0
+
       // Update entry
       const entry = await prisma.timeEntry.update({
         where: { id: openEntry.id },
@@ -218,6 +229,7 @@ export async function POST(request: NextRequest) {
           clockOutUserAgent: userAgent,
           breakMinutes,
           workedMinutes,
+          overtimeMinutes,
           notes: notes || openEntry.notes,
         },
       })
