@@ -68,11 +68,7 @@ async function main() {
       contractType: 'FULL_TIME' as const,
       ccnlLevel: '4',
       hireDate: new Date('2020-03-01'),
-      status: 'ACTIVE' as const,
-      weeklyHours: 40,
-      vacationDays: 26,
-      vacationUsed: 8,
-      bankAccount: 'IT60X0542811101000000123456'
+      status: 'ACTIVE' as const
     },
     {
       id: 'smiledoc-luca',
@@ -85,11 +81,7 @@ async function main() {
       contractType: 'FULL_TIME' as const,
       ccnlLevel: '4',
       hireDate: new Date('2021-09-15'),
-      status: 'ACTIVE' as const,
-      weeklyHours: 40,
-      vacationDays: 26,
-      vacationUsed: 12,
-      bankAccount: 'IT60X0542811101000000654321'
+      status: 'ACTIVE' as const
     },
     {
       id: 'smiledoc-giulia',
@@ -102,11 +94,7 @@ async function main() {
       contractType: 'PART_TIME' as const,
       ccnlLevel: '5',
       hireDate: new Date('2023-06-01'),
-      status: 'ACTIVE' as const,
-      weeklyHours: 20,
-      vacationDays: 13,
-      vacationUsed: 3,
-      bankAccount: 'IT60X0542811101000000789012'
+      status: 'ACTIVE' as const
     },
     {
       id: 'smiledoc-marco',
@@ -120,11 +108,7 @@ async function main() {
       ccnlLevel: '5',
       hireDate: new Date('2025-01-15'),
       probationEndsAt: new Date('2025-07-15'),
-      status: 'PROBATION' as const,
-      weeklyHours: 40,
-      vacationDays: 22,
-      vacationUsed: 0,
-      bankAccount: 'IT60X0542811101000000345678'
+      status: 'PROBATION' as const
     },
     {
       id: 'smiledoc-anna',
@@ -137,11 +121,7 @@ async function main() {
       contractType: 'FULL_TIME' as const,
       ccnlLevel: '3',
       hireDate: new Date('2019-02-01'),
-      status: 'ACTIVE' as const,
-      weeklyHours: 40,
-      vacationDays: 26,
-      vacationUsed: 15,
-      bankAccount: 'IT60X0542811101000000901234'
+      status: 'ACTIVE' as const
     }
   ]
 
