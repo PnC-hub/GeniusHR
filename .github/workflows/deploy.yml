@@ -52,20 +52,41 @@ jobs:
             # Wait for server to start
             sleep 10
 
-            # Show nginx config for geniushr
-            echo "=== Nginx geniushr.conf ==="
-            cat /etc/nginx/conf.d/geniushr.conf 2>/dev/null || echo "No nginx geniushr config"
+            # Create Apache SSL config for geniushr if it doesn't exist
+            if [ ! -f /etc/apache2/sites-available/geniushr-ssl.conf ]; then
+              echo "Creating Apache SSL config for geniushr..."
+              sudo tee /etc/apache2/sites-available/geniushr-ssl.conf > /dev/null << 'APACHECONF'
+            <VirtualHost *:443>
+                ServerName geniushr.geniusmile.com
 
-            # Show Apache SSL config
-            echo "=== Apache SSL sites ==="
-            ls -la /etc/apache2/sites-enabled/ | grep -i ssl || echo "No SSL sites"
-            grep -r "geniushr" /etc/apache2/sites-available/*ssl* 2>/dev/null || echo "No SSL config for geniushr in Apache"
+                SSLEngine on
+                SSLCertificateFile /etc/letsencrypt/live/geniushr.geniusmile.com/fullchain.pem
+                SSLCertificateKeyFile /etc/letsencrypt/live/geniushr.geniusmile.com/privkey.pem
 
-            # Check if Apache default SSL is handling geniushr
-            echo "=== Apache default-ssl config ==="
-            cat /etc/apache2/sites-available/default-ssl.conf 2>/dev/null | head -30 || echo "No default-ssl"
+                ProxyPreserveHost On
+                ProxyPass / http://127.0.0.1:3000/
+                ProxyPassReverse / http://127.0.0.1:3000/
 
-            # Test local route
+                ErrorLog ${APACHE_LOG_DIR}/geniushr_ssl_error.log
+                CustomLog ${APACHE_LOG_DIR}/geniushr_ssl_access.log combined
+            </VirtualHost>
+            APACHECONF
+
+              # Enable the site and reload Apache
+              sudo a2ensite geniushr-ssl.conf
+              sudo systemctl reload apache2
+            fi
+
+            # Check if Let's Encrypt cert exists, if not create it
+            if [ ! -d /etc/letsencrypt/live/geniushr.geniusmile.com ]; then
+              echo "SSL certificate not found, trying to create with certbot..."
+              sudo certbot --apache -d geniushr.geniusmile.com --non-interactive --agree-tos -m direzione@smiledoc.it || echo "Certbot failed"
+            fi
+
+            # Reload Apache to apply changes
+            sudo systemctl reload apache2 || echo "Apache reload failed"
+
+            # Test the routes
             echo "=== Testing localhost:3000/signatures ==="
             curl -s -o /dev/null -w "%{http_code}" http://localhost:3000/signatures
             echo ""
