@@ -52,30 +52,29 @@ jobs:
             # Wait for server to start
             sleep 10
 
-            # Find the correct certificate for geniushr
-            echo "=== Looking for geniushr certificate ==="
-            for cert in /usr/local/psa/var/certificates/*; do
-              if sudo openssl x509 -in "$cert" -text -noout 2>/dev/null | grep -q "geniushr"; then
-                echo "Found: $cert"
-                sudo openssl x509 -in "$cert" -text -noout 2>/dev/null | grep -E "(Subject:|DNS:)" | head -3
-              fi
-            done
+            # Check ALL processes listening on network
+            echo "=== All listening processes ==="
+            sudo netstat -tlnp | grep -E "(3000|node|npm)"
 
-            # Check Apache mod_ssl and mod_proxy
-            echo "=== Apache modules ==="
-            apache2ctl -M 2>/dev/null | grep -E "(ssl|proxy)" | head -10
+            # Check PM2 processes
+            echo "=== PM2 processes ==="
+            pm2 list
 
-            # Remove the broken SSL config and try nginx instead
-            echo "=== Disabling broken Apache SSL config ==="
-            sudo a2dissite geniushr-ssl.conf 2>/dev/null || echo "Site not enabled"
-            sudo systemctl restart apache2 || echo "Apache restart failed"
+            # Check Apache vhosts for HTTPS
+            echo "=== Apache vhosts with SSL ==="
+            grep -r "geniushr" /etc/apache2/sites-enabled/ 2>/dev/null
+            grep -r "geniushr" /etc/apache2/sites-available/ 2>/dev/null
 
-            # Try to start nginx
-            echo "=== Starting nginx ==="
-            sudo systemctl start nginx || echo "Nginx failed to start"
-            sudo systemctl status nginx 2>/dev/null | head -5 || echo "Nginx status unavailable"
+            # Check what process Apache proxies to
+            echo "=== Apache proxy config ==="
+            grep -r "ProxyPass" /etc/apache2/sites-enabled/*.conf 2>/dev/null | grep -i genius
 
-            # Test the routes
+            # Test localhost directly
             echo "=== Testing localhost:3000/signatures ==="
             curl -s -o /dev/null -w "%{http_code}" http://localhost:3000/signatures
+            echo ""
+
+            # Also test 127.0.0.1
+            echo "=== Testing 127.0.0.1:3000/signatures ==="
+            curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:3000/signatures
             echo ""
