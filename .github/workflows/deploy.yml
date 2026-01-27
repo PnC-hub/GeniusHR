@@ -52,21 +52,28 @@ jobs:
             # Wait for server to start
             sleep 10
 
-            # Find where SSL certs are located
-            echo "=== Looking for SSL certificates ==="
-            sudo ls -la /etc/letsencrypt/live/ 2>/dev/null || echo "No letsencrypt live folder"
-            sudo find /etc/ssl -name "*geniusmile*" 2>/dev/null | head -5 || echo "No geniusmile certs in /etc/ssl"
-            sudo find /etc/pki -name "*geniusmile*" 2>/dev/null | head -5 || echo "No certs in /etc/pki"
+            # Find the correct certificate for geniushr
+            echo "=== Looking for geniushr certificate ==="
+            for cert in /usr/local/psa/var/certificates/*; do
+              if sudo openssl x509 -in "$cert" -text -noout 2>/dev/null | grep -q "geniushr"; then
+                echo "Found: $cert"
+                sudo openssl x509 -in "$cert" -text -noout 2>/dev/null | grep -E "(Subject:|DNS:)" | head -3
+              fi
+            done
 
-            # Check existing Apache SSL config that works
-            echo "=== Apache port 443 configs ==="
-            grep -r "443" /etc/apache2/sites-enabled/*.conf 2>/dev/null | head -10 || echo "No 443 configs"
-            grep -r ":443" /etc/apache2/ports.conf 2>/dev/null || echo "No 443 in ports"
+            # Check Apache mod_ssl and mod_proxy
+            echo "=== Apache modules ==="
+            apache2ctl -M 2>/dev/null | grep -E "(ssl|proxy)" | head -10
 
-            # Check Plesk SSL certs location
-            echo "=== Plesk SSL certs ==="
-            sudo ls /var/www/vhosts/system/*/conf/ssl.* 2>/dev/null | head -5 || echo "No Plesk vhost SSL"
-            sudo ls /usr/local/psa/var/certificates/ 2>/dev/null | head -5 || echo "No Plesk certificates"
+            # Remove the broken SSL config and try nginx instead
+            echo "=== Disabling broken Apache SSL config ==="
+            sudo a2dissite geniushr-ssl.conf 2>/dev/null || echo "Site not enabled"
+            sudo systemctl restart apache2 || echo "Apache restart failed"
+
+            # Try to start nginx
+            echo "=== Starting nginx ==="
+            sudo systemctl start nginx || echo "Nginx failed to start"
+            sudo systemctl status nginx 2>/dev/null | head -5 || echo "Nginx status unavailable"
 
             # Test the routes
             echo "=== Testing localhost:3000/signatures ==="
