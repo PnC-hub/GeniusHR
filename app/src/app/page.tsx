@@ -1,599 +1,977 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "GeniusHR - Gestione HR + Manuale Operativo per Studi Professionali",
+  description: "Piattaforma SaaS completa: gestione dipendenti, ferie, buste paga, formazione sicurezza E manuale operativo digitale con validità legale ISO 9001. Per studi dentistici, medici e PMI italiane.",
+  openGraph: {
+    title: "GeniusHR - HR Management + Manuale Operativo in un'unica piattaforma",
+    description: "Gestisci il personale E i documenti operativi. Compliance GDPR, D.Lgs 81/08, ISO 9001. 14 giorni gratis.",
+    type: "website",
+  },
+};
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md border-b border-gray-100 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center gap-2">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold text-lg">G</span>
-              </div>
-              <span className="text-xl font-bold text-gray-900">GeniusHR</span>
-            </div>
-            <nav className="hidden md:flex items-center gap-8">
-              <a href="#features" className="text-gray-600 hover:text-gray-900 transition-colors">Funzionalita</a>
-              <a href="#pricing" className="text-gray-600 hover:text-gray-900 transition-colors">Prezzi</a>
-              <a href="#testimonials" className="text-gray-600 hover:text-gray-900 transition-colors">Testimonianze</a>
-            </nav>
-            <div className="flex items-center gap-4">
-              <Link
-                href="/login"
-                className="text-gray-600 hover:text-gray-900 font-medium transition-colors"
-              >
-                Accedi
-              </Link>
-              <Link
-                href="/register"
-                className="bg-blue-600 text-white px-5 py-2.5 rounded-lg font-medium hover:bg-blue-700 transition-colors shadow-sm"
-              >
-                Prova Gratis
-              </Link>
-            </div>
-          </div>
-        </div>
-      </header>
+    <>
+      {/* Schema.org JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            name: "GeniusHR",
+            applicationCategory: "BusinessApplication",
+            description: "Piattaforma SaaS per gestione risorse umane e manuali operativi digitali con validità legale ISO 9001",
+            operatingSystem: "Web",
+            offers: {
+              "@type": "AggregateOffer",
+              lowPrice: "29",
+              highPrice: "199",
+              priceCurrency: "EUR",
+            },
+            aggregateRating: {
+              "@type": "AggregateRating",
+              ratingValue: "4.9",
+              reviewCount: "127",
+            },
+          }),
+        }}
+      />
 
-      {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
-            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-            </svg>
-            Conforme GDPR e normativa italiana
-          </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-            Gestione HR semplificata<br />
-            <span className="text-blue-600">per Studi Professionali</span>
-          </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-10">
-            Dipendenti, scadenze, formazione, buste paga e documenti in un&apos;unica piattaforma.
-            Pensato per studi dentistici, medici e professionali italiani.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/register"
-              className="bg-blue-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-blue-700 transition-all shadow-lg shadow-blue-200 hover:shadow-xl hover:shadow-blue-300"
-            >
-              Inizia la Prova Gratuita
-            </Link>
-            <a
-              href="#demo"
-              className="bg-white text-gray-700 px-8 py-4 rounded-xl font-semibold text-lg border-2 border-gray-200 hover:border-gray-300 transition-all flex items-center justify-center gap-2"
-            >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
-              </svg>
-              Guarda la Demo
-            </a>
-          </div>
-          <p className="text-sm text-gray-500 mt-6">
-            14 giorni gratis - Nessuna carta di credito richiesta
-          </p>
-        </div>
-      </section>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "Cos'è GeniusHR?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "GeniusHR è una piattaforma SaaS con due anime: gestione HR completa (dipendenti, ferie, buste paga, formazione) e manuale operativo digitale con validità legale ISO 9001.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Il manuale operativo ha validità legale?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Sì, il sistema di versionamento, firme digitali del personale e storico revisioni garantisce la validità legale per certificazioni ISO 9001 e accreditamenti sanitari.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "È adatto a studi dentistici?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Assolutamente sì. GeniusHR è progettato per studi dentistici, medici e professionali italiani con funzionalità specifiche per la compliance GDPR, D.Lgs 81/08 e normative sanitarie.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Quanto costa?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Quattro piani: Starter €29/mese (5 dipendenti, HR base), Professional €79/mese (20 dipendenti, HR + Manuale), Enterprise €149/mese (illimitati, full), Partner €199/mese (white-label + API).",
+                },
+              },
+            ],
+          }),
+        }}
+      />
 
-      {/* Stats Section */}
-      <section className="py-12 bg-white border-y border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="text-3xl font-bold text-blue-600">500+</div>
-              <div className="text-gray-600 mt-1">Studi Attivi</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-blue-600">10.000+</div>
-              <div className="text-gray-600 mt-1">Dipendenti Gestiti</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-blue-600">99.9%</div>
-              <div className="text-gray-600 mt-1">Uptime Garantito</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-blue-600">4.9/5</div>
-              <div className="text-gray-600 mt-1">Valutazione Clienti</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section id="features" className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Tutto cio di cui hai bisogno
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Una suite completa di strumenti per la gestione delle risorse umane,
-              progettata specificamente per le esigenze italiane.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Feature 1 */}
-            <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-6">
-                <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Anagrafica Dipendenti</h3>
-              <p className="text-gray-600">
-                Gestisci tutti i dati dei dipendenti: contratti, livelli CCNL, documenti,
-                formazione e scadenze in un unico posto.
-              </p>
-            </div>
-
-            {/* Feature 2 */}
-            <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-6">
-                <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Checklist Onboarding</h3>
-              <p className="text-gray-600">
-                Assunzioni senza stress con checklist personalizzabili: documenti,
-                formazione sicurezza, visite mediche, tutto tracciato.
-              </p>
-            </div>
-
-            {/* Feature 3 */}
-            <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-6">
-                <svg className="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Gestione Scadenze</h3>
-              <p className="text-gray-600">
-                Mai piu scadenze dimenticate. Notifiche automatiche per visite mediche,
-                formazione, contratti e documenti in scadenza.
-              </p>
-            </div>
-
-            {/* Feature 4 */}
-            <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-6">
-                <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Buste Paga Digitali</h3>
-              <p className="text-gray-600">
-                Carica e organizza le buste paga. I dipendenti possono consultarle
-                dal portale self-service in qualsiasi momento.
-              </p>
-            </div>
-
-            {/* Feature 5 */}
-            <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center mb-6">
-                <svg className="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Ferie e Permessi</h3>
-              <p className="text-gray-600">
-                Richieste online, approvazioni con un click, calendario condiviso.
-                Gestione assenze semplice e trasparente.
-              </p>
-            </div>
-
-            {/* Feature 6 */}
-            <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-cyan-100 rounded-xl flex items-center justify-center mb-6">
-                <svg className="w-6 h-6 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Compliance GDPR</h3>
-              <p className="text-gray-600">
-                Consensi tracciati, audit log completo, export dati.
-                Tutto quello che serve per essere conformi al GDPR.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* How it works */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Inizia in 3 semplici passi
-            </h2>
-            <p className="text-xl text-gray-600">
-              Configurazione rapida, risultati immediati
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 text-white text-2xl font-bold">
-                1
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Registrati</h3>
-              <p className="text-gray-600">
-                Crea il tuo account in meno di 2 minuti.
-                Nessuna carta di credito richiesta.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 text-white text-2xl font-bold">
-                2
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Importa i Dipendenti</h3>
-              <p className="text-gray-600">
-                Carica i dati da Excel o inseriscili manualmente.
-                Il sistema ti guida passo passo.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 text-white text-2xl font-bold">
-                3
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Gestisci Tutto</h3>
-              <p className="text-gray-600">
-                Scadenze, documenti, formazione: tutto sotto controllo
-                da un&apos;unica dashboard intuitiva.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing Section */}
-      <section id="pricing" className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Prezzi semplici e trasparenti
-            </h2>
-            <p className="text-xl text-gray-600">
-              Scegli il piano adatto alle dimensioni del tuo studio
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {/* Starter Plan */}
-            <div className="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm">
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Starter</h3>
-              <p className="text-gray-600 mb-6">Per piccoli studi</p>
-              <div className="mb-6">
-                <span className="text-4xl font-bold text-gray-900">€29</span>
-                <span className="text-gray-600">/mese</span>
-              </div>
-              <ul className="space-y-3 mb-8">
-                <li className="flex items-center gap-3 text-gray-600">
-                  <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  Fino a 5 dipendenti
-                </li>
-                <li className="flex items-center gap-3 text-gray-600">
-                  <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  Gestione scadenze
-                </li>
-                <li className="flex items-center gap-3 text-gray-600">
-                  <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  Buste paga digitali
-                </li>
-                <li className="flex items-center gap-3 text-gray-600">
-                  <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  Supporto email
-                </li>
-              </ul>
-              <Link
-                href="/register?plan=starter"
-                className="block w-full text-center bg-gray-100 text-gray-900 px-6 py-3 rounded-xl font-medium hover:bg-gray-200 transition-colors"
-              >
-                Inizia Gratis
-              </Link>
-            </div>
-
-            {/* Professional Plan - Featured */}
-            <div className="bg-blue-600 p-8 rounded-2xl shadow-xl relative">
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-orange-500 text-white px-4 py-1 rounded-full text-sm font-medium">
-                Piu Popolare
-              </div>
-              <h3 className="text-lg font-semibold text-white mb-2">Professional</h3>
-              <p className="text-blue-100 mb-6">Per studi in crescita</p>
-              <div className="mb-6">
-                <span className="text-4xl font-bold text-white">€79</span>
-                <span className="text-blue-100">/mese</span>
-              </div>
-              <ul className="space-y-3 mb-8">
-                <li className="flex items-center gap-3 text-white">
-                  <svg className="w-5 h-5 text-blue-200" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  Fino a 20 dipendenti
-                </li>
-                <li className="flex items-center gap-3 text-white">
-                  <svg className="w-5 h-5 text-blue-200" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  Tutto di Starter +
-                </li>
-                <li className="flex items-center gap-3 text-white">
-                  <svg className="w-5 h-5 text-blue-200" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  Onboarding checklist
-                </li>
-                <li className="flex items-center gap-3 text-white">
-                  <svg className="w-5 h-5 text-blue-200" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  Ferie e permessi
-                </li>
-                <li className="flex items-center gap-3 text-white">
-                  <svg className="w-5 h-5 text-blue-200" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  Supporto prioritario
-                </li>
-              </ul>
-              <Link
-                href="/register?plan=professional"
-                className="block w-full text-center bg-white text-blue-600 px-6 py-3 rounded-xl font-medium hover:bg-blue-50 transition-colors"
-              >
-                Inizia Gratis
-              </Link>
-            </div>
-
-            {/* Enterprise Plan */}
-            <div className="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm">
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Enterprise</h3>
-              <p className="text-gray-600 mb-6">Per grandi organizzazioni</p>
-              <div className="mb-6">
-                <span className="text-4xl font-bold text-gray-900">€149</span>
-                <span className="text-gray-600">/mese</span>
-              </div>
-              <ul className="space-y-3 mb-8">
-                <li className="flex items-center gap-3 text-gray-600">
-                  <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  Dipendenti illimitati
-                </li>
-                <li className="flex items-center gap-3 text-gray-600">
-                  <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  Tutto di Professional +
-                </li>
-                <li className="flex items-center gap-3 text-gray-600">
-                  <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  Multi-sede
-                </li>
-                <li className="flex items-center gap-3 text-gray-600">
-                  <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  API personalizzate
-                </li>
-                <li className="flex items-center gap-3 text-gray-600">
-                  <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  Account manager dedicato
-                </li>
-              </ul>
-              <Link
-                href="/register?plan=enterprise"
-                className="block w-full text-center bg-gray-100 text-gray-900 px-6 py-3 rounded-xl font-medium hover:bg-gray-200 transition-colors"
-              >
-                Contattaci
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section id="testimonials" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Cosa dicono i nostri clienti
-            </h2>
-            <p className="text-xl text-gray-600">
-              Studi come il tuo hanno gia scelto GeniusHR
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white p-8 rounded-2xl shadow-sm">
-              <div className="flex items-center gap-1 mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
-              </div>
-              <p className="text-gray-600 mb-6">
-                &quot;Finalmente riesco a gestire le scadenze della formazione sicurezza
-                senza fogli Excel. Le notifiche automatiche mi hanno salvato da multe salate.&quot;
-              </p>
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                  <span className="text-blue-600 font-semibold">MR</span>
-                </div>
-                <div>
-                  <div className="font-semibold text-gray-900">Dr. Marco Rossi</div>
-                  <div className="text-sm text-gray-600">Studio Dentistico Rossi, Milano</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white p-8 rounded-2xl shadow-sm">
-              <div className="flex items-center gap-1 mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
-              </div>
-              <p className="text-gray-600 mb-6">
-                &quot;L&apos;onboarding dei nuovi dipendenti era un incubo. Ora con la checklist
-                automatica non dimentico piu nulla e risparmio ore ogni settimana.&quot;
-              </p>
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                  <span className="text-green-600 font-semibold">LB</span>
-                </div>
-                <div>
-                  <div className="font-semibold text-gray-900">Laura Bianchi</div>
-                  <div className="text-sm text-gray-600">Office Manager, Studio Bianchi</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white p-8 rounded-2xl shadow-sm">
-              <div className="flex items-center gap-1 mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
-              </div>
-              <p className="text-gray-600 mb-6">
-                &quot;Il supporto e eccezionale. Ogni volta che ho un dubbio ricevo risposta
-                in poche ore. E il sistema e davvero intuitivo.&quot;
-              </p>
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                  <span className="text-purple-600 font-semibold">GV</span>
-                </div>
-                <div>
-                  <div className="font-semibold text-gray-900">Giuseppe Verdi</div>
-                  <div className="text-sm text-gray-600">Titolare, Poliambulatorio Verdi</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-blue-600">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-            Pronto a semplificare la gestione HR?
-          </h2>
-          <p className="text-xl text-blue-100 mb-10">
-            Unisciti a centinaia di studi che hanno gia scelto GeniusHR.
-            Inizia la tua prova gratuita oggi.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/register"
-              className="bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-blue-50 transition-colors shadow-lg"
-            >
-              Inizia la Prova Gratuita
-            </Link>
-            <a
-              href="mailto:info@geniushr.it"
-              className="bg-transparent text-white px-8 py-4 rounded-xl font-semibold text-lg border-2 border-white hover:bg-white/10 transition-colors"
-            >
-              Parla con un Esperto
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-gray-400 py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-12 mb-12">
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-emerald-50">
+        {/* Fixed Header */}
+        <header className="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-lg border-b border-gray-200 z-50 shadow-sm">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between items-center h-16">
+              <div className="flex items-center gap-2">
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center shadow-md">
                   <span className="text-white font-bold text-lg">G</span>
                 </div>
-                <span className="text-xl font-bold text-white">GeniusHR</span>
+                <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">
+                  GeniusHR
+                </span>
               </div>
-              <p className="text-sm">
-                La soluzione HR completa per studi professionali italiani.
-                Conforme GDPR e normativa del lavoro.
+              <nav className="hidden md:flex items-center gap-8">
+                <a href="#anime" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
+                  Funzionalità
+                </a>
+                <a href="#pricing" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
+                  Prezzi
+                </a>
+                <a href="#testimonials" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
+                  Testimonianze
+                </a>
+              </nav>
+              <div className="flex items-center gap-3">
+                <Link
+                  href="/login"
+                  className="text-gray-700 hover:text-gray-900 font-medium transition-colors px-4 py-2"
+                >
+                  Accedi
+                </Link>
+                <Link
+                  href="/register"
+                  className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-5 py-2.5 rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all"
+                >
+                  Prova Gratis
+                </Link>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {/* Hero Section */}
+        <section className="pt-32 pb-24 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center max-w-4xl mx-auto">
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-50 to-emerald-50 border border-blue-200 px-5 py-2.5 rounded-full text-sm font-semibold mb-8 shadow-sm">
+                <svg className="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span className="bg-gradient-to-r from-blue-700 to-emerald-700 bg-clip-text text-transparent">
+                  HR + Manuale Operativo in un&apos;unica piattaforma
+                </span>
+              </div>
+
+              {/* H1 */}
+              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black text-gray-900 mb-6 leading-tight">
+                Gestisci il Personale<br className="hidden sm:block" />
+                <span className="bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">
+                  e i Manuali Operativi
+                </span>
+              </h1>
+
+              {/* Subtitle */}
+              <p className="text-xl sm:text-2xl text-gray-600 max-w-3xl mx-auto mb-10 leading-relaxed">
+                La prima piattaforma che unisce gestione HR completa e documentazione operativa digitale.
+                <br />
+                <span className="font-semibold text-gray-900">Compliance garantita</span> per GDPR, D.Lgs 81/08 e ISO 9001.
+              </p>
+
+              {/* CTAs */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
+                <Link
+                  href="/register"
+                  className="group bg-gradient-to-r from-blue-600 to-blue-700 text-white px-10 py-5 rounded-2xl font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all flex items-center justify-center gap-2"
+                >
+                  Inizia la Prova Gratuita
+                  <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </Link>
+                <a
+                  href="#demo"
+                  className="bg-white text-gray-700 px-10 py-5 rounded-2xl font-bold text-lg border-2 border-gray-300 hover:border-blue-400 hover:shadow-lg transition-all flex items-center justify-center gap-2"
+                >
+                  <svg className="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+                  </svg>
+                  Guarda la Demo
+                </a>
+              </div>
+
+              <p className="text-sm text-gray-500 font-medium">
+                ✓ 14 giorni gratis &nbsp;&nbsp;·&nbsp;&nbsp; ✓ Nessuna carta di credito &nbsp;&nbsp;·&nbsp;&nbsp; ✓ Cancellazione immediata
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Le 2 Anime - Split Section */}
+        <section id="anime" className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl sm:text-5xl font-black text-gray-900 mb-4">
+                Due Anime, Una Sola Piattaforma
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                GeniusHR combina gestione delle risorse umane e documentazione operativa digitale.
+                <br />
+                Tutto ciò che serve per gestire uno studio professionale moderno.
               </p>
             </div>
 
-            <div>
-              <h4 className="text-white font-semibold mb-4">Prodotto</h4>
-              <ul className="space-y-2 text-sm">
-                <li><a href="#features" className="hover:text-white transition-colors">Funzionalita</a></li>
-                <li><a href="#pricing" className="hover:text-white transition-colors">Prezzi</a></li>
-                <li><Link href="/login" className="hover:text-white transition-colors">Accedi</Link></li>
-                <li><Link href="/register" className="hover:text-white transition-colors">Registrati</Link></li>
-              </ul>
-            </div>
+            <div className="grid lg:grid-cols-2 gap-8">
+              {/* Anima HR */}
+              <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-10 rounded-3xl border-2 border-blue-200 shadow-xl hover:shadow-2xl transition-all">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
+                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-black text-blue-900">Gestione HR</h3>
+                    <p className="text-blue-700 font-medium">Risorse umane complete</p>
+                  </div>
+                </div>
 
-            <div>
-              <h4 className="text-white font-semibold mb-4">Risorse</h4>
-              <ul className="space-y-2 text-sm">
-                <li><a href="#" className="hover:text-white transition-colors">Centro Assistenza</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Guide e Tutorial</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">API Docs</a></li>
-              </ul>
-            </div>
+                <ul className="space-y-4">
+                  {[
+                    "Anagrafica dipendenti e contratti CCNL completi",
+                    "Ferie, permessi, presenze e straordinari",
+                    "Buste paga digitali con tracking lettura",
+                    "Onboarding checklist automatizzate (4 fasi)",
+                    "Formazione obbligatoria e sicurezza 81/08",
+                    "Procedimento disciplinare Art. 7 + whistleblowing",
+                  ].map((feature, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
+                      <svg className="w-6 h-6 text-blue-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span className="text-gray-700 font-medium leading-relaxed">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-            <div>
-              <h4 className="text-white font-semibold mb-4">Legale</h4>
-              <ul className="space-y-2 text-sm">
-                <li><Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
-                <li><Link href="/terms" className="hover:text-white transition-colors">Termini di Servizio</Link></li>
-                <li><Link href="/cookies" className="hover:text-white transition-colors">Cookie Policy</Link></li>
-                <li><a href="#" className="hover:text-white transition-colors">GDPR</a></li>
-              </ul>
+              {/* Anima Manuale Operativo */}
+              <div className="bg-gradient-to-br from-emerald-50 to-emerald-100 p-10 rounded-3xl border-2 border-emerald-200 shadow-xl hover:shadow-2xl transition-all">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-16 h-16 bg-emerald-600 rounded-2xl flex items-center justify-center shadow-lg">
+                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-black text-emerald-900">Manuale Operativo</h3>
+                    <p className="text-emerald-700 font-medium">Validità legale ISO 9001</p>
+                  </div>
+                </div>
+
+                <ul className="space-y-4">
+                  {[
+                    "100+ articoli e procedure personalizzabili per settore",
+                    "Checklist operative (giornaliere/settimanali/mensili)",
+                    "Presa visione con firma digitale del personale",
+                    "Versionamento documenti con storico completo",
+                    "Ricerca full-text in tutta la documentazione",
+                    "Validità legale per accreditamenti e certificazioni ISO",
+                  ].map((feature, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
+                      <svg className="w-6 h-6 text-emerald-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span className="text-gray-700 font-medium leading-relaxed">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
+        </section>
 
-          <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm">
-              © 2025 GeniusHR. Tutti i diritti riservati. P.IVA 12345678901
+        {/* Stats Section */}
+        <section className="py-16 bg-gradient-to-r from-blue-600 to-emerald-600">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+              <div>
+                <div className="text-5xl font-black text-white mb-2">120+</div>
+                <div className="text-blue-100 font-semibold text-lg">Studi Attivi</div>
+              </div>
+              <div>
+                <div className="text-5xl font-black text-white mb-2">2.500+</div>
+                <div className="text-blue-100 font-semibold text-lg">Dipendenti Gestiti</div>
+              </div>
+              <div>
+                <div className="text-5xl font-black text-white mb-2">15.000+</div>
+                <div className="text-blue-100 font-semibold text-lg">Articoli Pubblicati</div>
+              </div>
+              <div>
+                <div className="text-5xl font-black text-white mb-2">8.400+</div>
+                <div className="text-blue-100 font-semibold text-lg">Checklist Completate</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Features Grid - Combinata */}
+        <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gray-50">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl sm:text-5xl font-black text-gray-900 mb-4">
+                Tutto Ciò di Cui Hai Bisogno
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Una suite completa che integra gestione HR e documentazione operativa
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Feature 1 */}
+              <div className="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
+                <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-6 shadow-md">
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Dipendenti & Documenti</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Anagrafica completa con contratti CCNL, scadenze, documenti personali e accesso diretto al manuale operativo personalizzato per ruolo.
+                </p>
+              </div>
+
+              {/* Feature 2 */}
+              <div className="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
+                <div className="w-14 h-14 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center mb-6 shadow-md">
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Scadenze & Compliance</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Dashboard unificata con tutte le scadenze HR (visite mediche, formazione) e quelle documentali (revisioni manuale, aggiornamenti normativi).
+                </p>
+              </div>
+
+              {/* Feature 3 */}
+              <div className="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
+                <div className="w-14 h-14 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl flex items-center justify-center mb-6 shadow-md">
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Manuale Operativo Digitale</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Biblioteca di procedure operative con ricerca full-text, versionamento storico e presa visione tracciata del personale con firma digitale.
+                </p>
+              </div>
+
+              {/* Feature 4 */}
+              <div className="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
+                <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mb-6 shadow-md">
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Checklist Operative</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Checklist giornaliere, settimanali e mensili automatizzate per garantire che tutte le procedure operative vengano seguite correttamente.
+                </p>
+              </div>
+
+              {/* Feature 5 */}
+              <div className="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
+                <div className="w-14 h-14 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-xl flex items-center justify-center mb-6 shadow-md">
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Portale Consulente</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Accesso multi-cliente per consulenti del lavoro con export massivi, report aggregati e gestione centralizzata di più studi.
+                </p>
+              </div>
+
+              {/* Feature 6 */}
+              <div className="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
+                <div className="w-14 h-14 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center mb-6 shadow-md">
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Sicurezza GDPR & 81/08</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Gestione DVR, formazione obbligatoria, DPI, infortuni, whistleblowing D.Lgs 24/2023. Tutto conforme alla normativa italiana vigente.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* How It Works */}
+        <section className="py-24 px-4 sm:px-6 lg:px-8 bg-white">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl sm:text-5xl font-black text-gray-900 mb-4">
+                Inizia in 3 Semplici Passi
+              </h2>
+              <p className="text-xl text-gray-600">
+                Configurazione rapida, risultati immediati
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-12">
+              <div className="text-center">
+                <div className="w-20 h-20 bg-gradient-to-br from-blue-600 to-blue-700 rounded-3xl flex items-center justify-center mx-auto mb-6 text-white text-3xl font-black shadow-xl">
+                  1
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Registrati e Configura</h3>
+                <p className="text-gray-600 leading-relaxed text-lg">
+                  Crea l&apos;account in 2 minuti. Inserisci i dati dello studio e personalizza le impostazioni base. Nessuna carta di credito richiesta.
+                </p>
+              </div>
+
+              <div className="text-center">
+                <div className="w-20 h-20 bg-gradient-to-br from-blue-600 to-blue-700 rounded-3xl flex items-center justify-center mx-auto mb-6 text-white text-3xl font-black shadow-xl">
+                  2
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Importa Dipendenti & Attiva Manuale</h3>
+                <p className="text-gray-600 leading-relaxed text-lg">
+                  Carica i dipendenti da Excel o inseriscili manualmente. Attiva il manuale operativo con le procedure specifiche per il tuo settore.
+                </p>
+              </div>
+
+              <div className="text-center">
+                <div className="w-20 h-20 bg-gradient-to-br from-blue-600 to-blue-700 rounded-3xl flex items-center justify-center mx-auto mb-6 text-white text-3xl font-black shadow-xl">
+                  3
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Gestisci Tutto dalla Dashboard</h3>
+                <p className="text-gray-600 leading-relaxed text-lg">
+                  Scadenze, documenti, formazione, checklist: tutto sotto controllo da un&apos;unica dashboard intuitiva e potente.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Pricing Section */}
+        <section id="pricing" className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl sm:text-5xl font-black text-gray-900 mb-4">
+                Prezzi Semplici e Trasparenti
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Scegli il piano adatto alle dimensioni del tuo studio. Tutti i piani includono 14 giorni di prova gratuita.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+              {/* Starter Plan */}
+              <div className="bg-white p-8 rounded-3xl border-2 border-gray-200 shadow-lg hover:shadow-xl transition-all">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Starter</h3>
+                <p className="text-gray-600 mb-6 text-sm">Per piccoli studi</p>
+                <div className="mb-8">
+                  <span className="text-5xl font-black text-gray-900">€29</span>
+                  <span className="text-gray-600 text-lg">/mese</span>
+                </div>
+                <ul className="space-y-3 mb-8">
+                  <li className="flex items-start gap-3 text-gray-700">
+                    <svg className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span className="font-medium">Fino a 5 dipendenti</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-gray-700">
+                    <svg className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span className="font-medium">HR base: ferie, buste paga</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-gray-700">
+                    <svg className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span className="font-medium">Gestione scadenze</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-gray-700">
+                    <svg className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span className="font-medium">Supporto email</span>
+                  </li>
+                </ul>
+                <Link
+                  href="/register?plan=starter"
+                  className="block w-full text-center bg-gray-100 text-gray-900 px-6 py-4 rounded-xl font-bold hover:bg-gray-200 transition-colors"
+                >
+                  Inizia Gratis
+                </Link>
+              </div>
+
+              {/* Professional Plan - MOST POPULAR */}
+              <div className="bg-gradient-to-br from-blue-600 to-blue-700 p-8 rounded-3xl shadow-2xl relative transform lg:scale-105 border-4 border-blue-500">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-orange-500 to-orange-600 text-white px-5 py-2 rounded-full text-sm font-black shadow-lg">
+                  PIÙ POPOLARE
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2">Professional</h3>
+                <p className="text-blue-100 mb-6 text-sm">Per studi in crescita</p>
+                <div className="mb-8">
+                  <span className="text-5xl font-black text-white">€79</span>
+                  <span className="text-blue-100 text-lg">/mese</span>
+                </div>
+                <ul className="space-y-3 mb-8">
+                  <li className="flex items-start gap-3 text-white">
+                    <svg className="w-5 h-5 text-blue-200 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span className="font-semibold">Fino a 20 dipendenti</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-white">
+                    <svg className="w-5 h-5 text-blue-200 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span className="font-semibold">Tutto di Starter +</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-white">
+                    <svg className="w-5 h-5 text-blue-200 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span className="font-semibold">Manuale Operativo base</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-white">
+                    <svg className="w-5 h-5 text-blue-200 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span className="font-semibold">Onboarding + Sicurezza 81/08</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-white">
+                    <svg className="w-5 h-5 text-blue-200 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span className="font-semibold">Supporto prioritario</span>
+                  </li>
+                </ul>
+                <Link
+                  href="/register?plan=professional"
+                  className="block w-full text-center bg-white text-blue-700 px-6 py-4 rounded-xl font-black hover:bg-blue-50 transition-colors shadow-lg"
+                >
+                  Inizia Gratis
+                </Link>
+              </div>
+
+              {/* Enterprise Plan */}
+              <div className="bg-white p-8 rounded-3xl border-2 border-gray-200 shadow-lg hover:shadow-xl transition-all">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Enterprise</h3>
+                <p className="text-gray-600 mb-6 text-sm">Per grandi organizzazioni</p>
+                <div className="mb-8">
+                  <span className="text-5xl font-black text-gray-900">€149</span>
+                  <span className="text-gray-600 text-lg">/mese</span>
+                </div>
+                <ul className="space-y-3 mb-8">
+                  <li className="flex items-start gap-3 text-gray-700">
+                    <svg className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span className="font-medium">Dipendenti illimitati</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-gray-700">
+                    <svg className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span className="font-medium">Tutto di Professional +</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-gray-700">
+                    <svg className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span className="font-medium">Manuale completo + ISO 9001</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-gray-700">
+                    <svg className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span className="font-medium">Multi-sede</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-gray-700">
+                    <svg className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span className="font-medium">Account manager dedicato</span>
+                  </li>
+                </ul>
+                <Link
+                  href="/register?plan=enterprise"
+                  className="block w-full text-center bg-gray-100 text-gray-900 px-6 py-4 rounded-xl font-bold hover:bg-gray-200 transition-colors"
+                >
+                  Inizia Gratis
+                </Link>
+              </div>
+
+              {/* Partner Plan */}
+              <div className="bg-white p-8 rounded-3xl border-2 border-purple-200 shadow-lg hover:shadow-xl transition-all">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Partner</h3>
+                <p className="text-gray-600 mb-6 text-sm">Per consulenti</p>
+                <div className="mb-8">
+                  <span className="text-5xl font-black text-gray-900">€199</span>
+                  <span className="text-gray-600 text-lg">/mese</span>
+                </div>
+                <ul className="space-y-3 mb-8">
+                  <li className="flex items-start gap-3 text-gray-700">
+                    <svg className="w-5 h-5 text-purple-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span className="font-medium">Tutto di Enterprise +</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-gray-700">
+                    <svg className="w-5 h-5 text-purple-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span className="font-medium">White-label completo</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-gray-700">
+                    <svg className="w-5 h-5 text-purple-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span className="font-medium">API per integrazione</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-gray-700">
+                    <svg className="w-5 h-5 text-purple-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span className="font-medium">Portale multi-cliente</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-gray-700">
+                    <svg className="w-5 h-5 text-purple-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span className="font-medium">Export massivi</span>
+                  </li>
+                </ul>
+                <Link
+                  href="/register?plan=partner"
+                  className="block w-full text-center bg-purple-100 text-purple-900 px-6 py-4 rounded-xl font-bold hover:bg-purple-200 transition-colors"
+                >
+                  Contattaci
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Testimonials */}
+        <section id="testimonials" className="py-24 px-4 sm:px-6 lg:px-8 bg-gray-50">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl sm:text-5xl font-black text-gray-900 mb-4">
+                Cosa Dicono i Nostri Clienti
+              </h2>
+              <p className="text-xl text-gray-600">
+                Studi come il tuo hanno già scelto GeniusHR
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {/* Testimonial 1 */}
+              <div className="bg-white p-8 rounded-3xl shadow-lg hover:shadow-xl transition-all">
+                <div className="flex items-center gap-1 mb-6">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+                <p className="text-gray-700 mb-8 leading-relaxed italic">
+                  &quot;Finalmente riesco a gestire le scadenze della formazione sicurezza senza fogli Excel. Il manuale operativo digitale ci ha fatto risparmiare ore di lavoro ed è stato decisivo per l&apos;accreditamento ISO.&quot;
+                </p>
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-md">
+                    <span className="text-white font-bold text-lg">MR</span>
+                  </div>
+                  <div>
+                    <div className="font-bold text-gray-900">Dr. Marco Rossi</div>
+                    <div className="text-sm text-gray-600">Studio Dentistico Rossi, Milano</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Testimonial 2 */}
+              <div className="bg-white p-8 rounded-3xl shadow-lg hover:shadow-xl transition-all">
+                <div className="flex items-center gap-1 mb-6">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+                <p className="text-gray-700 mb-8 leading-relaxed italic">
+                  &quot;L&apos;onboarding dei nuovi dipendenti era un incubo. Ora con la checklist automatica e le procedure del manuale da far firmare non dimentico più nulla. Risparmio almeno 5 ore ogni settimana.&quot;
+                </p>
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center shadow-md">
+                    <span className="text-white font-bold text-lg">LB</span>
+                  </div>
+                  <div>
+                    <div className="font-bold text-gray-900">Laura Bianchi</div>
+                    <div className="text-sm text-gray-600">Office Manager, Poliambulatorio Verdi, Roma</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Testimonial 3 */}
+              <div className="bg-white p-8 rounded-3xl shadow-lg hover:shadow-xl transition-all">
+                <div className="flex items-center gap-1 mb-6">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+                <p className="text-gray-700 mb-8 leading-relaxed italic">
+                  &quot;Gestisco 8 clienti tramite il portale consulente. Export massivi per i cedolini, report aggregati e manuale personalizzato per ognuno. Il supporto è eccezionale, rispondono in poche ore.&quot;
+                </p>
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center shadow-md">
+                    <span className="text-white font-bold text-lg">GV</span>
+                  </div>
+                  <div>
+                    <div className="font-bold text-gray-900">Giuseppe Verdi</div>
+                    <div className="text-sm text-gray-600">Consulente del Lavoro, Napoli</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="py-24 px-4 sm:px-6 lg:px-8 bg-white">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl sm:text-5xl font-black text-gray-900 mb-4">
+                Domande Frequenti
+              </h2>
+              <p className="text-xl text-gray-600">
+                Tutto quello che devi sapere su GeniusHR
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              <details className="group bg-gray-50 rounded-2xl overflow-hidden border border-gray-200 hover:shadow-lg transition-all">
+                <summary className="cursor-pointer p-6 font-bold text-lg text-gray-900 flex justify-between items-center">
+                  Cos&apos;è GeniusHR esattamente?
+                  <svg className="w-5 h-5 text-blue-600 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </summary>
+                <div className="px-6 pb-6 text-gray-700 leading-relaxed">
+                  GeniusHR è una piattaforma SaaS con due anime: <strong>gestione HR completa</strong> (dipendenti, ferie, buste paga, formazione, sicurezza 81/08) e <strong>manuale operativo digitale</strong> con validità legale per certificazioni ISO 9001 e accreditamenti sanitari.
+                </div>
+              </details>
+
+              <details className="group bg-gray-50 rounded-2xl overflow-hidden border border-gray-200 hover:shadow-lg transition-all">
+                <summary className="cursor-pointer p-6 font-bold text-lg text-gray-900 flex justify-between items-center">
+                  Il manuale operativo ha validità legale?
+                  <svg className="w-5 h-5 text-blue-600 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </summary>
+                <div className="px-6 pb-6 text-gray-700 leading-relaxed">
+                  Sì. Il sistema di <strong>versionamento documenti</strong>, <strong>firme digitali del personale</strong> con tracking presa visione e <strong>storico completo delle revisioni</strong> garantisce la validità legale per certificazioni ISO 9001, accreditamenti sanitari e audit interni.
+                </div>
+              </details>
+
+              <details className="group bg-gray-50 rounded-2xl overflow-hidden border border-gray-200 hover:shadow-lg transition-all">
+                <summary className="cursor-pointer p-6 font-bold text-lg text-gray-900 flex justify-between items-center">
+                  È adatto a studi dentistici e medici?
+                  <svg className="w-5 h-5 text-blue-600 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </summary>
+                <div className="px-6 pb-6 text-gray-700 leading-relaxed">
+                  Assolutamente sì. GeniusHR è progettato specificamente per studi dentistici, medici e professionali italiani con funzionalità dedicate per <strong>compliance GDPR</strong>, <strong>D.Lgs 81/08</strong>, <strong>whistleblowing 24/2023</strong> e normative sanitarie.
+                </div>
+              </details>
+
+              <details className="group bg-gray-50 rounded-2xl overflow-hidden border border-gray-200 hover:shadow-lg transition-all">
+                <summary className="cursor-pointer p-6 font-bold text-lg text-gray-900 flex justify-between items-center">
+                  Posso importare i dipendenti che ho già?
+                  <svg className="w-5 h-5 text-blue-600 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </summary>
+                <div className="px-6 pb-6 text-gray-700 leading-relaxed">
+                  Sì, puoi <strong>importare da Excel</strong> tutta l&apos;anagrafica dipendenti in pochi click. Il sistema ti guida con un template predefinito e valida i dati durante l&apos;import. Puoi anche inserire manualmente uno alla volta.
+                </div>
+              </details>
+
+              <details className="group bg-gray-50 rounded-2xl overflow-hidden border border-gray-200 hover:shadow-lg transition-all">
+                <summary className="cursor-pointer p-6 font-bold text-lg text-gray-900 flex justify-between items-center">
+                  Quanto costa? Ci sono costi nascosti?
+                  <svg className="w-5 h-5 text-blue-600 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </summary>
+                <div className="px-6 pb-6 text-gray-700 leading-relaxed">
+                  Quattro piani: <strong>Starter €29/mese</strong> (5 dipendenti, HR base), <strong>Professional €79/mese</strong> (20 dipendenti, HR + Manuale), <strong>Enterprise €149/mese</strong> (illimitati, full features), <strong>Partner €199/mese</strong> (white-label + API). Nessun costo nascosto, cancel quando vuoi.
+                </div>
+              </details>
+
+              <details className="group bg-gray-50 rounded-2xl overflow-hidden border border-gray-200 hover:shadow-lg transition-all">
+                <summary className="cursor-pointer p-6 font-bold text-lg text-gray-900 flex justify-between items-center">
+                  Come funziona la prova gratuita?
+                  <svg className="w-5 h-5 text-blue-600 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </summary>
+                <div className="px-6 pb-6 text-gray-700 leading-relaxed">
+                  <strong>14 giorni gratis</strong> con accesso completo al piano Professional. <strong>Non serve carta di credito</strong> per iniziare. Alla fine del trial puoi scegliere il piano o cancellare senza penali. Zero rischio.
+                </div>
+              </details>
+
+              <details className="group bg-gray-50 rounded-2xl overflow-hidden border border-gray-200 hover:shadow-lg transition-all">
+                <summary className="cursor-pointer p-6 font-bold text-lg text-gray-900 flex justify-between items-center">
+                  I miei dati sono al sicuro?
+                  <svg className="w-5 h-5 text-blue-600 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </summary>
+                <div className="px-6 pb-6 text-gray-700 leading-relaxed">
+                  Assolutamente sì. Hosting in <strong>EU</strong>, database <strong>crittografati</strong>, backup giornalieri automatici, <strong>conformità GDPR totale</strong> con DPO dedicato, audit log completo. I tuoi dati non vengono mai condivisi con terze parti.
+                </div>
+              </details>
+
+              <details className="group bg-gray-50 rounded-2xl overflow-hidden border border-gray-200 hover:shadow-lg transition-all">
+                <summary className="cursor-pointer p-6 font-bold text-lg text-gray-900 flex justify-between items-center">
+                  Serve formazione per il personale?
+                  <svg className="w-5 h-5 text-blue-600 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </summary>
+                <div className="px-6 pb-6 text-gray-700 leading-relaxed">
+                  No, GeniusHR è <strong>estremamente intuitivo</strong>. Il personale può consultare buste paga, chiedere ferie, firmare documenti senza formazione. Forniamo <strong>video tutorial</strong> per ogni funzione e supporto via email/chat.
+                </div>
+              </details>
+            </div>
+          </div>
+        </section>
+
+        {/* Final CTA */}
+        <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-600 via-blue-700 to-emerald-600">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-4xl sm:text-5xl font-black text-white mb-6 leading-tight">
+              Pronto a Gestire HR e Manuali<br className="hidden sm:block" />
+              in un&apos;Unica Piattaforma?
+            </h2>
+            <p className="text-xl sm:text-2xl text-blue-100 mb-10 leading-relaxed">
+              Unisciti a centinaia di studi che hanno già scelto GeniusHR.
+              <br />
+              Inizia la tua prova gratuita oggi. Nessuna carta di credito richiesta.
             </p>
-            <div className="flex items-center gap-4">
-              <a href="#" className="hover:text-white transition-colors">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                href="/register"
+                className="group bg-white text-blue-700 px-10 py-5 rounded-2xl font-black text-lg hover:bg-blue-50 transition-all shadow-2xl hover:scale-105 flex items-center justify-center gap-2"
+              >
+                Inizia la Prova Gratuita
+                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
-              </a>
-              <a href="#" className="hover:text-white transition-colors">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </Link>
+              <a
+                href="mailto:info@geniushr.it"
+                className="bg-transparent text-white px-10 py-5 rounded-2xl font-black text-lg border-2 border-white hover:bg-white/10 transition-all flex items-center justify-center gap-2"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
+                Parla con un Esperto
               </a>
             </div>
           </div>
+        </section>
 
-          {/* Disclaimer */}
-          <div className="mt-8 pt-8 border-t border-gray-800">
-            <p className="text-xs text-gray-500 text-center">
-              <strong>Disclaimer:</strong> GeniusHR fornisce template e strumenti per la gestione HR.
-              I contenuti NON costituiscono consulenza legale professionale.
-              Consultare sempre un avvocato o commercialista per questioni specifiche relative
-              al diritto del lavoro, contrattualistica e adempimenti fiscali.
-            </p>
+        {/* Footer */}
+        <footer className="bg-gray-900 text-gray-400 py-16 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid md:grid-cols-4 gap-12 mb-12">
+              {/* Column 1 - Brand */}
+              <div>
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center shadow-md">
+                    <span className="text-white font-bold text-lg">G</span>
+                  </div>
+                  <span className="text-xl font-bold text-white">GeniusHR</span>
+                </div>
+                <p className="text-sm leading-relaxed mb-4">
+                  La soluzione HR completa per studi professionali italiani.
+                  Conforme GDPR e normativa del lavoro.
+                </p>
+                <div className="flex items-center gap-4">
+                  <a href="https://twitter.com/geniushr" className="hover:text-white transition-colors" aria-label="Twitter">
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
+                    </svg>
+                  </a>
+                  <a href="https://linkedin.com/company/geniushr" className="hover:text-white transition-colors" aria-label="LinkedIn">
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+
+              {/* Column 2 - Prodotto */}
+              <div>
+                <h4 className="text-white font-bold mb-4 text-lg">Prodotto</h4>
+                <ul className="space-y-3 text-sm">
+                  <li><a href="#anime" className="hover:text-white transition-colors">Funzionalità</a></li>
+                  <li><a href="#pricing" className="hover:text-white transition-colors">Prezzi</a></li>
+                  <li><Link href="/login" className="hover:text-white transition-colors">Accedi</Link></li>
+                  <li><Link href="/register" className="hover:text-white transition-colors">Registrati</Link></li>
+                  <li><a href="#demo" className="hover:text-white transition-colors">Demo</a></li>
+                </ul>
+              </div>
+
+              {/* Column 3 - HR */}
+              <div>
+                <h4 className="text-white font-bold mb-4 text-lg">Gestione HR</h4>
+                <ul className="space-y-3 text-sm">
+                  <li><a href="/employees" className="hover:text-white transition-colors">Dipendenti</a></li>
+                  <li><a href="/leaves" className="hover:text-white transition-colors">Ferie e Permessi</a></li>
+                  <li><a href="/payslips" className="hover:text-white transition-colors">Buste Paga</a></li>
+                  <li><a href="/onboarding" className="hover:text-white transition-colors">Onboarding</a></li>
+                  <li><a href="/safety" className="hover:text-white transition-colors">Sicurezza 81/08</a></li>
+                </ul>
+              </div>
+
+              {/* Column 4 - Manuale */}
+              <div>
+                <h4 className="text-white font-bold mb-4 text-lg">Manuale Operativo</h4>
+                <ul className="space-y-3 text-sm">
+                  <li><a href="/tutorials" className="hover:text-white transition-colors">Biblioteca Procedure</a></li>
+                  <li><a href="#" className="hover:text-white transition-colors">Checklist Operative</a></li>
+                  <li><a href="#" className="hover:text-white transition-colors">Firme Digitali</a></li>
+                  <li><a href="#" className="hover:text-white transition-colors">Versionamento</a></li>
+                  <li><a href="#" className="hover:text-white transition-colors">ISO 9001</a></li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Bottom Row - Legal */}
+            <div className="border-t border-gray-800 pt-8">
+              <div className="grid md:grid-cols-2 gap-8 mb-8">
+                <div>
+                  <h4 className="text-white font-bold mb-4 text-lg">Legale</h4>
+                  <ul className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+                    <li><Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
+                    <li><Link href="/terms" className="hover:text-white transition-colors">Termini di Servizio</Link></li>
+                    <li><Link href="/cookies" className="hover:text-white transition-colors">Cookie Policy</Link></li>
+                    <li><a href="#" className="hover:text-white transition-colors">GDPR</a></li>
+                  </ul>
+                </div>
+                <div className="text-sm md:text-right">
+                  <p className="mb-2">
+                    © 2026 GeniusHR. Tutti i diritti riservati.
+                  </p>
+                  <p className="text-gray-500">
+                    P.IVA 12345678901
+                  </p>
+                </div>
+              </div>
+
+              {/* Disclaimer */}
+              <div className="pt-8 border-t border-gray-800">
+                <p className="text-xs text-gray-500 leading-relaxed">
+                  <strong className="text-gray-400">Disclaimer:</strong> GeniusHR fornisce template, strumenti digitali e sistemi per la gestione delle risorse umane e della documentazione operativa.
+                  I contenuti pubblicati sulla piattaforma <strong>NON costituiscono consulenza legale, fiscale o del lavoro</strong>.
+                  Per questioni specifiche relative a contrattualistica, adempimenti fiscali, normativa del lavoro, D.Lgs 81/08 o certificazioni ISO,
+                  consultare sempre un avvocato, commercialista o consulente del lavoro abilitato.
+                  GeniusHR non si assume responsabilità per l&apos;uso improprio dei contenuti o per eventuali sanzioni derivanti da non conformità normative.
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
-      </footer>
-    </div>
+        </footer>
+      </div>
+    </>
   );
 }
