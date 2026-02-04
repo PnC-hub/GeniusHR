@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import Link from 'next/link'
+import PageInfoTooltip from '@/components/PageInfoTooltip'
 
 export default function SettingsPage() {
   const { data: session, status } = useSession()
@@ -32,13 +33,24 @@ export default function SettingsPage() {
 
   return (
     <div className="p-8">
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-          Impostazioni
-        </h1>
-        <p className="text-gray-600 dark:text-gray-400">
-          Gestisci le impostazioni del tuo account e dell&apos;organizzazione
-        </p>
+      <div className="mb-8 flex items-center gap-3">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+            Impostazioni
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400">
+            Gestisci le impostazioni del tuo account e dell&apos;organizzazione
+          </p>
+        </div>
+        <PageInfoTooltip
+          title="Impostazioni"
+          description="Configurazione aziendale, profilo e preferenze di sistema"
+          tips={[
+            "Dati aziendali",
+            "Gestione team e permessi",
+            "Branding personalizzato"
+          ]}
+        />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

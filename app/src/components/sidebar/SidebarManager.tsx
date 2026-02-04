@@ -41,6 +41,7 @@ const menuSections: MenuSection[] = [
     title: 'HR Admin',
     items: [
       { href: '/deadlines', icon: '⏰', label: 'Scadenze' },
+      { href: '/hr-costs', icon: '💶', label: 'Costi HR' },
       { href: '/safety', icon: '🦺', label: 'Sicurezza 81/08' },
       { href: '/disciplinary', icon: '⚖️', label: 'Disciplinare' },
       { href: '/whistleblowing', icon: '📢', label: 'Whistleblowing' },

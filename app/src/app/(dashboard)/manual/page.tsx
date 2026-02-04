@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import PageInfoTooltip from '@/components/PageInfoTooltip'
 
 export default function ManualDashboardPage() {
   const [data, setData] = useState<any>(null)
@@ -18,9 +19,20 @@ export default function ManualDashboardPage() {
   return (
     <div className="p-6">
       <div className="flex justify-between items-center mb-8">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">📋 Manuale Operativo</h1>
-          <p className="text-gray-500 dark:text-gray-400 mt-1">Gestisci documenti, procedure e checklist aziendali</p>
+        <div className="flex items-center gap-3">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">📋 Manuale Operativo</h1>
+            <p className="text-gray-500 dark:text-gray-400 mt-1">Gestisci documenti, procedure e checklist aziendali</p>
+          </div>
+          <PageInfoTooltip
+            title="Manuale Operativo"
+            description="Dashboard del manuale operativo aziendale con articoli, categorie e checklist"
+            tips={[
+              "Articoli organizzati per categoria",
+              "Checklist operative eseguibili",
+              "Registro prese visione"
+            ]}
+          />
         </div>
         <Link href="/manual/editor" className="bg-blue-600 text-white rounded-lg hover:bg-blue-700 px-6 py-2">
           + Nuovo Articolo

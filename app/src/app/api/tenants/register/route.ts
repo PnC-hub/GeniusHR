@@ -115,10 +115,11 @@ export async function POST(req: Request) {
     }
 
     // If no price ID configured (dev mode), just return success
+    // Use relative URL to avoid undefined NEXT_PUBLIC_APP_URL
     return NextResponse.json({
       success: true,
       tenant: result.tenant,
-      portalUrl: `${process.env.NEXT_PUBLIC_APP_URL}/${result.tenant.slug}`
+      portalUrl: `/dashboard`
     })
 
   } catch (error) {

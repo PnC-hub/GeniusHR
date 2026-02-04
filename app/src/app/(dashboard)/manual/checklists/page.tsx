@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import PageInfoTooltip from '@/components/PageInfoTooltip'
 
 const FREQ_LABELS: Record<string, string> = { DAILY: 'Giornaliera', WEEKLY: 'Settimanale', MONTHLY: 'Mensile', QUARTERLY: 'Trimestrale', ANNUAL: 'Annuale', ON_DEMAND: 'Su richiesta' }
 const FREQ_COLORS: Record<string, string> = { DAILY: 'bg-red-100 text-red-800', WEEKLY: 'bg-orange-100 text-orange-800', MONTHLY: 'bg-blue-100 text-blue-800', ON_DEMAND: 'bg-gray-100 text-gray-800' }
@@ -19,9 +20,20 @@ export default function ChecklistsPage() {
   return (
     <div className="p-6">
       <div className="flex justify-between items-center mb-6">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">☑️ Checklist Operative</h1>
-          <p className="text-gray-500 dark:text-gray-400 mt-1">Gestisci e completa le checklist dello studio</p>
+        <div className="flex items-center gap-3">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">☑️ Checklist Operative</h1>
+            <p className="text-gray-500 dark:text-gray-400 mt-1">Gestisci e completa le checklist dello studio</p>
+          </div>
+          <PageInfoTooltip
+            title="Checklist Operative"
+            description="Elenco delle checklist operative aziendali con frequenza e storico esecuzioni"
+            tips={[
+              "Badge frequenza: giornaliera, settimanale, mensile",
+              "Storico esecuzioni completate",
+              "Esecuzione interattiva step-by-step"
+            ]}
+          />
         </div>
       </div>
 

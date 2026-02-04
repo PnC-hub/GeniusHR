@@ -2,11 +2,11 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "GeniusHR - Gestione HR + Manuale Operativo per Studi Professionali",
-  description: "Piattaforma SaaS completa: gestione dipendenti, ferie, buste paga, formazione sicurezza E manuale operativo digitale con validità legale ISO 9001. Per studi dentistici, medici e PMI italiane.",
+  title: "GeniusHR - Gestione HR + Manuale Operativo | Compliance Art. 2086 c.c.",
+  description: "Piattaforma SaaS completa: gestione dipendenti, ferie, buste paga, formazione sicurezza E manuale operativo digitale con validità legale ISO 9001. Compliance Art. 2086 c.c. su assetti organizzativi. Per studi dentistici, medici e PMI italiane.",
   openGraph: {
-    title: "GeniusHR - HR Management + Manuale Operativo in un'unica piattaforma",
-    description: "Gestisci il personale E i documenti operativi. Compliance GDPR, D.Lgs 81/08, ISO 9001. 14 giorni gratis.",
+    title: "GeniusHR - HR Management + Manuale Operativo + Compliance Art. 2086",
+    description: "Gestisci il personale E i documenti operativi. Compliance GDPR, D.Lgs 81/08, ISO 9001, Art. 2086 c.c. 14 giorni gratis.",
     type: "website",
   },
 };
@@ -152,7 +152,7 @@ export default function Home() {
               <p className="text-xl sm:text-2xl text-gray-600 max-w-3xl mx-auto mb-10 leading-relaxed">
                 La prima piattaforma che unisce gestione HR completa e documentazione operativa digitale.
                 <br />
-                <span className="font-semibold text-gray-900">Compliance garantita</span> per GDPR, D.Lgs 81/08 e ISO 9001.
+                <span className="font-semibold text-gray-900">Compliance garantita</span> per GDPR, D.Lgs 81/08, ISO 9001 e Art. 2086 c.c.
               </p>
 
               {/* CTAs */}
@@ -382,7 +382,147 @@ export default function Home() {
                   Gestione DVR, formazione obbligatoria, DPI, infortuni, whistleblowing D.Lgs 24/2023. Tutto conforme alla normativa italiana vigente.
                 </p>
               </div>
+
+              {/* Feature 7 - Organigramma */}
+              <div className="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
+                <div className="w-14 h-14 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl flex items-center justify-center mb-6 shadow-md">
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Organigramma Visuale</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Visualizzazione e editing drag-and-drop dell&apos;organigramma aziendale con ruoli e linee gerarchiche per compliance Art. 2086 c.c.
+                </p>
+              </div>
+
+              {/* Feature 8 - Mansionario */}
+              <div className="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
+                <div className="w-14 h-14 bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl flex items-center justify-center mb-6 shadow-md">
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Mansionario Digitale</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Registro mansioni con competenze richieste per ogni ruolo, template preconfigurati per settore. Conforme assetti organizzativi.
+                </p>
+              </div>
+
+              {/* Feature 9 - Risk Management */}
+              <div className="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
+                <div className="w-14 h-14 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-xl flex items-center justify-center mb-6 shadow-md">
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Risk Management</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Matrice rischio/impatto, registro rischi con azioni di mitigazione e scadenze. Compliance assetti organizzativi Art. 2086.
+                </p>
+              </div>
+
+              {/* Feature 10 - Dashboard Costi */}
+              <div className="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
+                <div className="w-14 h-14 bg-gradient-to-br from-pink-500 to-pink-600 rounded-xl flex items-center justify-center mb-6 shadow-md">
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Dashboard Costi HR</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Analisi costi personale con proiezioni, breakdown per reparto e trend storici. Monitoraggio assetti contabili Art. 2086.
+                </p>
+              </div>
+
+              {/* Feature 11 - Disciplinare */}
+              <div className="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
+                <div className="w-14 h-14 bg-gradient-to-br from-gray-600 to-gray-700 rounded-xl flex items-center justify-center mb-6 shadow-md">
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Disciplinare Art. 7</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Workflow procedimenti disciplinari con timer 5 giorni, conforme Statuto Lavoratori. Tracking completo e documentazione legale.
+                </p>
+              </div>
+
+              {/* Feature 12 - Whistleblowing */}
+              <div className="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
+                <div className="w-14 h-14 bg-gradient-to-br from-rose-500 to-rose-600 rounded-xl flex items-center justify-center mb-6 shadow-md">
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Whistleblowing</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Canale segnalazioni anonime conforme D.Lgs 24/2023, tracking e gestione. Protezione del segnalante e conformità normativa totale.
+                </p>
+              </div>
             </div>
+          </div>
+        </section>
+
+        {/* Compliance Ready Section - NEW */}
+        <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100">
+          <div className="max-w-5xl mx-auto text-center">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 bg-white border-2 border-indigo-300 px-6 py-3 rounded-full text-sm font-black mb-6 shadow-lg">
+              <svg className="w-5 h-5 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              </svg>
+              <span className="bg-gradient-to-r from-indigo-700 to-blue-700 bg-clip-text text-transparent">
+                Art. 2086 c.c.
+              </span>
+            </div>
+
+            {/* H2 */}
+            <h2 className="text-4xl sm:text-5xl font-black text-gray-900 mb-6 leading-tight">
+              Compliance Ready per l&apos;Art. 2086
+            </h2>
+
+            {/* Subtitle */}
+            <p className="text-xl sm:text-2xl text-gray-700 mb-10 leading-relaxed max-w-3xl mx-auto">
+              Tutti i dati HR necessari per la compliance Art. 2086 c.c., connessi automaticamente al <strong>Cruscotto Imperium</strong>
+            </p>
+
+            {/* Pills */}
+            <div className="flex flex-wrap justify-center gap-3 mb-10">
+              <span className="bg-white text-indigo-700 px-5 py-2.5 rounded-full font-bold text-sm shadow-md border border-indigo-200">
+                Organigramma
+              </span>
+              <span className="bg-white text-indigo-700 px-5 py-2.5 rounded-full font-bold text-sm shadow-md border border-indigo-200">
+                Mansionario
+              </span>
+              <span className="bg-white text-indigo-700 px-5 py-2.5 rounded-full font-bold text-sm shadow-md border border-indigo-200">
+                Risk Management
+              </span>
+              <span className="bg-white text-indigo-700 px-5 py-2.5 rounded-full font-bold text-sm shadow-md border border-indigo-200">
+                Costi HR
+              </span>
+              <span className="bg-white text-indigo-700 px-5 py-2.5 rounded-full font-bold text-sm shadow-md border border-indigo-200">
+                Sicurezza Normativa
+              </span>
+            </div>
+
+            {/* Small text */}
+            <p className="text-base text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
+              I dati GeniusHR alimentano automaticamente <strong>5 delle 13 aree</strong> monitorate dai Tribunali per la compliance agli assetti organizzativi, amministrativi e contabili adeguati.
+            </p>
+
+            {/* CTA */}
+            <a
+              href="https://imperium.it"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-blue-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all"
+            >
+              Scopri il Cruscotto Compliance
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </a>
           </div>
         </section>
 
