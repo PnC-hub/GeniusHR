@@ -1,8 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import DashboardShell from '@/components/layout/DashboardShell'
 import Sidebar from '@/components/sidebar'
+import { WelcomeGuide, HelpButton } from '@/components/onboarding'
 
 interface Client {
   id: string
@@ -35,27 +36,59 @@ export default function DashboardLayoutClient({
   unreadNotifications,
 }: DashboardLayoutClientProps) {
   const [selectedClientId, setSelectedClientId] = useState<string | null>(null)
+  const [showWelcome, setShowWelcome] = useState(false)
+
+  // Check if first visit (show welcome guide for owners)
+  useEffect(() => {
+    if (role === 'OWNER') {
+      const hasSeenWelcome = localStorage.getItem('geniushr_welcome_seen')
+      if (!hasSeenWelcome) {
+        // Small delay to let the page load first
+        const timer = setTimeout(() => setShowWelcome(true), 500)
+        return () => clearTimeout(timer)
+      }
+    }
+  }, [role])
+
+  const handleWelcomeComplete = () => {
+    localStorage.setItem('geniushr_welcome_seen', 'true')
+    localStorage.setItem('geniushr_welcome_date', new Date().toISOString())
+  }
 
   const brandColor =
     role === 'EMPLOYEE' ? 'green' : role === 'CONSULTANT' ? 'purple' : 'blue'
 
   return (
-    <DashboardShell
-      user={user}
-      brandColor={brandColor}
-      sidebar={
-        <Sidebar
-          role={role}
-          pendingSignatures={pendingSignatures}
-          pendingLeaves={pendingLeaves}
-          unreadNotifications={unreadNotifications}
-          clients={clients}
-          selectedClientId={selectedClientId}
-          onClientChange={setSelectedClientId}
+    <>
+      <DashboardShell
+        user={user}
+        brandColor={brandColor}
+        sidebar={
+          <Sidebar
+            role={role}
+            pendingSignatures={pendingSignatures}
+            pendingLeaves={pendingLeaves}
+            unreadNotifications={unreadNotifications}
+            clients={clients}
+            selectedClientId={selectedClientId}
+            onClientChange={setSelectedClientId}
+          />
+        }
+      >
+        {children}
+      </DashboardShell>
+
+      {/* Help Button - always visible */}
+      <HelpButton />
+
+      {/* Welcome Guide - first visit only */}
+      {showWelcome && (
+        <WelcomeGuide
+          userName={user.name || undefined}
+          onClose={() => setShowWelcome(false)}
+          onComplete={handleWelcomeComplete}
         />
-      }
-    >
-      {children}
-    </DashboardShell>
+      )}
+    </>
   )
 }
