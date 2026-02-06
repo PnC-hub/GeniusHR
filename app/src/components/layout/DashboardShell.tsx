@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { signOut } from 'next-auth/react'
 import { useState } from 'react'
 
@@ -43,6 +43,7 @@ export default function DashboardShell({
   user,
   brandColor = 'blue',
 }: DashboardShellProps) {
+  const router = useRouter()
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false)
   const colors = brandColors[brandColor]
 
@@ -147,7 +148,11 @@ export default function DashboardShell({
 
             <div className="flex items-center gap-3">
               {/* Notifications */}
-              <button className="p-2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-zinc-700 rounded-lg relative">
+              <button
+                onClick={() => router.push('/notifications')}
+                className="p-2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-zinc-700 rounded-lg relative"
+                title="Notifiche"
+              >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
