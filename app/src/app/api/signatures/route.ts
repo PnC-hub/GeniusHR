@@ -28,9 +28,7 @@ export async function GET(request: NextRequest) {
     const tenantId = user.tenantId || user.employee?.tenantId
 
     const where: Record<string, unknown> = {
-      document: {
-        tenantId,
-      },
+      tenantId, // Use direct tenantId field for better performance
     }
 
     if (status) {
@@ -63,6 +61,7 @@ export async function GET(request: NextRequest) {
             firstName: true,
             lastName: true,
             email: true,
+            department: true, // Added department field used by frontend
           },
         },
         requester: {

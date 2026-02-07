@@ -392,9 +392,9 @@ export default function PayslipsManagementPage() {
     }).format(new Date(dateStr))
   }
 
-  // Stats calculations
-  const totalGross = payslips.reduce((sum, p) => sum + p.grossAmount, 0)
-  const totalNet = payslips.reduce((sum, p) => sum + p.netAmount, 0)
+  // Stats calculations - safely handle null/undefined values
+  const totalGross = payslips.reduce((sum, p) => sum + (p.grossAmount || 0), 0)
+  const totalNet = payslips.reduce((sum, p) => sum + (p.netAmount || 0), 0)
   const viewedCount = payslips.filter((p) => p.viewedAt !== null).length
   const notViewedCount = payslips.filter((p) => p.viewedAt === null).length
 
