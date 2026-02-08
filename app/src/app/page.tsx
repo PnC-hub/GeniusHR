@@ -119,7 +119,7 @@ export default function Home() {
                   href="/register"
                   className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-5 py-2.5 rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all"
                 >
-                  Prova Gratis
+                  Registrati Gratis
                 </Link>
               </div>
             </div>
@@ -161,7 +161,7 @@ export default function Home() {
                   href="/register"
                   className="group bg-gradient-to-r from-blue-600 to-blue-700 text-white px-10 py-5 rounded-2xl font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all flex items-center justify-center gap-2"
                 >
-                  Inizia la Prova Gratuita
+                  Registrati Gratis
                   <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
@@ -178,7 +178,7 @@ export default function Home() {
               </div>
 
               <p className="text-sm text-gray-500 font-medium">
-                ✓ 14 giorni gratis &nbsp;&nbsp;·&nbsp;&nbsp; ✓ Nessuna carta di credito &nbsp;&nbsp;·&nbsp;&nbsp; ✓ Cancellazione immediata
+                ✓ Gratis per sempre &nbsp;&nbsp;·&nbsp;&nbsp; ✓ Nessuna carta di credito &nbsp;&nbsp;·&nbsp;&nbsp; ✓ Upgrade quando vuoi
               </p>
             </div>
           </div>
@@ -577,14 +577,62 @@ export default function Home() {
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-3xl sm:text-5xl font-black text-gray-900 mb-4">
-                Prezzi Semplici e Trasparenti
+                Inizia Gratis, Cresci Quando Vuoi
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Scegli il piano adatto alle dimensioni del tuo studio. Tutti i piani includono 14 giorni di prova gratuita.
+                Piano Free per sempre. Upgrade solo quando le funzionalità avanzate diventano necessarie per la tua crescita.
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+            <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
+              {/* Free Plan */}
+              <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-8 rounded-3xl border-2 border-gray-300 shadow-lg hover:shadow-xl transition-all">
+                <div className="inline-flex items-center gap-1 bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold mb-4">
+                  <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  GRATIS PER SEMPRE
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Free</h3>
+                <p className="text-gray-600 mb-6 text-sm">Per iniziare</p>
+                <div className="mb-8">
+                  <span className="text-5xl font-black text-gray-900">€0</span>
+                  <span className="text-gray-600 text-lg">/sempre</span>
+                </div>
+                <ul className="space-y-3 mb-8">
+                  <li className="flex items-start gap-3 text-gray-700">
+                    <svg className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span className="font-medium">Fino a 3 dipendenti</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-gray-700">
+                    <svg className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span className="font-medium">Anagrafica base</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-gray-700">
+                    <svg className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span className="font-medium">Ferie e permessi</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-gray-700">
+                    <svg className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span className="font-medium">Dashboard base</span>
+                  </li>
+                </ul>
+                <Link
+                  href="/register?plan=free"
+                  className="block w-full text-center bg-green-600 text-white px-6 py-4 rounded-xl font-bold hover:bg-green-700 transition-colors"
+                >
+                  Registrati Gratis
+                </Link>
+              </div>
+
               {/* Starter Plan */}
               <div className="bg-white p-8 rounded-3xl border-2 border-gray-200 shadow-lg hover:shadow-xl transition-all">
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Starter</h3>
@@ -598,13 +646,13 @@ export default function Home() {
                     <svg className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    <span className="font-medium">Fino a 5 dipendenti</span>
+                    <span className="font-medium">Fino a 10 dipendenti</span>
                   </li>
                   <li className="flex items-start gap-3 text-gray-700">
                     <svg className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    <span className="font-medium">HR base: ferie, buste paga</span>
+                    <span className="font-medium">Buste paga digitali</span>
                   </li>
                   <li className="flex items-start gap-3 text-gray-700">
                     <svg className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
@@ -623,7 +671,7 @@ export default function Home() {
                   href="/register?plan=starter"
                   className="block w-full text-center bg-gray-100 text-gray-900 px-6 py-4 rounded-xl font-bold hover:bg-gray-200 transition-colors"
                 >
-                  Inizia Gratis
+                  Scegli Starter
                 </Link>
               </div>
 
@@ -674,7 +722,7 @@ export default function Home() {
                   href="/register?plan=professional"
                   className="block w-full text-center bg-white text-blue-700 px-6 py-4 rounded-xl font-black hover:bg-blue-50 transition-colors shadow-lg"
                 >
-                  Inizia Gratis
+                  Scegli Professional
                 </Link>
               </div>
 
@@ -722,7 +770,7 @@ export default function Home() {
                   href="/register?plan=enterprise"
                   className="block w-full text-center bg-gray-100 text-gray-900 px-6 py-4 rounded-xl font-bold hover:bg-gray-200 transition-colors"
                 >
-                  Inizia Gratis
+                  Scegli Enterprise
                 </Link>
               </div>
 
@@ -931,19 +979,19 @@ export default function Home() {
                   </svg>
                 </summary>
                 <div className="px-6 pb-6 text-gray-700 leading-relaxed">
-                  Quattro piani: <strong>Starter €29/mese</strong> (5 dipendenti, HR base), <strong>Professional €79/mese</strong> (20 dipendenti, HR + Manuale), <strong>Enterprise €149/mese</strong> (illimitati, full features), <strong>Partner €199/mese</strong> (white-label + API). Nessun costo nascosto, cancel quando vuoi.
+                  Piano <strong>Free per sempre</strong> (3 dipendenti, funzioni base), poi upgrade quando serve: <strong>Starter €29/mese</strong> (10 dipendenti), <strong>Professional €79/mese</strong> (20 dipendenti, Manuale incluso), <strong>Enterprise €149/mese</strong> (illimitati), <strong>Partner €199/mese</strong> (white-label + API). Nessun costo nascosto, cancel quando vuoi.
                 </div>
               </details>
 
               <details className="group bg-gray-50 rounded-2xl overflow-hidden border border-gray-200 hover:shadow-lg transition-all">
                 <summary className="cursor-pointer p-6 font-bold text-lg text-gray-900 flex justify-between items-center">
-                  Come funziona la prova gratuita?
+                  Come funziona il piano gratuito?
                   <svg className="w-5 h-5 text-blue-600 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </summary>
                 <div className="px-6 pb-6 text-gray-700 leading-relaxed">
-                  <strong>14 giorni gratis</strong> con accesso completo al piano Professional. <strong>Non serve carta di credito</strong> per iniziare. Alla fine del trial puoi scegliere il piano o cancellare senza penali. Zero rischio.
+                  Il piano <strong>Free è gratis per sempre</strong> con fino a 3 dipendenti e funzioni base. <strong>Non serve carta di credito</strong>. Fai upgrade quando le funzionalità avanzate diventano necessarie. Downgrade a Free sempre possibile. Zero rischio.
                 </div>
               </details>
 
@@ -984,14 +1032,14 @@ export default function Home() {
             <p className="text-xl sm:text-2xl text-blue-100 mb-10 leading-relaxed">
               Unisciti a centinaia di studi che hanno già scelto GeniusHR.
               <br />
-              Inizia la tua prova gratuita oggi. Nessuna carta di credito richiesta.
+              Inizia gratis oggi. Nessuna carta di credito richiesta.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/register"
                 className="group bg-white text-blue-700 px-10 py-5 rounded-2xl font-black text-lg hover:bg-blue-50 transition-all shadow-2xl hover:scale-105 flex items-center justify-center gap-2"
               >
-                Inizia la Prova Gratuita
+                Registrati Gratis
                 <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>

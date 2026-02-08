@@ -173,6 +173,7 @@ model Tenant {
   manualCategories   ManualCategory[]
   manualArticles     ManualArticle[]
   manualChecklists   ManualChecklist[]
+  feedbacks          Feedback[]
 }
 
 enum Plan {
@@ -2168,3 +2169,30 @@ model ManualChecklistExecution {
   notes       String?
   @@map("manual_checklist_executions")
 }
+
+
+// ============================================
+// FEEDBACK & SUPPORT
+// ============================================
+
+model Feedback {
+  id          String   @id @default(cuid())
+  type        String   // bug, feature, other
+  title       String
+  description String   @db.Text
+  page        String?
+  priority    String   @default("medium") // low, medium, high
+  status      String   @default("open") // open, in_progress, resolved, closed
+  userEmail   String?
+  userName    String?
+  userAgent   String?  @db.Text
+  tenantId    String?
+  tenant      Tenant?  @relation(fields: [tenantId], references: [id])
+  resolvedAt  DateTime?
+  resolvedBy  String?
+  resolution  String?  @db.Text
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  @@map("feedbacks")
+}
+

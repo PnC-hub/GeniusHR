@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import DashboardShell from '@/components/layout/DashboardShell'
 import Sidebar from '@/components/sidebar'
 import { WelcomeGuide, HelpButton } from '@/components/onboarding'
+import FeedbackButton from '@/components/FeedbackButton'
 
 interface Client {
   id: string
@@ -80,6 +81,9 @@ export default function DashboardLayoutClient({
 
       {/* Help Button - always visible */}
       <HelpButton />
+
+      {/* Feedback Button - always visible */}
+      <FeedbackButton />
 
       {/* Welcome Guide - first visit only */}
       {showWelcome && (
