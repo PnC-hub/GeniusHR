@@ -27,7 +27,7 @@ interface WelcomeGuideProps {
 const TOUR_STEPS = [
   {
     id: 'welcome',
-    title: 'Benvenuto in GeniusHR! 👋',
+    title: 'Benvenuto in Ordinia! 👋',
     description: 'Ti guideremo attraverso le funzionalità principali della piattaforma. Questa guida ti aiuterà a capire come gestire al meglio il tuo studio.',
     icon: Sparkles,
     color: 'blue'
@@ -89,7 +89,7 @@ const TOUR_STEPS = [
   {
     id: 'settings',
     title: 'Impostazioni',
-    description: 'Personalizza GeniusHR per il tuo studio: logo, colori, team e integrazioni.',
+    description: 'Personalizza Ordinia per il tuo studio: logo, colori, team e integrazioni.',
     icon: Settings,
     color: 'gray',
     path: '/settings',
@@ -294,7 +294,7 @@ export default function WelcomeGuide({ userName, onClose, onComplete }: WelcomeG
                 className="flex items-center gap-2 px-6 py-2.5 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors font-medium"
               >
                 <Sparkles className="w-5 h-5" />
-                Inizia a usare GeniusHR
+                Inizia a usare Ordinia
               </button>
             </div>
           </div>

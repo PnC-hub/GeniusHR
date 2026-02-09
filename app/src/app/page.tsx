@@ -2,10 +2,10 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "GeniusHR - Gestione HR + Manuale Operativo | Compliance Art. 2086 c.c.",
+  title: "Ordinia - Gestione HR + Manuale Operativo | Compliance Art. 2086 c.c.",
   description: "Piattaforma SaaS completa: gestione dipendenti, ferie, buste paga, formazione sicurezza E manuale operativo digitale con validità legale ISO 9001. Compliance Art. 2086 c.c. su assetti organizzativi. Per studi dentistici, medici e PMI italiane.",
   openGraph: {
-    title: "GeniusHR - HR Management + Manuale Operativo + Compliance Art. 2086",
+    title: "Ordinia - HR Management + Manuale Operativo + Compliance Art. 2086",
     description: "Gestisci il personale E i documenti operativi. Compliance GDPR, D.Lgs 81/08, ISO 9001, Art. 2086 c.c. 14 giorni gratis.",
     type: "website",
   },
@@ -21,7 +21,7 @@ export default function Home() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
-            name: "GeniusHR",
+            name: "Ordinia",
             applicationCategory: "BusinessApplication",
             description: "Piattaforma SaaS per gestione risorse umane e manuali operativi digitali con validità legale ISO 9001",
             operatingSystem: "Web",
@@ -49,10 +49,10 @@ export default function Home() {
             mainEntity: [
               {
                 "@type": "Question",
-                name: "Cos'è GeniusHR?",
+                name: "Cos'è Ordinia?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "GeniusHR è una piattaforma SaaS con due anime: gestione HR completa (dipendenti, ferie, buste paga, formazione) e manuale operativo digitale con validità legale ISO 9001.",
+                  text: "Ordinia è una piattaforma SaaS con due anime: gestione HR completa (dipendenti, ferie, buste paga, formazione) e manuale operativo digitale con validità legale ISO 9001.",
                 },
               },
               {
@@ -68,7 +68,7 @@ export default function Home() {
                 name: "È adatto a studi dentistici?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Assolutamente sì. GeniusHR è progettato per studi dentistici, medici e professionali italiani con funzionalità specifiche per la compliance GDPR, D.Lgs 81/08 e normative sanitarie.",
+                  text: "Assolutamente sì. Ordinia è progettato per studi dentistici, medici e professionali italiani con funzionalità specifiche per la compliance GDPR, D.Lgs 81/08 e normative sanitarie.",
                 },
               },
               {
@@ -94,7 +94,7 @@ export default function Home() {
                   <span className="text-white font-bold text-lg">G</span>
                 </div>
                 <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">
-                  GeniusHR
+                  Ordinia
                 </span>
               </div>
               <nav className="hidden md:flex items-center gap-8">
@@ -192,7 +192,7 @@ export default function Home() {
                 Due Anime, Una Sola Piattaforma
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                GeniusHR combina gestione delle risorse umane e documentazione operativa digitale.
+                Ordinia combina gestione delle risorse umane e documentazione operativa digitale.
                 <br />
                 Tutto ciò che serve per gestire uno studio professionale moderno.
               </p>
@@ -508,7 +508,7 @@ export default function Home() {
 
             {/* Small text */}
             <p className="text-base text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
-              I dati GeniusHR alimentano automaticamente <strong>5 delle 13 aree</strong> monitorate dai Tribunali per la compliance agli assetti organizzativi, amministrativi e contabili adeguati.
+              I dati Ordinia alimentano automaticamente <strong>5 delle 13 aree</strong> monitorate dai Tribunali per la compliance agli assetti organizzativi, amministrativi e contabili adeguati.
             </p>
 
             {/* CTA */}
@@ -833,7 +833,7 @@ export default function Home() {
                 Cosa Dicono i Nostri Clienti
               </h2>
               <p className="text-xl text-gray-600">
-                Studi come il tuo hanno già scelto GeniusHR
+                Studi come il tuo hanno già scelto Ordinia
               </p>
             </div>
 
@@ -918,20 +918,20 @@ export default function Home() {
                 Domande Frequenti
               </h2>
               <p className="text-xl text-gray-600">
-                Tutto quello che devi sapere su GeniusHR
+                Tutto quello che devi sapere su Ordinia
               </p>
             </div>
 
             <div className="space-y-4">
               <details className="group bg-gray-50 rounded-2xl overflow-hidden border border-gray-200 hover:shadow-lg transition-all">
                 <summary className="cursor-pointer p-6 font-bold text-lg text-gray-900 flex justify-between items-center">
-                  Cos&apos;è GeniusHR esattamente?
+                  Cos&apos;è Ordinia esattamente?
                   <svg className="w-5 h-5 text-blue-600 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </summary>
                 <div className="px-6 pb-6 text-gray-700 leading-relaxed">
-                  GeniusHR è una piattaforma SaaS con due anime: <strong>gestione HR completa</strong> (dipendenti, ferie, buste paga, formazione, sicurezza 81/08) e <strong>manuale operativo digitale</strong> con validità legale per certificazioni ISO 9001 e accreditamenti sanitari.
+                  Ordinia è una piattaforma SaaS con due anime: <strong>gestione HR completa</strong> (dipendenti, ferie, buste paga, formazione, sicurezza 81/08) e <strong>manuale operativo digitale</strong> con validità legale per certificazioni ISO 9001 e accreditamenti sanitari.
                 </div>
               </details>
 
@@ -955,7 +955,7 @@ export default function Home() {
                   </svg>
                 </summary>
                 <div className="px-6 pb-6 text-gray-700 leading-relaxed">
-                  Assolutamente sì. GeniusHR è progettato specificamente per studi dentistici, medici e professionali italiani con funzionalità dedicate per <strong>compliance GDPR</strong>, <strong>D.Lgs 81/08</strong>, <strong>whistleblowing 24/2023</strong> e normative sanitarie.
+                  Assolutamente sì. Ordinia è progettato specificamente per studi dentistici, medici e professionali italiani con funzionalità dedicate per <strong>compliance GDPR</strong>, <strong>D.Lgs 81/08</strong>, <strong>whistleblowing 24/2023</strong> e normative sanitarie.
                 </div>
               </details>
 
@@ -1015,7 +1015,7 @@ export default function Home() {
                   </svg>
                 </summary>
                 <div className="px-6 pb-6 text-gray-700 leading-relaxed">
-                  No, GeniusHR è <strong>estremamente intuitivo</strong>. Il personale può consultare buste paga, chiedere ferie, firmare documenti senza formazione. Forniamo <strong>video tutorial</strong> per ogni funzione e supporto via email/chat.
+                  No, Ordinia è <strong>estremamente intuitivo</strong>. Il personale può consultare buste paga, chiedere ferie, firmare documenti senza formazione. Forniamo <strong>video tutorial</strong> per ogni funzione e supporto via email/chat.
                 </div>
               </details>
             </div>
@@ -1030,7 +1030,7 @@ export default function Home() {
               in un&apos;Unica Piattaforma?
             </h2>
             <p className="text-xl sm:text-2xl text-blue-100 mb-10 leading-relaxed">
-              Unisciti a centinaia di studi che hanno già scelto GeniusHR.
+              Unisciti a centinaia di studi che hanno già scelto Ordinia.
               <br />
               Inizia gratis oggi. Nessuna carta di credito richiesta.
             </p>
@@ -1045,7 +1045,7 @@ export default function Home() {
                 </svg>
               </Link>
               <a
-                href="mailto:info@geniushr.it"
+                href="mailto:info@ordinia.it"
                 className="bg-transparent text-white px-10 py-5 rounded-2xl font-black text-lg border-2 border-white hover:bg-white/10 transition-all flex items-center justify-center gap-2"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1067,19 +1067,19 @@ export default function Home() {
                   <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center shadow-md">
                     <span className="text-white font-bold text-lg">G</span>
                   </div>
-                  <span className="text-xl font-bold text-white">GeniusHR</span>
+                  <span className="text-xl font-bold text-white">Ordinia</span>
                 </div>
                 <p className="text-sm leading-relaxed mb-4">
                   La soluzione HR completa per studi professionali italiani.
                   Conforme GDPR e normativa del lavoro.
                 </p>
                 <div className="flex items-center gap-4">
-                  <a href="https://twitter.com/geniushr" className="hover:text-white transition-colors" aria-label="Twitter">
+                  <a href="https://twitter.com/ordinia" className="hover:text-white transition-colors" aria-label="Twitter">
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
                     </svg>
                   </a>
-                  <a href="https://linkedin.com/company/geniushr" className="hover:text-white transition-colors" aria-label="LinkedIn">
+                  <a href="https://linkedin.com/company/ordinia" className="hover:text-white transition-colors" aria-label="LinkedIn">
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                     </svg>
@@ -1138,7 +1138,7 @@ export default function Home() {
                 </div>
                 <div className="text-sm md:text-right">
                   <p className="mb-2">
-                    © 2026 GeniusHR. Tutti i diritti riservati.
+                    © 2026 Ordinia. Tutti i diritti riservati.
                   </p>
                   <p className="text-gray-500">
                     P.IVA 12345678901
@@ -1149,11 +1149,11 @@ export default function Home() {
               {/* Disclaimer */}
               <div className="pt-8 border-t border-gray-800">
                 <p className="text-xs text-gray-500 leading-relaxed">
-                  <strong className="text-gray-400">Disclaimer:</strong> GeniusHR fornisce template, strumenti digitali e sistemi per la gestione delle risorse umane e della documentazione operativa.
+                  <strong className="text-gray-400">Disclaimer:</strong> Ordinia fornisce template, strumenti digitali e sistemi per la gestione delle risorse umane e della documentazione operativa.
                   I contenuti pubblicati sulla piattaforma <strong>NON costituiscono consulenza legale, fiscale o del lavoro</strong>.
                   Per questioni specifiche relative a contrattualistica, adempimenti fiscali, normativa del lavoro, D.Lgs 81/08 o certificazioni ISO,
                   consultare sempre un avvocato, commercialista o consulente del lavoro abilitato.
-                  GeniusHR non si assume responsabilità per l&apos;uso improprio dei contenuti o per eventuali sanzioni derivanti da non conformità normative.
+                  Ordinia non si assume responsabilità per l&apos;uso improprio dei contenuti o per eventuali sanzioni derivanti da non conformità normative.
                 </p>
               </div>
             </div>

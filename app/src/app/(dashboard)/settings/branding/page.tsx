@@ -243,7 +243,7 @@ export default function BrandingSettingsPage() {
             />
             {isPremium && (
               <p className="mt-1 text-sm text-gray-500">
-                Configura un CNAME dal tuo dominio a cname.geniushr.it
+                Configura un CNAME dal tuo dominio a cname.ordinia.it
               </p>
             )}
           </div>

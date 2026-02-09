@@ -188,7 +188,7 @@ export default function HelpButton() {
                   Hai bisogno di supporto?
                 </p>
                 <a
-                  href="mailto:supporto@geniushr.it"
+                  href="mailto:supporto@ordinia.it"
                   className="text-sm text-blue-600 hover:text-blue-700 font-medium"
                 >
                   Contattaci →

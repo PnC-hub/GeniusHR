@@ -13,7 +13,7 @@ const defaultTheme: ThemeConfig = {
   primaryColor: '#2563eb',
   secondaryColor: '#10b981',
   logo: null,
-  companyName: 'GeniusHR'
+  companyName: 'Ordinia'
 }
 
 const ThemeContext = createContext<ThemeConfig>(defaultTheme)

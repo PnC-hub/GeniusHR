@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Termini di Servizio - GeniusHR',
-  description: 'Termini e condizioni di utilizzo del servizio GeniusHR',
+  title: 'Termini di Servizio - Ordinia',
+  description: 'Termini e condizioni di utilizzo del servizio Ordinia',
 }
 
 export default function TermsOfServicePage() {
@@ -10,18 +10,18 @@ export default function TermsOfServicePage() {
     <article className="prose prose-zinc dark:prose-invert max-w-none">
       <h1>Termini di Servizio</h1>
       <p className="lead">
-        Condizioni generali di utilizzo del servizio GeniusHR
+        Condizioni generali di utilizzo del servizio Ordinia
       </p>
       <p className="text-sm text-zinc-500">Ultima modifica: Gennaio 2026 - Versione 1.0</p>
 
       <h2>1. Definizioni</h2>
       <ul>
         <li>
-          <strong>&quot;Servizio&quot;</strong>: la piattaforma SaaS GeniusHR per la gestione delle
+          <strong>&quot;Servizio&quot;</strong>: la piattaforma SaaS Ordinia per la gestione delle
           risorse umane
         </li>
         <li>
-          <strong>&quot;Fornitore&quot;</strong>: Smiledoc S.r.l., titolare del servizio GeniusHR
+          <strong>&quot;Fornitore&quot;</strong>: Smiledoc S.r.l., titolare del servizio Ordinia
         </li>
         <li>
           <strong>&quot;Cliente&quot;</strong>: lo studio odontoiatrico o la clinica che sottoscrive
@@ -38,7 +38,7 @@ export default function TermsOfServicePage() {
       </ul>
 
       <h2>2. Oggetto del Servizio</h2>
-      <p>GeniusHR fornisce una piattaforma cloud per:</p>
+      <p>Ordinia fornisce una piattaforma cloud per:</p>
       <ul>
         <li>Gestione anagrafica dipendenti</li>
         <li>Archiviazione documenti HR</li>
@@ -124,7 +124,7 @@ export default function TermsOfServicePage() {
       <div className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-amber-900 dark:border-amber-800 dark:bg-amber-950 dark:text-amber-200">
         <h3 className="mt-0 text-amber-900 dark:text-amber-200">IMPORTANTE - DISCLAIMER</h3>
         <p className="mb-0">
-          GeniusHR fornisce <strong>strumenti e template</strong> per la gestione HR. I contenuti e
+          Ordinia fornisce <strong>strumenti e template</strong> per la gestione HR. I contenuti e
           i modelli forniti hanno scopo puramente informativo e{' '}
           <strong>NON costituiscono consulenza legale, fiscale o professionale</strong>.
         </p>

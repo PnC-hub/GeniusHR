@@ -40,7 +40,7 @@ export const tutorials: Tutorial[] = [
         title: 'Strutturazione dei Reparti',
         content: `La corretta organizzazione del team è fondamentale per il successo della tua azienda.
 
-In GeniusHR puoi creare reparti personalizzati che riflettono la struttura reale del tuo studio:
+In Ordinia puoi creare reparti personalizzati che riflettono la struttura reale del tuo studio:
 
 **Per uno studio odontoiatrico tipico:**
 - Reception e Front Office
@@ -65,7 +65,7 @@ Ogni reparto può avere un responsabile che gestisce autonomamente:
       },
       {
         title: 'Assegnazione Ruoli e Permessi',
-        content: `GeniusHR prevede diversi livelli di accesso per garantire sicurezza e privacy:
+        content: `Ordinia prevede diversi livelli di accesso per garantire sicurezza e privacy:
 
 **Titolare/Admin:**
 - Accesso completo a tutte le funzionalità
@@ -103,7 +103,7 @@ Ogni reparto può avere un responsabile che gestisce autonomamente:
         title: 'Delega Efficace',
         content: `La delega non è solo assegnare compiti, ma responsabilizzare il team.
 
-**Best practice per delegare in GeniusHR:**
+**Best practice per delegare in Ordinia:**
 
 1. **Approvazioni ferie:** Delega ai manager di reparto le approvazioni di routine. Tu mantieni la visibilità generale.
 
@@ -154,7 +154,7 @@ Ogni reparto può avere un responsabile che gestisce autonomamente:
    - Alterna le priorità anno per anno
 
 3. **Crea il calendario condiviso**
-   - Visualizza nel calendario GeniusHR chi è in ferie quando
+   - Visualizza nel calendario Ordinia chi è in ferie quando
    - Assicurati che ogni giorno ci sia copertura minima
    - Evita che intere funzioni chiave siano assenti insieme
 
@@ -183,7 +183,7 @@ Ogni reparto può avere un responsabile che gestisce autonomamente:
    - Richieste pianificate: gestisci con calma
 
 2. **Verifica copertura**
-   - GeniusHR ti mostra automaticamente chi altro è già in ferie
+   - Ordinia ti mostra automaticamente chi altro è già in ferie
    - Controlla che ogni funzione critica sia coperta
    - Per studi medici: assicura sempre almeno 1 dentista presente
 
@@ -212,7 +212,7 @@ Ogni reparto può avere un responsabile che gestisce autonomamente:
 - Ricorda che è obbligo godere delle ferie maturate
 
 **Giugno:** Primo controllo semestrale
-- Estrai il report "Saldi Ferie" da GeniusHR
+- Estrai il report "Saldi Ferie" da Ordinia
 - Identifica chi ha più di 15 giorni residui
 - Invia email personalizzata invitando a pianificare
 
@@ -300,7 +300,7 @@ Ogni reparto può avere un responsabile che gestisce autonomamente:
 2. **Documentazione obbligatoria**
    - Fattura elettronica (preferibile a scontrino)
    - Ricevuta fiscale se > €50
-   - Foto dello scontrino caricata su GeniusHR
+   - Foto dello scontrino caricata su Ordinia
 
 3. **Cosa NON è rimborsabile**
    - Minibar hotel
@@ -313,7 +313,7 @@ Ogni reparto può avere un responsabile che gestisce autonomamente:
    - Raggruppare le spese per trasferta
    - Liquidazione entro mese successivo
 
-**Configurazione in GeniusHR:**
+**Configurazione in Ordinia:**
 Vai su Impostazioni → Note Spese → Policy
 Imposta i limiti automatici: il sistema bloccherà richieste oltre soglia.`,
         tips: [
@@ -330,7 +330,7 @@ Imposta i limiti automatici: il sistema bloccherà richieste oltre soglia.`,
         title: 'Calcolo Rimborso Chilometrico',
         content: `Il rimborso chilometrico è regolato dalle tabelle ACI aggiornate annualmente.
 
-**Come funziona in GeniusHR:**
+**Come funziona in Ordinia:**
 
 1. **Il dipendente inserisce:**
    - Partenza (es. "Studio - Via Rossi 1, Roma")
@@ -354,7 +354,7 @@ Imposta i limiti automatici: il sistema bloccherà richieste oltre soglia.`,
 - Auto ibrida: €0.58/km
 - Auto elettrica: €0.48/km
 
-**Nota:** GeniusHR mantiene automaticamente le tabelle aggiornate.`,
+**Nota:** Ordinia mantiene automaticamente le tabelle aggiornate.`,
         tips: [
           'Chiedi sempre la targa del veicolo usato (verifica coerenza)',
           'Confronta i km dichiarati con Google Maps',
@@ -373,7 +373,7 @@ Imposta i limiti automatici: il sistema bloccherà richieste oltre soglia.`,
 **Workflow consigliato:**
 
 **Step 1: Controllo automatico**
-GeniusHR verifica:
+Ordinia verifica:
 - Ricevuta allegata ✓
 - Importo entro massimale ✓
 - Categoria corretta ✓
@@ -387,7 +387,7 @@ GeniusHR verifica:
 **Step 3: Pagamento**
 - Nota spesa approvata → export per contabilità
 - Liquidazione in busta paga o bonifico separato
-- Tracciamento pagamento in GeniusHR
+- Tracciamento pagamento in Ordinia
 
 **Cosa controllare:**
 1. **Coerenza:** La spesa è relativa all'attività dichiarata?
@@ -406,7 +406,7 @@ GeniusHR verifica:
         title: 'Controllo Budget Trasferte',
         content: `Monitora le spese viaggio per mantenerle sotto controllo.
 
-**Dashboard GeniusHR - Spese:**
+**Dashboard Ordinia - Spese:**
 - Spese totali mese corrente
 - Spese per dipendente
 - Spese per categoria
@@ -449,7 +449,7 @@ Esporta CSV mensile con:
     sections: [
       {
         title: 'Upload Massivo Buste Paga',
-        content: `GeniusHR semplifica la distribuzione mensile dei cedolini.
+        content: `Ordinia semplifica la distribuzione mensile dei cedolini.
 
 **Metodi di upload:**
 
@@ -465,7 +465,7 @@ Esporta CSV mensile con:
 
 **3. PDF unico multi-pagina**
 - Il consulente genera un PDF unico con tutti i cedolini
-- GeniusHR lo divide automaticamente
+- Ordinia lo divide automaticamente
 - Ogni dipendente riceve solo il suo
 
 **Dopo l'upload:**
@@ -496,7 +496,7 @@ Esporta CSV mensile con:
 **Come funziona:**
 
 1. **Riconoscimento codice fiscale**
-   - GeniusHR legge il CF dal PDF
+   - Ordinia legge il CF dal PDF
    - Cerca corrispondenza nel database dipendenti
    - Associa automaticamente
 
@@ -580,13 +580,13 @@ Solo dopo clicca "Conferma e Invia"`,
 
 **Processo:**
 1. Ricevi le CU dal consulente (di solito PDF multiplo)
-2. Upload su GeniusHR nella sezione "Documenti Fiscali"
+2. Upload su Ordinia nella sezione "Documenti Fiscali"
 3. Tag: "CU 2026"
 4. Sistema invia notifica a tutti
 5. Tracciamento download
 
 **Particolarità CU:**
-- Conservazione 10 anni (GeniusHR lo fa automaticamente)
+- Conservazione 10 anni (Ordinia lo fa automaticamente)
 - Dipendenti ex-dipendenti devono poter scaricare
 - Consegna tracciata importante per eventuali controlli
 
@@ -894,7 +894,7 @@ In emergenza: selezioni template, personalizzi, invii`,
 - Attestato formazione sicurezza (da fare entro 60gg)
 - Visita medica (se prevista)
 
-**Gestione in GeniusHR:**
+**Gestione in Ordinia:**
 - Upload documenti in fascicolo dipendente
 - Richiesta firma digitale per quelli obbligatori
 - Tracking stato (firmato/non firmato)
@@ -930,7 +930,7 @@ In emergenza: selezioni template, personalizzi, invii`,
 - Per addetti antincendio
 - Rinnovo ogni 5 anni
 
-**Tracciamento in GeniusHR:**
+**Tracciamento in Ordinia:**
 - Inserisci dipendente
 - Sistema genera scadenzario formazione
 - Alert 60 giorni prima scadenza
@@ -983,7 +983,7 @@ In emergenza: selezioni template, personalizzi, invii`,
 - Comunicazione formale
 - Se confermato: celebra! (messaggio team, welcome ufficiale)
 
-**GeniusHR - Gestione periodo prova:**
+**Ordinia - Gestione periodo prova:**
 - Alert automatici a 30-60 giorni
 - Template scheda valutazione
 - Storico feedback
@@ -1027,7 +1027,7 @@ Durante periodo prova:
 📊 **Registro Infortuni**
 - Annotare ogni infortunio > 1 giorno assenza
 - Conservazione 4 anni
-- GeniusHR lo mantiene automaticamente
+- Ordinia lo mantiene automaticamente
 
 👷 **Nomine Sicurezza**
 - RSPP (Responsabile Servizio Prevenzione Protezione)
@@ -1043,7 +1043,7 @@ Durante periodo prova:
 - Primo Soccorso: ogni 3 anni
 - Antincendio: ogni 5 anni
 
-**Gestione in GeniusHR:**
+**Gestione in Ordinia:**
 Sezione Sicurezza → Dashboard
 - Scadenzario formazioni
 - Alert automatici
@@ -1100,7 +1100,7 @@ Sezione Sicurezza → Dashboard
 ❌ Mancanza di prove documentate
 ❌ Violare privacy (non comunicare a terzi)
 
-**GeniusHR - Gestione Disciplinare:**
+**Ordinia - Gestione Disciplinare:**
 - Workflow guidato step-by-step
 - Template contestazioni
 - Tracciamento tempistiche
@@ -1144,7 +1144,7 @@ Sezione Sicurezza → Dashboard
 - Protezione segnalante da ritorsioni
 - Riservatezza identità (se richiesta)
 
-**GeniusHR Whistleblowing:**
+**Ordinia Whistleblowing:**
 - Canale anonimo con codice accesso
 - Messaggistica sicura bidirezionale
 - Gestione ticket strutturata
@@ -1202,7 +1202,7 @@ Sezione Sicurezza → Dashboard
 - Protezione da accessi non autorizzati
 - Sistema di recupero rapido
 
-**GeniusHR - Archivio:**
+**Ordinia - Archivio:**
 - Conservazione automatica con scadenze
 - Backup giornalieri
 - Conformità GDPR
@@ -1240,7 +1240,7 @@ Sezione Sicurezza → Dashboard
     sections: [
       {
         title: 'Configurare Accesso Consulente',
-        content: `GeniusHR permette al tuo consulente di accedere ai dati necessari senza compromettere la privacy.
+        content: `Ordinia permette al tuo consulente di accedere ai dati necessari senza compromettere la privacy.
 
 **Come invitare il consulente:**
 
@@ -1315,10 +1315,10 @@ Sezione Sicurezza → Dashboard
 - Promozioni
 
 **Processo mensile:**
-1. Tu esporti dati GeniusHR (es. 28 del mese)
+1. Tu esporti dati Ordinia (es. 28 del mese)
 2. Invii al consulente (o lui scarica direttamente)
 3. Consulente elabora cedolini
-4. Consulente carica cedolini su GeniusHR
+4. Consulente carica cedolini su Ordinia
 5. Tu distribuisci ai dipendenti
 
 **Automazione:**
@@ -1328,7 +1328,7 @@ Sezione Sicurezza → Dashboard
         tips: [
           'Valida dati prima di esportare (controlla anomalie presenze)',
           'Esporta sempre ultimo giorno utile del mese',
-          'Mantieni nomenclatura coerente tra GeniusHR e software paghe',
+          'Mantieni nomenclatura coerente tra Ordinia e software paghe',
         ],
       },
       {
@@ -1338,7 +1338,7 @@ Sezione Sicurezza → Dashboard
 **Canali di comunicazione:**
 
 💬 **Messaggistica Interna**
-- Usa il sistema messaggi GeniusHR
+- Usa il sistema messaggi Ordinia
 - Threads per argomento
 - Tutto tracciato e archiviato
 - Meglio di email disperse
@@ -1367,7 +1367,7 @@ Sezione Sicurezza → Dashboard
 - Aggiornamento policy aziendali
 
 **Template comunicazioni:**
-GeniusHR include template per:
+Ordinia include template per:
 - Nuova assunzione
 - Cessazione rapporto
 - Variazione dati

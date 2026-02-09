@@ -137,7 +137,7 @@ export default function FeedbackButton() {
                       Segnala un problema
                     </h2>
                     <p className="text-sm text-gray-600 mt-1">
-                      Aiutaci a migliorare GeniusHR
+                      Aiutaci a migliorare Ordinia
                     </p>
                   </div>
                   <button

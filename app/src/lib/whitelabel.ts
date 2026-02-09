@@ -42,8 +42,8 @@ export function getDefaultTheme(): ThemeConfig {
     secondaryColor: '#10b981',
     logo: null,
     favicon: null,
-    companyName: 'GeniusHR',
-    supportEmail: 'support@geniushr.it',
+    companyName: 'Ordinia',
+    supportEmail: 'support@ordinia.it',
     customCss: null
   }
 }

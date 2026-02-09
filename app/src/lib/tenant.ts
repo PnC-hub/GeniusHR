@@ -5,7 +5,7 @@ export async function getCurrentTenant() {
   const headersList = await headers()
   const host = headersList.get('host') || ''
 
-  // Extract subdomain: studio-rossi.geniushr.it -> studio-rossi
+  // Extract subdomain: studio-rossi.ordinia.it -> studio-rossi
   const subdomain = host.split('.')[0]
 
   // Check for custom domain first

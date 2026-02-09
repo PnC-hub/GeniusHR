@@ -94,12 +94,12 @@ export default function TutorialsPage() {
               Centro Tutorial
             </h1>
             <p className="text-gray-600 dark:text-gray-400">
-              Guide pratiche per utilizzare al meglio GeniusHR
+              Guide pratiche per utilizzare al meglio Ordinia
             </p>
           </div>
           <PageInfoTooltip
             title="Centro Tutorial"
-            description="Qui trovi tutorial interattivi per imparare a utilizzare tutte le funzionalità di GeniusHR. Ogni guida include esempi pratici, suggerimenti operativi e checklist."
+            description="Qui trovi tutorial interattivi per imparare a utilizzare tutte le funzionalità di Ordinia. Ogni guida include esempi pratici, suggerimenti operativi e checklist."
             tips={[
               'Inizia dai tutorial base se sei un nuovo utente',
               'Il tuo progresso viene salvato automaticamente',

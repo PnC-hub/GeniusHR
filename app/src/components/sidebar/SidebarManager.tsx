@@ -16,7 +16,7 @@ interface MenuSection {
 
 const menuSections: MenuSection[] = [
   {
-    title: 'GeniusHR',
+    title: 'Ordinia',
     items: [
       { href: '/dashboard', icon: '🏠', label: 'Dashboard' },
       { href: '/employees', icon: '👥', label: 'Dipendenti' },

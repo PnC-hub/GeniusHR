@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy - GeniusHR',
+  title: 'Privacy Policy - Ordinia',
   description: 'Informativa sulla privacy ai sensi del GDPR Art. 13',
 }
 
@@ -25,7 +25,7 @@ export default function PrivacyPolicyPage() {
       </p>
 
       <h2>2. Categorie di Dati Raccolti</h2>
-      <p>GeniusHR raccoglie e tratta le seguenti categorie di dati personali:</p>
+      <p>Ordinia raccoglie e tratta le seguenti categorie di dati personali:</p>
 
       <h3>2.1 Dati di registrazione</h3>
       <ul>

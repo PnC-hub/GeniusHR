@@ -19,7 +19,7 @@ export function middleware(request: NextRequest) {
   }
 
   // Check if this is a custom domain or subdomain
-  // For subdomains like studio-rossi.geniushr.it
+  // For subdomains like studio-rossi.ordinia.it
   // We add the tenant slug to the request headers
   const response = NextResponse.next()
 

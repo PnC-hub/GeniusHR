@@ -42,7 +42,7 @@ export async function createCustomer(email: string, name: string) {
   return stripe.customers.create({
     email,
     name,
-    metadata: { source: 'geniushr_saas' }
+    metadata: { source: 'ordinia_saas' }
   })
 }
 

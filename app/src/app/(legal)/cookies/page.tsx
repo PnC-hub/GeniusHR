@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Cookie Policy - GeniusHR',
-  description: 'Informativa sui cookie utilizzati da GeniusHR',
+  title: 'Cookie Policy - Ordinia',
+  description: 'Informativa sui cookie utilizzati da Ordinia',
 }
 
 export default function CookiePolicyPage() {

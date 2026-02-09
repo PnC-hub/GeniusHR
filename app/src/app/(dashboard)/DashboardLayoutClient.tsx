@@ -42,7 +42,7 @@ export default function DashboardLayoutClient({
   // Check if first visit (show welcome guide for owners)
   useEffect(() => {
     if (role === 'OWNER') {
-      const hasSeenWelcome = localStorage.getItem('geniushr_welcome_seen')
+      const hasSeenWelcome = localStorage.getItem('ordinia_welcome_seen')
       if (!hasSeenWelcome) {
         // Small delay to let the page load first
         const timer = setTimeout(() => setShowWelcome(true), 500)
@@ -52,8 +52,8 @@ export default function DashboardLayoutClient({
   }, [role])
 
   const handleWelcomeComplete = () => {
-    localStorage.setItem('geniushr_welcome_seen', 'true')
-    localStorage.setItem('geniushr_welcome_date', new Date().toISOString())
+    localStorage.setItem('ordinia_welcome_seen', 'true')
+    localStorage.setItem('ordinia_welcome_date', new Date().toISOString())
   }
 
   const brandColor =

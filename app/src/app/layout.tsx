@@ -11,7 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "GeniusHR - Gestione HR per Studi Odontoiatrici",
+  title: "Ordinia - Gestione HR per Studi Odontoiatrici",
   description: "Il primo software HR specifico per studi dentistici. Compliance CCNL, GDPR, sicurezza D.Lgs 81/2008.",
 };
 

@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Whistleblowing | GeniusHR',
+  title: 'Whistleblowing | Ordinia',
   description: 'Canale di segnalazione sicuro conforme al D.Lgs. 24/2023',
 }
 

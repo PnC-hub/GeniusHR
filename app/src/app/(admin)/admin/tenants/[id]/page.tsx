@@ -60,13 +60,13 @@ export default async function TenantDetailPage({
         <div>
           <h1 className="text-3xl font-bold text-gray-900">{tenant.name}</h1>
           <p className="text-gray-600 mt-1">
-            {tenant.slug}.geniushr.it
+            {tenant.slug}.ordinia.it
             {tenant.customDomain && ` • ${tenant.customDomain}`}
           </p>
         </div>
         <div className="flex gap-3">
           <a
-            href={`https://${tenant.slug}.geniushr.it`}
+            href={`https://${tenant.slug}.ordinia.it`}
             target="_blank"
             rel="noopener noreferrer"
             className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"

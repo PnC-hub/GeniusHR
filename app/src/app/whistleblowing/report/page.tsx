@@ -40,7 +40,7 @@ export default function WhistleblowingReportPage() {
   const getTenantSlug = () => {
     if (typeof window !== 'undefined') {
       const hostname = window.location.hostname
-      // Check for subdomain (e.g., company.geniushr.com)
+      // Check for subdomain (e.g., company.ordinia.com)
       const parts = hostname.split('.')
       if (parts.length > 2) {
         return parts[0]

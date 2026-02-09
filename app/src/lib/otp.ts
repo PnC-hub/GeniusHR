@@ -143,7 +143,7 @@ export async function sendOtpEmail(
   console.log(`
     ===== OTP EMAIL =====
     To: ${email}
-    Subject: Il tuo codice di verifica GeniusHR
+    Subject: Il tuo codice di verifica Ordinia
 
     Ciao ${userName || ''},
 
@@ -155,7 +155,7 @@ export async function sendOtpEmail(
 
     Se non hai richiesto questo codice, ignora questa email.
 
-    - Il team GeniusHR
+    - Il team Ordinia
     ====================
   `)
 
@@ -177,7 +177,7 @@ export async function sendOtpSms(
   console.log(`
     ===== OTP SMS =====
     To: ${phone}
-    Message: GeniusHR - Il tuo codice di verifica è: ${code}. Scade tra ${OTP_EXPIRY_MINUTES} minuti.
+    Message: Ordinia - Il tuo codice di verifica è: ${code}. Scade tra ${OTP_EXPIRY_MINUTES} minuti.
     ====================
   `)
 

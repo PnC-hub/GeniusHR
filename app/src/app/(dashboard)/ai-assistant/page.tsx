@@ -288,7 +288,7 @@ Le ricordo che il documento **"[Nome Documento]"** è in attesa della Sua firma 
 - Inviato il: [Data Invio]
 - Scadenza: [Data Scadenza]
 
-Per procedere alla firma, acceda al suo portale dipendente GeniusHR e segua le istruzioni.
+Per procedere alla firma, acceda al suo portale dipendente Ordinia e segua le istruzioni.
 
 **Link diretto:** [URL firma]
 

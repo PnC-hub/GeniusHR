@@ -7,7 +7,7 @@ export default function LegalLayout({ children }: { children: React.ReactNode })
       <header className="border-b border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900">
         <div className="mx-auto max-w-4xl px-4 py-4">
           <Link href="/" className="text-xl font-bold text-zinc-900 dark:text-white">
-            GeniusHR
+            Ordinia
           </Link>
         </div>
       </header>
@@ -30,7 +30,7 @@ export default function LegalLayout({ children }: { children: React.ReactNode })
             </Link>
           </nav>
           <p className="mt-4 text-xs text-zinc-500 dark:text-zinc-500">
-            GeniusHR - Gestione HR per Studi Odontoiatrici
+            Ordinia - Gestione HR per Studi Odontoiatrici
           </p>
         </div>
       </footer>

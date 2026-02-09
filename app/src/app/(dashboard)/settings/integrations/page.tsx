@@ -204,12 +204,12 @@ export default function IntegrationsSettingsPage() {
             Integrazioni
           </h1>
           <p className="text-gray-600 dark:text-gray-400">
-            Connetti GeniusHR con i tuoi strumenti preferiti
+            Connetti Ordinia con i tuoi strumenti preferiti
           </p>
         </div>
         <PageInfoTooltip
           title="Integrazioni Esterne"
-          description="Collega GeniusHR ai software che già utilizzi per automatizzare lo scambio di dati. Le integrazioni permettono di sincronizzare anagrafiche, presenze e cedolini."
+          description="Collega Ordinia ai software che già utilizzi per automatizzare lo scambio di dati. Le integrazioni permettono di sincronizzare anagrafiche, presenze e cedolini."
           tips={[
             'L\'integrazione con Zucchetti e TeamSystem sincronizza i dati paghe',
             'Google e Microsoft 365 permettono SSO e calendario condiviso',
