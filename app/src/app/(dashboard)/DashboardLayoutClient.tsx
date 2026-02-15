@@ -87,7 +87,7 @@ export default function DashboardLayoutClient({
       <FeedbackButton />
 
       {/* AI Training FAB - quick access to training */}
-      <TrainingFAB />
+      <TrainingFAB context="dashboard" />
 
       {/* Welcome Guide - first visit only */}
       {showWelcome && (

@@ -267,7 +267,7 @@ async function queryData(
         return { count: leaves.length, data: leaves };
 
       case 'expense':
-        const expenses = await prisma.expense.findMany({
+        const expenses = await prisma.expenseRequest.findMany({
           where: { employee: { tenantId }, ...filters },
           take: 10
         });
@@ -343,56 +343,58 @@ export async function processTrainingMessage(
     // Gestisci function calls
     if (message.tool_calls && message.tool_calls.length > 0) {
       const toolCall = message.tool_calls[0];
-      const functionName = toolCall.function.name;
-      const functionArgs = JSON.parse(toolCall.function.arguments);
+      if (toolCall.type === 'function' && 'function' in toolCall) {
+        const functionName = toolCall.function.name;
+        const functionArgs = JSON.parse(toolCall.function.arguments);
 
-      output.functionCall = functionName;
+        output.functionCall = functionName;
 
-      // Esegui la funzione
-      const functionResult = await executeFunctionCall(functionName, functionArgs, tenantId);
-      output.functionResult = functionResult;
+        // Esegui la funzione
+        const functionResult = await executeFunctionCall(functionName, functionArgs, tenantId);
+        output.functionResult = functionResult;
 
-      // Estrai correzione o regola se applicabile
-      if (functionName === 'extract_correction') {
-        output.correction = {
-          entityType: functionArgs.entityType,
-          entityId: functionArgs.entityId,
-          originalValue: functionArgs.originalValue,
-          correctedValue: functionArgs.correctedValue,
-          fieldPath: functionArgs.fieldPath,
-          ruleExtracted: functionArgs.ruleExtracted
-        };
-      } else if (functionName === 'create_rule') {
-        output.rule = {
-          name: functionArgs.name,
-          condition: functionArgs.condition,
-          conditionJson: functionArgs.conditionJson,
-          action: functionArgs.action,
-          actionJson: functionArgs.actionJson,
-          priority: functionArgs.priority
-        };
-      }
-
-      // Seconda chiamata per ottenere risposta finale con risultato funzione
-      const followUpMessages: OpenAI.Chat.ChatCompletionMessageParam[] = [
-        ...allMessages,
-        message as OpenAI.Chat.ChatCompletionMessageParam,
-        {
-          role: 'tool' as const,
-          tool_call_id: toolCall.id,
-          content: JSON.stringify(functionResult)
+        // Estrai correzione o regola se applicabile
+        if (functionName === 'extract_correction') {
+          output.correction = {
+            entityType: functionArgs.entityType,
+            entityId: functionArgs.entityId,
+            originalValue: functionArgs.originalValue,
+            correctedValue: functionArgs.correctedValue,
+            fieldPath: functionArgs.fieldPath,
+            ruleExtracted: functionArgs.ruleExtracted
+          };
+        } else if (functionName === 'create_rule') {
+          output.rule = {
+            name: functionArgs.name,
+            condition: functionArgs.condition,
+            conditionJson: functionArgs.conditionJson,
+            action: functionArgs.action,
+            actionJson: functionArgs.actionJson,
+            priority: functionArgs.priority
+          };
         }
-      ];
 
-      const followUpResponse = await openai.chat.completions.create({
-        model: 'gpt-4o',
-        messages: followUpMessages,
-        temperature: 0.7,
-        max_tokens: 500
-      });
+        // Seconda chiamata per ottenere risposta finale con risultato funzione
+        const followUpMessages: OpenAI.Chat.ChatCompletionMessageParam[] = [
+          ...allMessages,
+          message as OpenAI.Chat.ChatCompletionMessageParam,
+          {
+            role: 'tool' as const,
+            tool_call_id: toolCall.id,
+            content: JSON.stringify(functionResult)
+          }
+        ];
 
-      output.content = followUpResponse.choices[0].message.content || output.content;
-      output.tokens = (output.tokens || 0) + (followUpResponse.usage?.total_tokens || 0);
+        const followUpResponse = await openai.chat.completions.create({
+          model: 'gpt-4o',
+          messages: followUpMessages,
+          temperature: 0.7,
+          max_tokens: 500
+        });
+
+        output.content = followUpResponse.choices[0].message.content || output.content;
+        output.tokens = (output.tokens || 0) + (followUpResponse.usage?.total_tokens || 0);
+      }
     }
 
     return output;
@@ -479,6 +481,8 @@ export async function applyRulesToData(
           // Registra applicazione regola
           await prisma.aIRuleApplication.create({
             data: {
+              tenantId,
+              module,
               ruleId: rule.id,
               entityType,
               entityId,
