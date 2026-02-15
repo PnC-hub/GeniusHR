@@ -11,16 +11,20 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Non autorizzato' }, { status: 401 })
     }
 
-    const user = await prisma.user.findUnique({
-      where: { id: session.user.id },
-      include: { tenant: true, employee: true },
+    // Use TenantMember to get tenantId (same as /api/employees)
+    const membership = await prisma.tenantMember.findFirst({
+      where: { userId: session.user.id },
     })
 
-    if (!user?.tenantId && !user?.employee?.tenantId) {
-      return NextResponse.json({ error: 'Tenant non trovato' }, { status: 404 })
+    if (!membership) {
+      return NextResponse.json({ error: 'Nessun tenant associato' }, { status: 404 })
     }
 
-    const tenantId = (user.tenantId || user.employee?.tenantId) as string
+    const tenantId = membership.tenantId
+
+    const user = await prisma.user.findUnique({
+      where: { id: session.user.id },
+    })
 
     const body = await request.json()
     const { employeeId, date, clockIn, clockOut, breakMinutes, notes } = body
@@ -89,7 +93,7 @@ export async function POST(request: NextRequest) {
         overtimeMinutes,
         status: 'PENDING',
         notes: notes || 'Timbratura manuale',
-        managerNotes: `Inserita manualmente da ${user.name || user.email}`,
+        managerNotes: `Inserita manualmente da ${user?.name || user?.email || 'utente'}`,
       },
       include: {
         employee: {
@@ -107,7 +111,7 @@ export async function POST(request: NextRequest) {
     // Log audit
     await logAudit({
       tenantId,
-      userId: user.id,
+      userId: user?.id || session.user.id,
       action: 'CREATE',
       entityType: 'TimeEntry',
       entityId: entry.id,

@@ -154,8 +154,7 @@ export default function AcceptInvitePage() {
         {/* Logo */}
         <div className="text-center mb-8">
           <Link href="/" className="text-4xl font-bold text-white">
-            <span>Genius</span>
-            <span className="text-green-200">HR</span>
+            <span>Ordinia</span>
           </Link>
         </div>
 

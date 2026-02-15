@@ -1,0 +1,2445 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smiledoc - Portale Dipendenti e Gestione HR</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        header p {
+            color: #718096;
+            font-size: 14px;
+        }
+
+        /* Mode Switcher */
+        .mode-switcher {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .mode-btn {
+            padding: 15px 30px;
+            background: white;
+            border: 3px solid transparent;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            color: #4a5568;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .mode-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .mode-btn.active {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .mode-btn .icon {
+            font-size: 24px;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Alerts */
+        .alert {
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .alert-legal {
+            background: #fed7d7;
+            color: #c53030;
+            border-left: 4px solid #c53030;
+        }
+
+        .alert-info {
+            background: #bee3f8;
+            color: #2b6cb0;
+            border-left: 4px solid #2b6cb0;
+        }
+
+        .alert-success {
+            background: #c6f6d5;
+            color: #276749;
+            border-left: 4px solid #38a169;
+        }
+
+        /* Portal Container */
+        .portal {
+            display: none;
+        }
+
+        .portal.active {
+            display: block;
+        }
+
+        /* Navigation */
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nav-tab {
+            padding: 12px 20px;
+            background: #edf2f7;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: #4a5568;
+            transition: all 0.3s ease;
+        }
+
+        .nav-tab:hover {
+            background: #e2e8f0;
+        }
+
+        .nav-tab.active {
+            background: #667eea;
+            color: white;
+        }
+
+        /* Sidebar Layout for Admin */
+        .admin-layout {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 20px;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .sidebar-btn {
+            padding: 15px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-align: left;
+            background: white;
+            color: #2d3748;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .sidebar-btn:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .sidebar-btn.active {
+            background: #667eea;
+            color: white;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Section */
+        .section {
+            display: none;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            font-size: 24px;
+        }
+
+        .section h3 {
+            color: #4a5568;
+            margin: 25px 0 15px;
+            font-size: 16px;
+        }
+
+        .section p {
+            color: #4a5568;
+            line-height: 1.8;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        /* Cards */
+        .doc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .doc-card {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            border-left: 4px solid #667eea;
+        }
+
+        .doc-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-color: #667eea;
+        }
+
+        .doc-card h4 {
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        .doc-card p {
+            color: #718096;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-right: 5px;
+            margin-bottom: 10px;
+        }
+
+        .badge-required { background: #fed7d7; color: #c53030; }
+        .badge-optional { background: #c6f6d5; color: #276749; }
+        .badge-policy { background: #bee3f8; color: #2b6cb0; }
+        .badge-admin { background: #faf089; color: #975a16; }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-sm { padding: 8px 14px; font-size: 12px; }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #667eea;
+            color: #667eea;
+        }
+        .btn-outline:hover { background: #667eea; color: white; }
+        .btn-copy { background: #48bb78; }
+        .btn-copy:hover { background: #38a169; }
+        .btn-group { display: flex; gap: 10px; }
+
+        /* Checklist */
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            padding: 12px 15px;
+            background: #f7fafc;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 4px solid #e2e8f0;
+        }
+
+        .checklist li.completed {
+            border-left-color: #48bb78;
+            background: #f0fff4;
+        }
+
+        .checklist input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .checklist-link {
+            color: #2d3748;
+            text-decoration: none;
+            border-bottom: 1px dashed #667eea;
+            transition: all 0.2s ease;
+        }
+
+        .checklist-link:hover {
+            color: #667eea;
+            border-bottom-style: solid;
+        }
+
+        /* Timeline */
+        .phase-timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .phase {
+            margin-bottom: 30px;
+            padding-left: 40px;
+            position: relative;
+        }
+
+        .phase::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 24px;
+            height: 24px;
+            background: #667eea;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #667eea;
+        }
+
+        .phase.completed::before {
+            background: #48bb78;
+            box-shadow: 0 0 0 3px #48bb78;
+        }
+
+        .phase h4 {
+            color: #2d3748;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .phase p {
+            color: #718096;
+            font-size: 13px;
+            margin: 0;
+        }
+
+        /* Employee Cards */
+        .dipendenti-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .dip-card {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .dip-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+
+        .dip-card h4 { color: #2d3748; margin-bottom: 10px; font-size: 16px; }
+        .dip-card p { color: #718096; font-size: 12px; margin-bottom: 8px; }
+
+        .progress-bar {
+            background: #e2e8f0;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .progress-fill {
+            background: #667eea;
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+
+        /* Email Templates */
+        .email-template {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.6;
+            color: #2d3748;
+            margin-bottom: 15px;
+            border: 1px solid #e2e8f0;
+            max-height: 400px;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .copy-btn-absolute {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover { background: #f7fafc; }
+
+        /* Info Boxes */
+        .warning-box {
+            background: #fffaf0;
+            border: 1px solid #ed8936;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .warning-box h4 { color: #c05621; margin-bottom: 10px; }
+
+        .info-box {
+            background: #ebf8ff;
+            border: 1px solid #4299e1;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .info-box h4 { color: #2b6cb0; margin-bottom: 10px; }
+
+        .legal-ref {
+            font-size: 12px;
+            color: #718096;
+            font-style: italic;
+            margin-top: 5px;
+        }
+
+        /* Grid layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        /* Folder Tree */
+        .folder-tree {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 13px;
+        }
+
+        .folder-tree ul { list-style: none; padding-left: 20px; }
+        .folder-tree > ul { padding-left: 0; }
+        .folder-tree li { padding: 3px 0; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: white;
+            font-size: 14px;
+        }
+
+        footer a { color: white; text-decoration: underline; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .admin-layout { grid-template-columns: 1fr; }
+            .sidebar { flex-direction: row; overflow-x: auto; }
+            .sidebar-btn { flex-shrink: 0; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .nav-tabs { flex-direction: column; }
+            .nav-tab { width: 100%; text-align: center; }
+            .mode-switcher { flex-direction: column; }
+            .mode-btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Smiledoc - Portale Dipendenti</h1>
+            <p>Sistema Gestione Documentale HR | Via Monte Circeo 12, Monterotondo (RM)</p>
+        </header>
+
+        <!-- Mode Switcher -->
+        <div class="mode-switcher">
+            <button class="mode-btn active" onclick="switchMode('dipendente')">
+                <span class="icon">👤</span>
+                Area Dipendente
+            </button>
+            <button class="mode-btn" onclick="switchMode('admin')">
+                <span class="icon">⚙️</span>
+                Gestione HR
+            </button>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- PORTALE DIPENDENTE -->
+        <!-- ============================================ -->
+        <div id="portal-dipendente" class="portal active">
+            <div class="alert alert-legal">
+                <strong>Nota Legale:</strong> Tutti i documenti sono conformi a D.Lgs. 81/2008, L. 300/1970, GDPR, <strong>CCNL Studi Professionali (Confprofessioni)</strong>. Conservazione documentale: 10 anni.
+            </div>
+
+            <nav class="nav-tabs">
+                <button class="nav-tab active" onclick="showDipSection('dip-dashboard')">Dashboard</button>
+                <button class="nav-tab" onclick="showDipSection('dip-nota')">Note Utilizzo</button>
+                <button class="nav-tab" onclick="showDipSection('dip-onboarding')">Onboarding</button>
+                <button class="nav-tab" onclick="showDipSection('dip-sicurezza')">Sicurezza</button>
+                <button class="nav-tab" onclick="showDipSection('dip-documenti')">Documenti</button>
+                <button class="nav-tab" onclick="showDipSection('dip-policy')">Policy</button>
+                <button class="nav-tab" onclick="showDipSection('dip-contatti')">Contatti HR</button>
+                <button class="nav-tab" onclick="showDipSection('dip-valori')">Valori Smiledoc</button>
+                <button class="nav-tab" onclick="showDipSection('dip-ccnl')">CCNL</button>
+            </nav>
+
+            <!-- Dashboard Dipendente -->
+            <section id="dip-dashboard" class="section active">
+                <h2>Dashboard Dipendente</h2>
+                <div class="info-box">
+                    <h4>Benvenuto nel Portale Dipendenti Smiledoc</h4>
+                    <p>Qui trovi tutti i documenti, le policy e le informazioni utili per il tuo lavoro.</p>
+                </div>
+
+                <div class="grid-2">
+                    <div class="doc-card">
+                        <h4>Documenti Obbligatori</h4>
+                        <p>Verifica di aver consegnato tutti i documenti richiesti.</p>
+                        <button class="btn btn-sm" onclick="showDipSection('dip-onboarding')">Vai a Onboarding</button>
+                    </div>
+                    <div class="doc-card">
+                        <h4>Sicurezza sul Lavoro</h4>
+                        <p>Formazione obbligatoria e DPI.</p>
+                        <button class="btn btn-sm" onclick="showDipSection('dip-sicurezza')">Vai a Sicurezza</button>
+                    </div>
+                    <div class="doc-card">
+                        <h4>Policy Aziendali</h4>
+                        <p>Regolamenti e procedure interne.</p>
+                        <button class="btn btn-sm" onclick="showDipSection('dip-policy')">Vai a Policy</button>
+                    </div>
+                    <div class="doc-card">
+                        <h4>Modulistica</h4>
+                        <p>Moduli per ferie, permessi, variazioni dati.</p>
+                        <button class="btn btn-sm" onclick="showDipSection('dip-documenti')">Vai a Documenti</button>
+                    </div>
+                </div>
+
+                <h3>Link Rapidi</h3>
+                <div class="doc-grid">
+                    <a href="documenti/onboarding/Informativa_Privacy_Dipendenti.docx" class="doc-card" style="text-decoration: none;">
+                        <span class="badge badge-required">Obbligatorio</span>
+                        <h4>Informativa Privacy</h4>
+                        <p>Consenso trattamento dati GDPR</p>
+                    </a>
+                    <a href="documenti/sicurezza/Scheda_Formazione_Sicurezza.docx" class="doc-card" style="text-decoration: none;">
+                        <span class="badge badge-required">Obbligatorio</span>
+                        <h4>Formazione Sicurezza</h4>
+                        <p>Attestato D.Lgs. 81/2008</p>
+                    </a>
+                    <a href="documenti/amministrazione/Modulo_Richiesta_Ferie_Permessi.docx" class="doc-card" style="text-decoration: none;">
+                        <span class="badge badge-optional">Modulo</span>
+                        <h4>Richiesta Ferie/Permessi</h4>
+                        <p>Modulo per richieste assenze</p>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Nota di Utilizzo -->
+            <section id="dip-nota" class="section">
+                <h2>Nota di Utilizzo del Portale</h2>
+
+                <div class="info-box" style="background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%); border-color: #667eea;">
+                    <h4>Finalita del Portale</h4>
+                    <p>Il Portale <strong>HR Smiledoc</strong> e uno strumento informativo e operativo messo a disposizione dei dipendenti dello Studio Dentistico Smiledoc con l'obiettivo di:</p>
+                    <ul style="margin: 15px 0 15px 20px; font-size: 14px;">
+                        <li>facilitare l'accesso a documenti, procedure e modulistica</li>
+                        <li>supportare l'organizzazione interna e la comunicazione</li>
+                        <li>favorire chiarezza, trasparenza e uniformita dei comportamenti</li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    <h4>Importante: Limiti del Portale</h4>
+                    <p>Il Portale ha funzione <strong>di supporto</strong> e <strong>non sostituisce</strong> in alcun modo:</p>
+                    <ul style="margin: 10px 0 0 20px; font-size: 14px;">
+                        <li>il contratto individuale di lavoro</li>
+                        <li>il CCNL Studi Professionali (Confprofessioni) vigente</li>
+                        <li>il Regolamento Aziendale Smiledoc firmato</li>
+                        <li>la normativa di legge applicabile</li>
+                    </ul>
+                </div>
+
+                <h3>Valore dei Contenuti</h3>
+                <div class="doc-card">
+                    <p>I contenuti presenti sul Portale (testi, procedure, moduli, linee guida, checklist) hanno <strong>valore informativo e organizzativo</strong>.</p>
+                    <p style="margin-top: 15px;"><strong>In caso di difformita o interpretazioni discordanti:</strong></p>
+                    <ul style="margin: 10px 0 0 20px; font-size: 14px;">
+                        <li>prevalgono sempre le disposizioni contenute nel <strong>Regolamento Aziendale Smiledoc sottoscritto</strong></li>
+                        <li>prevalgono le norme di legge e del CCNL, se piu favorevoli al dipendente</li>
+                    </ul>
+                </div>
+
+                <h3>Aggiornamento dei Contenuti</h3>
+                <div class="doc-card">
+                    <p>Lo Studio Smiledoc si riserva il diritto di:</p>
+                    <ul style="margin: 10px 0 15px 20px; font-size: 14px;">
+                        <li>aggiornare, modificare o integrare i contenuti del Portale</li>
+                        <li>adeguare procedure e documentazione a mutamenti normativi o organizzativi</li>
+                    </ul>
+                    <p><strong>Tali aggiornamenti:</strong></p>
+                    <ul style="margin: 10px 0 0 20px; font-size: 14px;">
+                        <li>non costituiscono modifica del contratto di lavoro</li>
+                        <li>non richiedono nuova sottoscrizione individuale</li>
+                        <li>hanno efficacia dalla data di pubblicazione</li>
+                    </ul>
+                </div>
+
+                <h3>Utilizzo Corretto del Portale</h3>
+                <div class="grid-2">
+                    <div class="doc-card" style="border-left-color: #48bb78;">
+                        <h4>Il dipendente e tenuto a:</h4>
+                        <ul style="margin-left: 15px; font-size: 13px;">
+                            <li>consultare periodicamente il Portale</li>
+                            <li>utilizzare la modulistica e le procedure ufficiali ivi pubblicate</li>
+                            <li>attenersi alle indicazioni operative fornite dai responsabili</li>
+                        </ul>
+                    </div>
+                    <div class="doc-card" style="border-left-color: #c53030;">
+                        <h4>Il Portale non costituisce:</h4>
+                        <ul style="margin-left: 15px; font-size: 13px;">
+                            <li>sede di contestazione disciplinare</li>
+                            <li>strumento di comunicazione formale sostitutivo delle comunicazioni aziendali ufficiali</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Tutela e Responsabilita</h3>
+                <div class="doc-card">
+                    <p><strong>Lo Studio Smiledoc non risponde di:</strong></p>
+                    <ul style="margin: 10px 0 15px 20px; font-size: 14px;">
+                        <li>utilizzi impropri o interpretazioni personali dei contenuti</li>
+                        <li>copie, stampe o screenshot non aggiornati</li>
+                    </ul>
+                    <p><strong>Fa fede esclusivamente:</strong></p>
+                    <ul style="margin: 10px 0 0 20px; font-size: 14px;">
+                        <li>la versione vigente del Regolamento Aziendale</li>
+                        <li>la documentazione ufficiale comunicata dallo Studio</li>
+                    </ul>
+                </div>
+
+                <div class="alert alert-info" style="margin-top: 30px;">
+                    <h4 style="margin-bottom: 10px;">Accettazione</h4>
+                    <p>L'accesso e l'utilizzo del Portale HR Smiledoc comportano l'accettazione delle presenti condizioni.</p>
+                    <p style="margin-top: 15px; font-size: 12px; color: #2b6cb0;"><strong>Studio Dentistico Smiledoc</strong> | Data di pubblicazione: Gennaio 2026</p>
+                </div>
+            </section>
+
+            <!-- Onboarding Dipendente -->
+            <section id="dip-onboarding" class="section">
+                <h2>Onboarding - Documenti Assunzione</h2>
+                <div class="alert alert-info">
+                    <strong>Primo giorno:</strong> Consegna tutti i documenti obbligatori all'ufficio HR entro 7 giorni dall'assunzione.
+                </div>
+
+                <h3>Checklist Documenti Obbligatori</h3>
+                <ul class="checklist">
+                    <li><input type="checkbox" id="dip-doc1"><label for="dip-doc1"><strong>Documento d'identita</strong> - Carta d'identita o passaporto valido</label></li>
+                    <li><input type="checkbox" id="dip-doc2"><label for="dip-doc2"><strong>Codice Fiscale</strong> - Tessera sanitaria</label></li>
+                    <li><input type="checkbox" id="dip-doc3"><label for="dip-doc3"><a href="documenti/onboarding/Modulo_Dati_Personali.docx" class="checklist-link"><strong>Modulo Dati Personali</strong></a> - Compilato e firmato</label></li>
+                    <li><input type="checkbox" id="dip-doc4"><label for="dip-doc4"><a href="documenti/onboarding/Informativa_Privacy_Dipendenti.docx" class="checklist-link"><strong>Consenso Privacy GDPR</strong></a> - Firmato</label></li>
+                    <li><input type="checkbox" id="dip-doc5"><label for="dip-doc5"><a href="documenti/onboarding/Patto_di_Riservatezza_NDA.docx" class="checklist-link"><strong>Patto di Riservatezza (NDA)</strong></a> - Firmato</label></li>
+                    <li><input type="checkbox" id="dip-doc6"><label for="dip-doc6"><strong>Coordinate Bancarie</strong> - IBAN per stipendio</label></li>
+                </ul>
+
+                <h3>Documenti Scaricabili</h3>
+                <div class="doc-grid">
+                    <div class="doc-card">
+                        <span class="badge badge-required">Obbligatorio</span>
+                        <h4>Modulo Dati Personali</h4>
+                        <p>Dati anagrafici e fiscali</p>
+                        <a href="documenti/onboarding/Modulo_Dati_Personali.docx" class="btn btn-sm">Scarica</a>
+                    </div>
+                    <div class="doc-card">
+                        <span class="badge badge-required">Obbligatorio</span>
+                        <h4>Informativa Privacy</h4>
+                        <p>GDPR e consenso trattamento dati</p>
+                        <a href="documenti/onboarding/Informativa_Privacy_Dipendenti.docx" class="btn btn-sm">Scarica</a>
+                    </div>
+                    <div class="doc-card">
+                        <span class="badge badge-required">Obbligatorio</span>
+                        <h4>Patto di Riservatezza (NDA)</h4>
+                        <p>Non divulgazione informazioni</p>
+                        <a href="documenti/onboarding/Patto_di_Riservatezza_NDA.docx" class="btn btn-sm">Scarica</a>
+                    </div>
+                    <div class="doc-card">
+                        <span class="badge badge-policy">Informativo</span>
+                        <h4>Guida Onboarding</h4>
+                        <p>Informazioni di benvenuto</p>
+                        <a href="documenti/onboarding/GUIDA_Gestione_Documentale_Onboarding.docx" class="btn btn-sm">Scarica</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sicurezza Dipendente -->
+            <section id="dip-sicurezza" class="section">
+                <h2>Sicurezza sul Lavoro</h2>
+                <div class="warning-box">
+                    <h4>Obbligo Formativo D.Lgs. 81/2008</h4>
+                    <p>La formazione sulla sicurezza e obbligatoria. La mancata formazione comporta sanzioni.</p>
+                </div>
+
+                <h3>Formazione Obbligatoria</h3>
+                <div class="alert alert-legal" style="margin-bottom: 15px;">
+                    <strong>Accordo Stato-Regioni 17/04/2025:</strong> La formazione deve avvenire <strong>PRIMA dell'inizio attivita lavorativa</strong>. Studio odontoiatrico = Codice ATECO 86.23.00 = <strong>RISCHIO ALTO</strong>.
+                </div>
+
+                <table>
+                    <thead>
+                        <tr><th>Corso</th><th>Durata</th><th>Validita</th><th>Note</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Formazione Generale</td><td>4 ore</td><td>Permanente</td><td><strong>Prima dell'inizio attivita</strong></td></tr>
+                        <tr><td>Formazione Specifica (ASO/Clinici)</td><td><strong>12 ore</strong></td><td>5 anni</td><td><strong>Prima dell'inizio attivita - Rischio ALTO</strong></td></tr>
+                        <tr><td>Formazione Specifica (Segreteria)</td><td>4 ore</td><td>5 anni</td><td><strong>Prima dell'inizio attivita - Rischio BASSO</strong></td></tr>
+                        <tr><td>Aggiornamento</td><td>6 ore</td><td>Quinquennale</td><td>Per tutti (anche e-learning)</td></tr>
+                        <tr><td>Antincendio</td><td>4 ore</td><td>5 anni</td><td>Per addetti designati</td></tr>
+                        <tr><td>Primo Soccorso</td><td>12 ore</td><td>3 anni</td><td>Odontoiatri esenti (laurea valida)</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>Classe di Rischio per Mansione</h3>
+                <div class="info-box" style="margin-bottom: 15px;">
+                    <h4>Verifica con il tuo RSPP</h4>
+                    <p>Gli studi odontoiatrici rientrano generalmente nel <strong>Rischio ALTO</strong> (ATECO 86.23.00). Tuttavia, per le ASO che manipolano agenti biologici o radiazioni, verifica con il tuo RSPP se la formazione "Specifica" deve essere:</p>
+                    <ul style="margin: 10px 0 0 20px; font-size: 13px;">
+                        <li><strong>4 ore:</strong> Rischio Basso (mansioni esclusivamente amministrative)</li>
+                        <li><strong>8 ore:</strong> Rischio Medio</li>
+                        <li><strong>12 ore:</strong> Rischio Alto (contatto diretto con pazienti, agenti biologici, radiazioni)</li>
+                    </ul>
+                    <p style="margin-top: 10px;">La tabella sotto riporta la classificazione standard per studi odontoiatrici, ma <strong>la valutazione finale spetta al RSPP</strong> in base al DVR specifico dello studio.</p>
+                </div>
+                <table>
+                    <thead>
+                        <tr><th>Mansione</th><th>Rischio</th><th>Ore Formazione Specifica</th><th>Modalita</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>ASO (Assistente Studio Odontoiatrico)</td><td><span class="badge badge-required">ALTO</span></td><td>12 ore</td><td>Presenza/Videoconferenza</td></tr>
+                        <tr><td>Igienista Dentale</td><td><span class="badge badge-required">ALTO</span></td><td>12 ore</td><td>Presenza/Videoconferenza</td></tr>
+                        <tr><td>Odontotecnico</td><td><span class="badge badge-required">ALTO</span></td><td>12 ore</td><td>Presenza/Videoconferenza</td></tr>
+                        <tr><td>Segreteria / Reception</td><td><span class="badge badge-optional">BASSO</span></td><td>4 ore</td><td>Anche E-learning</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>DPI - Dispositivi di Protezione</h3>
+                <div class="doc-grid">
+                    <div class="doc-card">
+                        <span class="badge badge-required">Obbligatorio</span>
+                        <h4>Verbale Consegna DPI</h4>
+                        <p>Registro consegna dispositivi</p>
+                        <a href="documenti/sicurezza/Verbale_Consegna_DPI.docx" class="btn btn-sm">Scarica</a>
+                    </div>
+                    <div class="doc-card">
+                        <span class="badge badge-policy">Procedura</span>
+                        <h4>Segnalazione Infortunio</h4>
+                        <p>Modulo per infortuni sul lavoro</p>
+                        <a href="documenti/sicurezza/Modulo_Segnalazione_Infortunio.docx" class="btn btn-sm">Scarica</a>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <h4>In caso di emergenza</h4>
+                    <p><strong>Punto di raccolta:</strong> Area parcheggio esterno<br>
+                    <strong>Cassetta pronto soccorso:</strong> Reception e sala sterilizzazione</p>
+                </div>
+            </section>
+
+            <!-- Documenti Dipendente -->
+            <section id="dip-documenti" class="section">
+                <h2>Modulistica</h2>
+                <h3>Richieste e Comunicazioni</h3>
+                <div class="doc-grid">
+                    <div class="doc-card">
+                        <span class="badge badge-optional">Modulo</span>
+                        <h4>Richiesta Ferie e Permessi</h4>
+                        <p>Richiesta assenze retribuite</p>
+                        <a href="documenti/amministrazione/Modulo_Richiesta_Ferie_Permessi.docx" class="btn btn-sm">Scarica</a>
+                    </div>
+                    <div class="doc-card">
+                        <span class="badge badge-optional">Modulo</span>
+                        <h4>Variazione Dati</h4>
+                        <p>Modifiche residenza, IBAN, contatti</p>
+                        <a href="documenti/amministrazione/Modulo_Variazione_Dati.docx" class="btn btn-sm">Scarica</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Policy Dipendente -->
+            <section id="dip-policy" class="section">
+                <h2>Policy Aziendali</h2>
+                <div class="alert alert-info">
+                    <strong>Importante:</strong> La lettura delle policy aziendali e obbligatoria per tutti i dipendenti.
+                </div>
+
+                <div class="doc-grid">
+                    <div class="doc-card">
+                        <span class="badge badge-policy">Policy</span>
+                        <h4>Regolamento Interno</h4>
+                        <p>Norme, orari, procedure</p>
+                        <a href="documenti/policy/Regolamento Interno Smiledoc Short.docx" class="btn btn-sm">Leggi</a>
+                    </div>
+                    <div class="doc-card">
+                        <span class="badge badge-policy">Policy</span>
+                        <h4>Regolamento Completo</h4>
+                        <p>Versione integrale</p>
+                        <a href="documenti/policy/Regolamento Aziendale Smiledoc Completo.docx" class="btn btn-sm">Leggi</a>
+                    </div>
+                    <div class="doc-card">
+                        <span class="badge badge-policy">Policy</span>
+                        <h4>Policy Email</h4>
+                        <p>Uso strumenti informatici</p>
+                        <a href="documenti/policy/Policy Uso Email Aziendali Smiledoc.docx" class="btn btn-sm">Leggi</a>
+                    </div>
+                    <div class="doc-card">
+                        <span class="badge badge-policy">Policy</span>
+                        <h4>Manuale Aziendale</h4>
+                        <p>Comunicazioni e disciplina</p>
+                        <a href="documenti/policy/Manuale Aziendale Smiledoc – Comunicazioni E Disciplina.docx" class="btn btn-sm">Leggi</a>
+                    </div>
+                </div>
+
+                <h3>Orario di Lavoro</h3>
+                <table>
+                    <thead><tr><th>Giorno</th><th>Mattina</th><th>Pomeriggio</th></tr></thead>
+                    <tbody>
+                        <tr><td>Lunedi - Venerdi</td><td colspan="2">10:00 - 19:00</td></tr>
+                        <tr><td>Sabato</td><td colspan="2">Chiuso</td></tr>
+                    </tbody>
+                </table>
+                <p class="legal-ref">* Gli orari possono variare in base al contratto individuale.</p>
+            </section>
+
+            <!-- Valori Smiledoc -->
+            <section id="dip-valori" class="section">
+                <h2>I Nostri Valori</h2>
+                <div class="info-box" style="background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%); border-color: #667eea;">
+                    <h4>Benvenuto nella Famiglia Smiledoc</h4>
+                    <p>Non siamo solo un'azienda. Siamo una squadra che crede nel sorriso come missione.</p>
+                </div>
+
+                <h3>La Nostra Missione</h3>
+                <div class="doc-grid">
+                    <div class="doc-card" style="border-left-color: #48bb78;">
+                        <h4>Cura del Paziente</h4>
+                        <p>Ogni paziente merita attenzione, empatia e professionalita. Il loro sorriso e il nostro successo.</p>
+                    </div>
+                    <div class="doc-card" style="border-left-color: #ed8936;">
+                        <h4>Crescita Personale</h4>
+                        <p>Investiamo nella formazione continua. Ogni membro del team ha l'opportunita di crescere.</p>
+                    </div>
+                    <div class="doc-card" style="border-left-color: #9f7aea;">
+                        <h4>Lavoro di Squadra</h4>
+                        <p>Il successo e collettivo. Collaboriamo, ci supportiamo e celebriamo insieme.</p>
+                    </div>
+                    <div class="doc-card" style="border-left-color: #38b2ac;">
+                        <h4>Innovazione</h4>
+                        <p>Abbracciamo le nuove tecnologie per offrire cure migliori e un ambiente di lavoro moderno.</p>
+                    </div>
+                </div>
+
+                <h3>Video di Benvenuto</h3>
+                <div class="doc-card" style="text-align: center; padding: 40px;">
+                    <div style="font-size: 48px; margin-bottom: 15px;">🎬</div>
+                    <h4>Presentazione Team Smiledoc</h4>
+                    <p style="margin-bottom: 20px;">Scopri chi siamo, come lavoriamo e perche amiamo quello che facciamo.</p>
+                    <button class="btn" onclick="alert('Video in preparazione - Coming Soon!')">Guarda il Video</button>
+                </div>
+
+                <h3>I Nostri Principi Guida</h3>
+                <ul class="checklist">
+                    <li style="border-left-color: #667eea;"><strong>Rispetto</strong> - Trattiamo tutti con dignita e considerazione</li>
+                    <li style="border-left-color: #667eea;"><strong>Trasparenza</strong> - Comunicazione aperta e onesta sempre</li>
+                    <li style="border-left-color: #667eea;"><strong>Responsabilita</strong> - Ci assumiamo le nostre responsabilita</li>
+                    <li style="border-left-color: #667eea;"><strong>Eccellenza</strong> - Puntiamo sempre al meglio</li>
+                    <li style="border-left-color: #667eea;"><strong>Benessere</strong> - La salute del team e una priorita</li>
+                </ul>
+
+                <div class="warning-box" style="background: #f0fff4; border-color: #48bb78;">
+                    <h4 style="color: #276749;">Hai idee o suggerimenti?</h4>
+                    <p style="color: #276749;">Siamo sempre aperti al feedback. Contatta HR per condividere le tue idee su come migliorare il nostro ambiente di lavoro.</p>
+                </div>
+            </section>
+
+            <!-- CCNL -->
+            <section id="dip-ccnl" class="section">
+                <h2>CCNL Studi Professionali</h2>
+                <div class="info-box">
+                    <h4>Contratto Collettivo Nazionale di Lavoro</h4>
+                    <p>Smiledoc applica il <strong>CCNL Studi Professionali - Confprofessioni</strong>, il contratto di riferimento per studi odontoiatrici e professionali.</p>
+                </div>
+
+                <h3>I Tuoi Diritti Contrattuali</h3>
+                <div class="doc-grid">
+                    <div class="doc-card" style="border-left-color: #48bb78;">
+                        <h4>Ferie Annuali</h4>
+                        <p><strong>26 giorni lavorativi</strong> all'anno (escluse festivita). Maturazione proporzionale nel primo anno.</p>
+                        <span class="badge badge-policy">Art. 87 CCNL</span>
+                    </div>
+                    <div class="doc-card" style="border-left-color: #667eea;">
+                        <h4>Permessi Retribuiti (ROL)</h4>
+                        <p><strong>72 ore annue</strong> di permessi retribuiti. Maturazione mensile: 6 ore/mese.</p>
+                        <span class="badge badge-policy">Art. 88 CCNL</span>
+                    </div>
+                    <div class="doc-card" style="border-left-color: #ed8936;">
+                        <h4>TFR - Trattamento Fine Rapporto</h4>
+                        <p>Accantonamento annuo pari a <strong>1 mensilita / 13,5</strong> della retribuzione globale.</p>
+                        <span class="badge badge-policy">Art. 2120 C.C.</span>
+                    </div>
+                    <div class="doc-card" style="border-left-color: #9f7aea;">
+                        <h4>Scatti di Anzianita</h4>
+                        <p><strong>6 scatti biennali</strong>. Importo variabile per livello (da 19,63€ a 25,46€/mese).</p>
+                        <span class="badge badge-policy">Art. 80 CCNL</span>
+                    </div>
+                </div>
+
+                <h3>Malattia e Infortunio</h3>
+                <table>
+                    <thead>
+                        <tr><th>Periodo</th><th>Retribuzione</th><th>Note</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Giorni 1-3 (carenza)</td><td>100%</td><td>A carico datore di lavoro</td></tr>
+                        <tr><td>Giorni 4-20</td><td>75%</td><td>50% INPS + 25% datore</td></tr>
+                        <tr><td>Giorni 21-180</td><td>100%</td><td>66,66% INPS + 33,34% datore</td></tr>
+                        <tr><td>Oltre 180 giorni</td><td>50%</td><td>Solo integrazione datore</td></tr>
+                    </tbody>
+                </table>
+                <p class="legal-ref">Riferimento: Art. 96-97 CCNL Studi Professionali</p>
+
+                <h3>Orario di Lavoro Contrattuale</h3>
+                <div class="grid-2">
+                    <div class="doc-card">
+                        <h4>Full-Time</h4>
+                        <p><strong>40 ore settimanali</strong> distribuite su 5 o 6 giorni.</p>
+                    </div>
+                    <div class="doc-card">
+                        <h4>Part-Time</h4>
+                        <p>Orario ridotto proporzionale. Minimo: <strong>16 ore settimanali</strong>.</p>
+                    </div>
+                </div>
+
+                <h3>Livelli e Inquadramento</h3>
+                <table>
+                    <thead>
+                        <tr><th>Livello</th><th>Profilo</th><th>Minimo Tabellare 2024</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Quadro</td><td>Responsabile struttura</td><td>€ 1.893,46</td></tr>
+                        <tr><td>1°</td><td>Coordinatore/Responsabile</td><td>€ 1.750,87</td></tr>
+                        <tr><td>2°</td><td>Impiegato specializzato</td><td>€ 1.565,86</td></tr>
+                        <tr><td>3° Super</td><td>ASO con esperienza</td><td>€ 1.474,75</td></tr>
+                        <tr><td>3°</td><td>ASO / Segretaria</td><td>€ 1.416,55</td></tr>
+                        <tr><td>4° Super</td><td>Impiegato d'ordine</td><td>€ 1.347,22</td></tr>
+                        <tr><td>4°</td><td>Impiegato generico</td><td>€ 1.296,12</td></tr>
+                        <tr><td>5°</td><td>Apprendista / Primo impiego</td><td>€ 1.173,45</td></tr>
+                    </tbody>
+                </table>
+                <p class="legal-ref">* Minimi tabellari aggiornati al rinnovo CCNL 2024. Verifica sempre la busta paga per il tuo inquadramento.</p>
+
+                <h3>Permessi Speciali</h3>
+                <ul class="checklist">
+                    <li style="border-left-color: #48bb78;"><strong>Matrimonio:</strong> 15 giorni consecutivi retribuiti</li>
+                    <li style="border-left-color: #48bb78;"><strong>Lutto familiare:</strong> 3 giorni per decesso coniuge/parenti 1° grado</li>
+                    <li style="border-left-color: #48bb78;"><strong>Nascita figlio:</strong> 10 giorni (congedo paternita obbligatorio)</li>
+                    <li style="border-left-color: #48bb78;"><strong>Donazione sangue:</strong> 1 giorno retribuito</li>
+                    <li style="border-left-color: #48bb78;"><strong>Visite mediche:</strong> Permesso per visite specialistiche documentate</li>
+                    <li style="border-left-color: #48bb78;"><strong>L. 104/92:</strong> 3 giorni/mese per assistenza disabili</li>
+                </ul>
+
+                <div class="warning-box">
+                    <h4>Hai domande sul tuo contratto?</h4>
+                    <p>Contatta l'ufficio HR per chiarimenti sul tuo inquadramento, retribuzione o diritti contrattuali. Puoi anche consultare il testo integrale del CCNL disponibile presso la direzione.</p>
+                </div>
+            </section>
+
+            <!-- Contatti Dipendente -->
+            <section id="dip-contatti" class="section">
+                <h2>Contatti e Responsabili</h2>
+
+                <h3>Numeri di Emergenza</h3>
+                <div class="alert alert-legal" style="background: #fed7d7; border-left-color: #c53030;">
+                    <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px; text-align: center;">
+                        <div>
+                            <div style="font-size: 28px; font-weight: bold; color: #c53030;">118</div>
+                            <div style="font-size: 12px;">Emergenza Sanitaria</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 28px; font-weight: bold; color: #c53030;">115</div>
+                            <div style="font-size: 12px;">Vigili del Fuoco</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 28px; font-weight: bold; color: #c53030;">112</div>
+                            <div style="font-size: 12px;">Numero Unico Emergenze</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 28px; font-weight: bold; color: #c53030;">113</div>
+                            <div style="font-size: 12px;">Polizia</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Responsabili Aziendali</h3>
+                <div class="doc-grid">
+                    <div class="doc-card" style="border-left-color: #667eea;">
+                        <span class="badge badge-policy">HR</span>
+                        <h4>Ufficio Risorse Umane</h4>
+                        <p><strong>Email:</strong> hr@smiledoc.it</p>
+                        <p><strong>Orario:</strong> Lun-Ven 09:00-17:00</p>
+                        <p><strong>Competenze:</strong> Assunzioni, ferie, permessi, buste paga, formazione amministrativa</p>
+                    </div>
+                    <div class="doc-card" style="border-left-color: #9f7aea;">
+                        <span class="badge" style="background: #e9d8fd; color: #553c9a;">Direzione</span>
+                        <h4>Direzione Sanitaria</h4>
+                        <p><strong>Email:</strong> direzione@smiledoc.it</p>
+                        <p><strong>Per:</strong> Questioni urgenti, decisioni strategiche</p>
+                        <p><strong>Competenze:</strong> Autorizzazione provvedimenti, questioni straordinarie</p>
+                    </div>
+                    <div class="doc-card" style="border-left-color: #ed8936;">
+                        <span class="badge" style="background: #faf089; color: #975a16;">RSPP</span>
+                        <h4>Responsabile Sicurezza (RSPP)</h4>
+                        <p><strong>Referente:</strong> [Nome RSPP]</p>
+                        <p><strong>Contatto:</strong> Tramite HR o direzione</p>
+                        <p><strong>Competenze:</strong> Sicurezza sul lavoro, DPI, DVR, formazione D.Lgs. 81/2008</p>
+                    </div>
+                    <div class="doc-card" style="border-left-color: #48bb78;">
+                        <span class="badge badge-optional">Consulente</span>
+                        <h4>Consulente del Lavoro</h4>
+                        <p><strong>Contatto:</strong> Tramite HR</p>
+                        <p><strong>Competenze:</strong> Buste paga, contributi INPS/INAIL, vertenze, CCNL</p>
+                    </div>
+                </div>
+
+                <h3>Responsabile Procedimenti Disciplinari</h3>
+                <div class="info-box">
+                    <h4>Chi autorizza i provvedimenti?</h4>
+                    <p><strong>Richiami verbali e scritti:</strong> Responsabile HR o Direzione</p>
+                    <p><strong>Contestazioni formali e gravi:</strong> Direzione con supporto legale</p>
+                    <p><strong>Sospensioni e licenziamenti:</strong> Esclusivamente Direzione/Titolare</p>
+                    <p class="legal-ref">Tutti i provvedimenti richiedono la procedura Art. 7 L. 300/1970</p>
+                </div>
+
+                <h3>Segnalazioni Whistleblowing</h3>
+                <div class="warning-box" style="background: #ebf8ff; border-color: #4299e1;">
+                    <h4 style="color: #2b6cb0;">Canale Segnalazioni Anonime (D.Lgs. 24/2023)</h4>
+                    <p style="color: #2b6cb0;">Se sei a conoscenza di comportamenti illeciti, irregolarita o violazioni, puoi segnalare in modo anonimo e protetto.</p>
+                    <p style="margin-top: 15px;"><strong>Come segnalare:</strong></p>
+                    <ul style="margin-left: 20px; font-size: 13px; color: #2b6cb0;">
+                        <li><strong>Email dedicata:</strong> whistleblowing@smiledoc.it (casella riservata)</li>
+                        <li><strong>Lettera cartacea:</strong> Busta chiusa con dicitura "RISERVATO - WHISTLEBLOWING" indirizzata alla Direzione</li>
+                        <li><strong>Colloquio riservato:</strong> Richiesta appuntamento con Direzione</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>Cosa puoi segnalare:</strong></p>
+                    <ul style="margin-left: 20px; font-size: 13px; color: #2b6cb0;">
+                        <li>Violazioni di legge o regolamenti</li>
+                        <li>Frodi, corruzione, conflitti di interesse</li>
+                        <li>Violazioni sicurezza sul lavoro</li>
+                        <li>Molestie o discriminazioni</li>
+                        <li>Violazioni privacy e dati personali</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>Garanzie:</strong> Il segnalante e protetto da ritorsioni (Art. 17 D.Lgs. 24/2023). L'identita resta riservata.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- PORTALE AMMINISTRAZIONE HR -->
+        <!-- ============================================ -->
+        <div id="portal-admin" class="portal">
+            <div class="alert alert-success">
+                <strong>Gestione HR:</strong> Sistema per onboarding, formazione, sicurezza e procedimenti disciplinari
+            </div>
+
+            <div class="admin-layout">
+                <div class="sidebar">
+                    <button class="sidebar-btn active" onclick="showAdminSection('admin-home')">🏠 Home</button>
+                    <button class="sidebar-btn" onclick="showAdminSection('admin-onboarding')">👤 Onboarding</button>
+                    <button class="sidebar-btn" onclick="showAdminSection('admin-documenti')">📄 Documenti</button>
+                    <button class="sidebar-btn" onclick="showAdminSection('admin-fasi')">📊 Fasi Procedurali</button>
+                    <button class="sidebar-btn" onclick="showAdminSection('admin-email')">📧 Template Email</button>
+                    <button class="sidebar-btn" onclick="showAdminSection('admin-dipendenti')">👥 Dipendenti</button>
+                    <button class="sidebar-btn" onclick="showAdminSection('admin-disciplina')">⚠️ Disciplina</button>
+                    <button class="sidebar-btn" onclick="showAdminSection('admin-performance')">📈 Performance</button>
+                    <button class="sidebar-btn" onclick="showAdminSection('admin-scadenze')">⏰ Scadenze</button>
+                    <button class="sidebar-btn" onclick="showAdminSection('admin-privacy')">🔒 Privacy GDPR</button>
+                    <button class="sidebar-btn" onclick="showAdminSection('admin-workflow')">⚙️ Workflow HR</button>
+                    <button class="sidebar-btn" onclick="showAdminSection('admin-guida')">❓ Guida</button>
+                </div>
+
+                <div class="admin-content">
+                    <!-- Admin Home -->
+                    <section id="admin-home" class="section active">
+                        <h2>🏠 Gestione HR - Dashboard</h2>
+                        <div class="alert alert-info">
+                            <strong>Sistema Attivo:</strong> Gestione documentale per 5 dipendenti, modalita fase-per-fase
+                        </div>
+
+                        <h3>Panoramica Sistema</h3>
+                        <p>Dashboard per la gestione completa del personale:</p>
+                        <ul style="margin-left: 20px; color: #4a5568; font-size: 14px;">
+                            <li><strong>Onboarding:</strong> Raccolta dati, contratto, informative</li>
+                            <li><strong>Sicurezza:</strong> DPI, formazione, DVR</li>
+                            <li><strong>Amministrazione:</strong> Moduli, variazioni, documentazione</li>
+                            <li><strong>Disciplina:</strong> Procedure richiami, contestazioni, licenziamento</li>
+                        </ul>
+
+                        <h3>Azioni Rapide</h3>
+                        <div class="doc-grid">
+                            <div class="doc-card">
+                                <h4>Nuovo Dipendente</h4>
+                                <p>Avvia ciclo completo onboarding</p>
+                                <button class="btn btn-sm" onclick="showAdminSection('admin-onboarding')">Inizia</button>
+                            </div>
+                            <div class="doc-card">
+                                <h4>Scarica Documenti</h4>
+                                <p>Tutti i moduli pronti da stampare</p>
+                                <button class="btn btn-sm" onclick="showAdminSection('admin-documenti')">Vai</button>
+                            </div>
+                            <div class="doc-card">
+                                <h4>Template Email</h4>
+                                <p>Email di richiamo e contestazione</p>
+                                <button class="btn btn-sm" onclick="showAdminSection('admin-email')">Vai</button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Admin Onboarding -->
+                    <section id="admin-onboarding" class="section">
+                        <h2>👤 Checklist Onboarding</h2>
+                        <p>Segui questa sequenza per ogni nuovo dipendente:</p>
+
+                        <div class="alert alert-legal" style="margin-bottom: 20px;">
+                            <strong>ATTENZIONE - Accordo Stato-Regioni 17/04/2025:</strong> La formazione sulla sicurezza deve essere completata <strong>PRIMA dell'inizio dell'attivita lavorativa</strong>. Il dipendente NON puo iniziare a lavorare senza aver completato la formazione obbligatoria.
+                        </div>
+
+                        <div class="warning-box" style="margin-bottom: 20px; background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-color: #f59e0b;">
+                            <h4>🛡️ PROTEZIONE LEGALE AZIENDA</h4>
+                            <p>I documenti contrassegnati con <span class="badge badge-required">BLINDATO</span> sono <strong>essenziali per la tutela aziendale</strong> in caso di controversie. Assicurati che siano firmati PRIMA dell'inizio attivita'.</p>
+                        </div>
+
+                        <h3>FASE 1: DOCUMENTI BLINDATI - Prima dell'inizio attivita'</h3>
+                        <ul class="checklist">
+                            <li style="border-left-color: #dc2626; background: #fef2f2;"><input type="checkbox"> <a href="documenti/onboarding/Modulo_Dati_Personali.docx" class="checklist-link">Compilare Modulo Dati Personali</a></li>
+                            <li style="border-left-color: #dc2626; background: #fef2f2;"><input type="checkbox"> Consegnare Contratto Lavoro (firmato in duplice copia)</li>
+                            <li style="border-left-color: #dc2626; background: #fef2f2;"><input type="checkbox"> <a href="documenti/onboarding/Dichiarazione_Domicilio_Digitale.docx" class="checklist-link"><strong>BLINDATO:</strong> Far firmare Dichiarazione Domicilio Digitale (email personale)</a> <span class="badge badge-required">CRITICO</span></li>
+                            <li style="border-left-color: #dc2626; background: #fef2f2;"><input type="checkbox"> <a href="documenti/onboarding/Dichiarazione_Accettazione_Regolamento_Blindata.docx" class="checklist-link"><strong>BLINDATO:</strong> Far firmare Accettazione Regolamento e Codice Disciplinare</a> <span class="badge badge-required">CRITICO</span></li>
+                            <li style="border-left-color: #dc2626; background: #fef2f2;"><input type="checkbox"> <a href="documenti/onboarding/Patto_di_Riservatezza_NDA.docx" class="checklist-link"><strong>BLINDATO:</strong> Far firmare NDA/Patto Riservatezza</a> <span class="badge badge-required">CRITICO</span></li>
+                            <li><input type="checkbox"> <a href="documenti/onboarding/Informativa_Privacy_Dipendenti.docx" class="checklist-link">Consegnare Informativa Privacy GDPR + firma</a></li>
+                            <li><input type="checkbox"> <a href="documenti/onboarding/Nomina_Autorizzato_Trattamento_Dati.docx" class="checklist-link">Far firmare Nomina Autorizzato Trattamento Dati</a></li>
+                            <li><input type="checkbox"> <a href="documenti/policy/Policy Uso Email Aziendali Smiledoc.docx" class="checklist-link">Consegnare Policy Email + firma presa visione</a></li>
+                        </ul>
+
+                        <h3>FASE 2: FORMAZIONE OBBLIGATORIA - Prima dell'inizio attivita'</h3>
+                        <ul class="checklist">
+                            <li style="border-left-color: #c53030; background: #fed7d7;"><input type="checkbox"> <strong style="color: #c53030;">FORMAZIONE GENERALE (4 ore) - OBBLIGATORIA prima di iniziare</strong></li>
+                            <li style="border-left-color: #c53030; background: #fed7d7;"><input type="checkbox"> <strong style="color: #c53030;">FORMAZIONE SPECIFICA (4-12 ore in base a mansione) - OBBLIGATORIA prima di iniziare</strong></li>
+                            <li><input type="checkbox"> Allegare attestati formazione al fascicolo</li>
+                        </ul>
+
+                        <h3>FASE 3: SICUREZZA E DPI - Giorni 1-3</h3>
+                        <ul class="checklist">
+                            <li><input type="checkbox"> <a href="documenti/sicurezza/Verbale_Consegna_DPI.docx" class="checklist-link">Consegnare DPI con firma verbale</a></li>
+                            <li><input type="checkbox"> Illustrare DVR - Documento Valutazione Rischi</li>
+                            <li><input type="checkbox"> Far firmare Dichiarazione DVR</li>
+                            <li><input type="checkbox"> <a href="documenti/sicurezza/Modulo_Presa_Visione_Rischi_Specifici.docx" class="checklist-link">Far firmare Presa Visione Rischi Specifici</a></li>
+                            <li><input type="checkbox"> <a href="documenti/sicurezza/Scheda_Formazione_Sicurezza.docx" class="checklist-link">Registrare formazione nella Scheda Formazione</a></li>
+                        </ul>
+
+                        <div class="warning-box" style="margin-top: 15px;">
+                            <h4>⚠️ Validita Legale della Firma Documenti</h4>
+                            <p>Per garantire pieno valore probatorio in caso di contenzioso, ogni documento deve essere firmato con:</p>
+                            <ul style="margin: 10px 0 0 20px; font-size: 13px;">
+                                <li><strong>Firma autografa:</strong> Documento stampato, firmato a mano, scansionato e archiviato (originale cartaceo conservato)</li>
+                                <li><strong>Firma Elettronica Avanzata (FEA):</strong> Tramite provider certificato (es. DocuSign, Adobe Sign, Aruba Sign)</li>
+                            </ul>
+                            <p style="margin-top: 10px; color: #c05621;"><strong>ATTENZIONE:</strong> Una semplice spunta sul sito o checkbox digitale <strong>NON ha valore probatorio pieno</strong> in sede giudiziale. Prediligi sempre firma autografa con scansione o FEA.</p>
+                        </div>
+
+                        <h3>FASE 4: VERIFICA FASCICOLO - Entro 7 giorni</h3>
+                        <ul class="checklist">
+                            <li><input type="checkbox"> Verificare che TUTTI i documenti blindati siano firmati</li>
+                            <li><input type="checkbox"> Scansionare e archiviare digitalmente tutti i documenti firmati</li>
+                            <li><input type="checkbox"> Conservare originali cartacei in fascicolo fisico</li>
+                            <li><input type="checkbox"> Inviare email di benvenuto con riepilogo documenti consegnati</li>
+                        </ul>
+
+                        <h3>FASE 5: FINE PERIODO PROVA (60 giorni CCNL Studi Prof.)</h3>
+                        <ul class="checklist">
+                            <li><input type="checkbox"> Compilare valutazione performance periodo prova</li>
+                            <li><input type="checkbox"> <a href="documenti/onboarding/Comunicazione_Esito_Periodo_Prova.docx" class="checklist-link">Comunicare esito prova (SCRITTO con firma per ricevuta)</a></li>
+                            <li><input type="checkbox"> Se esito negativo: consegnare lettera PRIMA della scadenza</li>
+                            <li><input type="checkbox"> <a href="documenti/onboarding/Checklist_Onboarding_Dipendenti.docx" class="checklist-link">Fascicolo personale completo in archivio</a></li>
+                        </ul>
+
+                        <div class="alert alert-success" style="margin-top: 20px;">
+                            <strong>✅ FASCICOLO COMPLETO =</strong> Contratto + Domicilio Digitale + Accettazione Regolamento + NDA + Privacy + DPI + Formazione + Esito Prova
+                        </div>
+
+                        <div class="info-box" style="margin-top: 20px;">
+                            <h4>Ore Formazione per Mansione (Rischio ALTO - ATECO 86.23.00)</h4>
+                            <ul style="margin-left: 20px; font-size: 13px;">
+                                <li><strong>ASO / Igienista / Clinici:</strong> 4h Generale + 12h Specifica = <strong>16 ore totali</strong></li>
+                                <li><strong>Segreteria / Reception:</strong> 4h Generale + 4h Specifica = <strong>8 ore totali</strong></li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Admin Documenti -->
+                    <section id="admin-documenti" class="section">
+                        <h2>📄 Documenti Pronti</h2>
+                        <p>Tutti i moduli pronti per la stampa e compilazione:</p>
+
+                        <h3>🛡️ DOCUMENTI BLINDATI (Protezione Legale)</h3>
+                        <div class="doc-grid">
+                            <div class="doc-card" style="border-left-color: #dc2626; background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);">
+                                <span class="badge badge-required">CRITICO</span>
+                                <h4>Dichiarazione Domicilio Digitale</h4>
+                                <p>Elezione email personale per comunicazioni - Art. 1335 c.c.</p>
+                                <a href="documenti/onboarding/Dichiarazione_Domicilio_Digitale.docx" class="btn btn-sm">Scarica</a>
+                            </div>
+                            <div class="doc-card" style="border-left-color: #dc2626; background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);">
+                                <span class="badge badge-required">CRITICO</span>
+                                <h4>Accettazione Regolamento Blindata</h4>
+                                <p>Presa visione integrale con rinuncia eccezioni</p>
+                                <a href="documenti/onboarding/Dichiarazione_Accettazione_Regolamento_Blindata.docx" class="btn btn-sm">Scarica</a>
+                            </div>
+                            <div class="doc-card" style="border-left-color: #dc2626; background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);">
+                                <span class="badge badge-required">CRITICO</span>
+                                <h4>Patto di Riservatezza (NDA)</h4>
+                                <p>Protezione dati pazienti e informazioni aziendali</p>
+                                <a href="documenti/onboarding/Patto_di_Riservatezza_NDA.docx" class="btn btn-sm">Scarica</a>
+                            </div>
+                            <div class="doc-card" style="border-left-color: #dc2626; background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);">
+                                <span class="badge badge-required">CRITICO</span>
+                                <h4>Esito Periodo di Prova</h4>
+                                <p>Comunicazione formale superamento/mancato superamento</p>
+                                <a href="documenti/onboarding/Comunicazione_Esito_Periodo_Prova.docx" class="btn btn-sm">Scarica</a>
+                            </div>
+                        </div>
+
+                        <h3>SEZIONE ONBOARDING</h3>
+                        <div class="doc-grid">
+                            <div class="doc-card">
+                                <h4>Modulo Dati Personali</h4>
+                                <p>Raccolta anagrafica, documenti, contatti</p>
+                                <a href="documenti/onboarding/Modulo_Dati_Personali.docx" class="btn btn-sm">Scarica</a>
+                            </div>
+                            <div class="doc-card">
+                                <h4>Checklist Onboarding</h4>
+                                <p>Guida operativa completa</p>
+                                <a href="documenti/onboarding/Checklist_Onboarding_Dipendenti.docx" class="btn btn-sm">Scarica</a>
+                            </div>
+                            <div class="doc-card">
+                                <h4>Informativa Privacy GDPR</h4>
+                                <p>Informativa trattamento dati dipendenti</p>
+                                <a href="documenti/onboarding/Informativa_Privacy_Dipendenti.docx" class="btn btn-sm">Scarica</a>
+                            </div>
+                            <div class="doc-card">
+                                <h4>Nomina Autorizzato Dati</h4>
+                                <p>GDPR - Trattamento dati</p>
+                                <a href="documenti/onboarding/Nomina_Autorizzato_Trattamento_Dati.docx" class="btn btn-sm">Scarica</a>
+                            </div>
+                        </div>
+
+                        <h3>SEZIONE SICUREZZA</h3>
+                        <div class="doc-grid">
+                            <div class="doc-card">
+                                <h4>Verbale Consegna DPI</h4>
+                                <p>Dispositivi protezione individuale</p>
+                                <a href="documenti/sicurezza/Verbale_Consegna_DPI.docx" class="btn btn-sm">Scarica</a>
+                            </div>
+                            <div class="doc-card">
+                                <h4>Scheda Formazione Sicurezza</h4>
+                                <p>Tracciamento formazione</p>
+                                <a href="documenti/sicurezza/Scheda_Formazione_Sicurezza.docx" class="btn btn-sm">Scarica</a>
+                            </div>
+                            <div class="doc-card">
+                                <h4>Segnalazione Infortunio</h4>
+                                <p>Modulo infortuni sul lavoro</p>
+                                <a href="documenti/sicurezza/Modulo_Segnalazione_Infortunio.docx" class="btn btn-sm">Scarica</a>
+                            </div>
+                            <div class="doc-card">
+                                <span class="badge badge-required">Obbligatorio</span>
+                                <h4>Presa Visione Rischi Specifici</h4>
+                                <p>Dichiarazione Art. 36 D.Lgs. 81/2008</p>
+                                <a href="documenti/sicurezza/Modulo_Presa_Visione_Rischi_Specifici.docx" class="btn btn-sm">Scarica</a>
+                            </div>
+                        </div>
+
+                        <h3>SEZIONE AMMINISTRAZIONE</h3>
+                        <div class="doc-grid">
+                            <div class="doc-card">
+                                <h4>Modulo Variazione Dati</h4>
+                                <p>Residenza, IBAN, stato civile</p>
+                                <a href="documenti/amministrazione/Modulo_Variazione_Dati.docx" class="btn btn-sm">Scarica</a>
+                            </div>
+                            <div class="doc-card">
+                                <h4>Richiesta Ferie/Permessi</h4>
+                                <p>Modulo assenze</p>
+                                <a href="documenti/amministrazione/Modulo_Richiesta_Ferie_Permessi.docx" class="btn btn-sm">Scarica</a>
+                            </div>
+                            <div class="doc-card">
+                                <h4>Registro Provvedimenti</h4>
+                                <p>Tracciamento sanzioni</p>
+                                <a href="documenti/amministrazione/Registro_Provvedimenti_Disciplinari.docx" class="btn btn-sm">Scarica</a>
+                            </div>
+                        </div>
+
+                        <h3>SEZIONE POLICY</h3>
+                        <div class="doc-grid">
+                            <div class="doc-card">
+                                <h4>Regolamento Interno Short</h4>
+                                <p>Versione da consegnare</p>
+                                <a href="documenti/policy/Regolamento Interno Smiledoc Short.docx" class="btn btn-sm">Scarica</a>
+                            </div>
+                            <div class="doc-card">
+                                <h4>Regolamento Completo</h4>
+                                <p>Versione integrale</p>
+                                <a href="documenti/policy/Regolamento Aziendale Smiledoc Completo.docx" class="btn btn-sm">Scarica</a>
+                            </div>
+                            <div class="doc-card">
+                                <h4>Policy Email</h4>
+                                <p>Uso email aziendali</p>
+                                <a href="documenti/policy/Policy Uso Email Aziendali Smiledoc.docx" class="btn btn-sm">Scarica</a>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Admin Fasi -->
+                    <section id="admin-fasi" class="section">
+                        <h2>📊 Timeline Fasi Procedurali</h2>
+                        <p>Sequenza temporale completa per ogni dipendente:</p>
+
+                        <div class="phase-timeline">
+                            <div class="phase completed">
+                                <h4>📝 FASE 1: Raccolta Dati (Giorno 1)</h4>
+                                <p><strong>Documenti:</strong> Modulo Dati Personali, Contratto, Privacy GDPR<br>
+                                <strong>Azione:</strong> Compilazione, firma e scansione cloud<br>
+                                <strong>Conservazione:</strong> Fascicolo personale digitale</p>
+                            </div>
+
+                            <div class="phase">
+                                <h4>🛡️ FASE 2: Sicurezza & DPI (Giorni 1-3)</h4>
+                                <p><strong>Documenti:</strong> Verbale DPI, DVR, Dichiarazione ricez.DPI<br>
+                                <strong>Azione:</strong> Consegna fisica DPI, istruzioni<br>
+                                <strong>Conservazione:</strong> Registro DPI + fascicolo</p>
+                            </div>
+
+                            <div class="phase">
+                                <h4>📚 FASE 3: Formazione Base (Giorni 3-30)</h4>
+                                <p><strong>Documenti:</strong> Scheda Formazione, attestati corso<br>
+                                <strong>Azione:</strong> Formazione generale 4 ore<br>
+                                <strong>Conservazione:</strong> Scheda + copia attestato</p>
+                            </div>
+
+                            <div class="phase">
+                                <h4>🎓 FASE 4: Formazione Specifica (Giorni 30-60)</h4>
+                                <p><strong>Documenti:</strong> Aggiornamento Scheda Formazione<br>
+                                <strong>Azione:</strong> Formazione specifica 4 ore<br>
+                                <strong>Conservazione:</strong> Scheda completa + attestato</p>
+                            </div>
+
+                            <div class="phase">
+                                <h4>✅ FASE 5: Chiusura Prova (Giorno 60)</h4>
+                                <p><strong>Documenti:</strong> Comunicazione esito prova<br>
+                                <strong>Azione:</strong> Valutazione competenze<br>
+                                <strong>Conservazione:</strong> Comunicazione esito nel fascicolo</p>
+                            </div>
+
+                            <div class="phase">
+                                <h4>📊 FASE 6: Monitoraggio Continuo</h4>
+                                <p><strong>Documenti:</strong> Registro Disciplinare (se necessario)<br>
+                                <strong>Azione:</strong> Aggiornamento ferie, permessi, variazioni<br>
+                                <strong>Conservazione:</strong> Fascicolo sempre aggiornato</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Admin Email Templates -->
+                    <section id="admin-email" class="section">
+                        <h2>📧 Template Email & Lettere</h2>
+                        <p>Copia i template e personalizza con dati reali:</p>
+
+                        <h3>🔴 RICHIAMO DISCIPLINARE (Email Semplice)</h3>
+                        <div class="email-template" style="position: relative;">
+                            <button class="btn btn-copy btn-sm copy-btn-absolute" onclick="copyToClipboard('email1')">Copia</button>
+                            <div id="email1">DA: legale@smiledoc.it
+A: [email.dipendente@smiledoc.it]
+CC: direzione@smiledoc.it
+OGGETTO: RICHIAMO DISCIPLINARE - [Nome Cognome]
+
+-------------------------------------------
+
+Spett.le [Nome Cognome],
+
+Con la presente comunico formalmente un RICHIAMO SCRITTO per:
+
+FATTO CONTESTATO:
+[Descrizione specifica con data, ora, luogo, dettagli]
+
+Esempio: "In data 20/01/2026, ore 09:15, ritardo di 15 minuti
+all'inizio turno fissato alle 09:00. Nessun preavviso fornito."
+
+VIOLAZIONE REGOLAMENTO:
+Art. 5 - Orari: "Tutti i dipendenti sono tenuti a rispettare
+gli orari indicati nel contratto."
+
+SANZIONE APPLICATA:
+- Richiamo Scritto
+
+DIRITTO DI RISPOSTA:
+Avete facolta di rispondere per iscritto entro 5 giorni.
+Email: legale@smiledoc.it
+
+Cordiali saluti,
+Smiledoc S.r.l. - Titolare
+
+-------------------------------------------
+[NOTA: Inviare con ricevuta di lettura]</div>
+                        </div>
+
+                        <h3>🔴🔴 CONTESTAZIONE DISCIPLINARE (Art. 7 L. 300/1970)</h3>
+                        <div class="email-template" style="position: relative;">
+                            <button class="btn btn-copy btn-sm copy-btn-absolute" onclick="copyToClipboard('email2')">Copia</button>
+                            <div id="email2">DA: legale@smiledoc.it (PEC - RACCOMANDATA AR)
+A: [email.dipendente@smiledoc.it]
+OGGETTO: CONTESTAZIONE FORMALE - [Nome Cognome]
+
+-------------------------------------------
+
+Spett.le [Nome Cognome],
+
+CONTESTAZIONE FORMALE DI ADDEBITO
+Ai sensi Art. 7, L. 300/1970 (Statuto dei Lavoratori)
+
+FATTO CONTESTATO:
+[DESCRIZIONE MOLTO DETTAGLIATA con date, testimoni, prove]
+
+ARTICOLI VIOLATI:
+- Regolamento Interno Art. [__]: [Testo articolo]
+- Patto di Riservatezza NDA Art. [__]: [Testo articolo]
+- CCNL Studi Professionali Art. [__]: [Testo articolo]
+
+GRAVITA E CIRCOSTANZE:
+- Violazione di fiducia
+- Danno potenziale all'azienda
+- Premeditazione/intenzionalita
+- Reiterazione
+
+DIRITTO DI DIFESA - ART. 7:
+Potete fornire giustificazioni scritte entro 5 GIORNI.
+Potete richiedere colloquio orale con rappresentante sindacale.
+
+Email: legale@smiledoc.it
+Termine: 5 giorni da ricevimento PEC
+
+PROVVEDIMENTI POTENZIALI:
+- Sospensione dal lavoro giorni: [__]
+- Licenziamento Giustificato Motivo
+- Licenziamento Giusta Causa
+
+Il provvedimento finale sara comunicato entro 10 giorni
+dal termine di esercizio del diritto di difesa.
+
+Cordiali saluti,
+Smiledoc S.r.l. - Titolare
+
+-------------------------------------------
+[NOTA: Inviare via PEC o Raccomandata AR]</div>
+                        </div>
+
+                        <h3>📧 COMUNICAZIONE ESITO PROVA (Positivo)</h3>
+                        <div class="email-template" style="position: relative;">
+                            <button class="btn btn-copy btn-sm copy-btn-absolute" onclick="copyToClipboard('email3')">Copia</button>
+                            <div id="email3">DA: direzione@smiledoc.it
+A: [email.dipendente@smiledoc.it]
+OGGETTO: Comunicazione Esito Positivo Periodo Prova
+
+-------------------------------------------
+
+Caro/a [Nome Cognome],
+
+Con piacere comunico che ha SUPERATO POSITIVAMENTE il periodo di prova.
+
+A partire da questa data il Vostro contratto prosegue come
+CONTRATTO INDETERMINATO, con le condizioni previste dal
+CCNL Studi Professionali.
+
+VALUTAZIONE POSITIVA PER:
+- Competenza tecnica
+- Puntualita e affidabilita
+- Comportamento professionale
+- Integrazione nel team
+
+Congratulazioni!
+
+Cordiali saluti,
+Smiledoc S.r.l. - Titolare
+
+-------------------------------------------</div>
+                        </div>
+                    </section>
+
+                    <!-- Admin Dipendenti -->
+                    <section id="admin-dipendenti" class="section">
+                        <h2>👥 Gestione Dipendenti</h2>
+                        <p>Tracker onboarding per ciascun dipendente:</p>
+
+                        <div class="dipendenti-grid">
+                            <div class="dip-card">
+                                <h4>1. [Nome Dipendente]</h4>
+                                <p><strong>Mansione:</strong> ASO</p>
+                                <p><strong>Assunzione:</strong> --/--/----</p>
+                                <p><strong>Status:</strong> ⏳ Da inserire</p>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 0%"></div>
+                                </div>
+                            </div>
+
+                            <div class="dip-card">
+                                <h4>2. [Nome Dipendente]</h4>
+                                <p><strong>Mansione:</strong> Reception</p>
+                                <p><strong>Assunzione:</strong> --/--/----</p>
+                                <p><strong>Status:</strong> ⏳ Da inserire</p>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 0%"></div>
+                                </div>
+                            </div>
+
+                            <div class="dip-card">
+                                <h4>3. [Posizione Libera]</h4>
+                                <p><strong>Mansione:</strong> ---</p>
+                                <p><strong>Status:</strong> ⏳ Attesa Assunzione</p>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 0%"></div>
+                                </div>
+                            </div>
+
+                            <div class="dip-card">
+                                <h4>4. [Posizione Libera]</h4>
+                                <p><strong>Mansione:</strong> ---</p>
+                                <p><strong>Status:</strong> ⏳ Attesa Assunzione</p>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 0%"></div>
+                                </div>
+                            </div>
+
+                            <div class="dip-card">
+                                <h4>5. [Posizione Libera]</h4>
+                                <p><strong>Mansione:</strong> ---</p>
+                                <p><strong>Status:</strong> ⏳ Attesa Assunzione</p>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info" style="margin-top: 20px;">
+                            <strong>Statistiche:</strong> Dipendenti Attivi: 0/5 | Onboarding Completati: 0 | Posizioni Libere: 5
+                        </div>
+                    </section>
+
+                    <!-- Admin Disciplina -->
+                    <section id="admin-disciplina" class="section">
+                        <h2>⚠️ Procedure Disciplinari</h2>
+
+                        <div class="warning-box">
+                            <h4>Art. 7 L. 300/1970 - Statuto dei Lavoratori</h4>
+                            <p>Mai applicare sanzioni senza aver seguito la procedura completa. La mancata osservanza rende il provvedimento nullo.</p>
+                        </div>
+
+                        <div class="alert alert-legal" style="margin-bottom: 20px;">
+                            <strong>⚠️ OBBLIGO AFFISSIONE CODICE DISCIPLINARE:</strong> Ai sensi dell'Art. 7 Statuto dei Lavoratori, il regolamento/codice disciplinare con le relative sanzioni <strong>DEVE essere affisso in luogo accessibile a tutti</strong> (bacheca fisica in studio). La pubblicazione sul portale web è un ottimo supporto documentale, ma la giurisprudenza richiede <strong>l'affissione fisica</strong> per la massima validità legale delle sanzioni.
+                        </div>
+
+                        <div class="info-box" style="margin-bottom: 20px; background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%); border-color: #10b981;">
+                            <h4>✅ VALIDITA' COMUNICAZIONI VIA EMAIL</h4>
+                            <p>Se il dipendente ha firmato la <strong>Dichiarazione di Domicilio Digitale</strong> all'assunzione:</p>
+                            <ul style="margin: 10px 0 0 20px; font-size: 13px;">
+                                <li><strong>Richiami verbali/scritti (Livello 1-2):</strong> Possono essere inviati via email ordinaria all'indirizzo dichiarato</li>
+                                <li><strong>Contestazioni formali (Livello 3):</strong> Email + conservare prova invio (screenshot/log)</li>
+                                <li><strong>Contestazioni gravi e licenziamento (Livello 4-6):</strong> Raccomandata AR o PEC (per maggior tutela)</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>IMPORTANTE:</strong> La presunzione di conoscenza (art. 1335 c.c.) opera dal momento dell'invio. Il dipendente NON potra' eccepire di non aver letto l'email.</p>
+                        </div>
+
+                        <h3>Scala Progressiva Sanzioni</h3>
+                        <table>
+                            <thead>
+                                <tr><th>Livello</th><th>Sanzione</th><th>Tipologia Violazione</th><th>Documento</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1</td><td>Richiamo Verbale</td><td>Mancanze lievi, primo episodio</td><td>Annotazione interna</td></tr>
+                                <tr><td>2</td><td>Richiamo Scritto</td><td>Mancanze lievi reiterate o isolate di media gravita</td><td><a href="documenti/disciplina/Template Richiamo Disciplinare Via Email.docx">Template Richiamo</a></td></tr>
+                                <tr><td>3</td><td>Contestazione Formale</td><td>Violazioni regolamento, negligenza, ritardi ripetuti</td><td><a href="documenti/disciplina/Template_Lettera_Contestazione_Disciplinare.docx">Template Contestazione</a></td></tr>
+                                <tr><td>4</td><td>Contestazione Grave</td><td>Violazione NDA, danno economico, insubordinazione</td><td><a href="documenti/disciplina/Template Contestazione Disciplinare Grave.docx">Template Grave</a></td></tr>
+                                <tr><td>5</td><td>Sospensione (max 10gg)</td><td>Fatti gravi con necessita di allontanamento</td><td>Procedura interna</td></tr>
+                                <tr><td>6</td><td>Licenziamento</td><td>Giusta causa o giustificato motivo soggettivo</td><td><a href="documenti/disciplina/Procedura Licenziamento Disciplinare Smiledoc.docx">Procedura Licenziamento</a></td></tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Differenza tra Contestazione Formale e Grave</h3>
+                        <div class="grid-2">
+                            <div class="doc-card" style="border-left-color: #ed8936;">
+                                <h4>Contestazione Formale (Livello 3)</h4>
+                                <p><strong>Quando si usa:</strong></p>
+                                <ul style="margin-left: 15px; font-size: 13px; color: #4a5568;">
+                                    <li>Ritardi ripetuti (3+ in un mese)</li>
+                                    <li>Mancato rispetto procedure operative</li>
+                                    <li>Negligenza senza danni significativi</li>
+                                    <li>Comportamento scorretto con colleghi</li>
+                                    <li>Uso improprio strumenti aziendali</li>
+                                </ul>
+                                <p style="margin-top: 10px;"><strong>Sanzione tipica:</strong> Multa fino a 4 ore di retribuzione</p>
+                            </div>
+                            <div class="doc-card" style="border-left-color: #c53030;">
+                                <h4>Contestazione Grave (Livello 4)</h4>
+                                <p><strong>Quando si usa:</strong></p>
+                                <ul style="margin-left: 15px; font-size: 13px; color: #4a5568;">
+                                    <li>Violazione patto di riservatezza (NDA)</li>
+                                    <li>Danno economico all'azienda</li>
+                                    <li>Insubordinazione verso superiori</li>
+                                    <li>Comportamento lesivo con pazienti</li>
+                                    <li>Falsificazione documenti/timbrature</li>
+                                    <li>Recidiva dopo contestazione formale</li>
+                                </ul>
+                                <p style="margin-top: 10px;"><strong>Sanzione tipica:</strong> Sospensione 1-10 giorni senza retribuzione</p>
+                            </div>
+                        </div>
+
+                        <div class="info-box">
+                            <h4>Criteri di Valutazione Gravita</h4>
+                            <p>Per determinare se usare contestazione formale o grave, valutare:</p>
+                            <ul style="margin-left: 20px; font-size: 13px;">
+                                <li><strong>Intenzionalita:</strong> L'atto era volontario o frutto di negligenza?</li>
+                                <li><strong>Danno:</strong> C'e stato danno economico, reputazionale o ai pazienti?</li>
+                                <li><strong>Recidiva:</strong> Il dipendente ha precedenti disciplinari?</li>
+                                <li><strong>Ruolo:</strong> La posizione del dipendente aggrava la responsabilita?</li>
+                                <li><strong>Proporzionalita:</strong> La sanzione e proporzionata al fatto?</li>
+                            </ul>
+                        </div>
+
+                        <h3>Procedura Corretta (Art. 7)</h3>
+                        <div class="folder-tree">
+1. CONTESTAZIONE SCRITTA
+   ↓ (entro 5 giorni)
+2. DIRITTO DI DIFESA del dipendente
+   ↓ (dopo scadenza termine)
+3. PROVVEDIMENTO DISCIPLINARE
+   ↓ (entro 10 giorni)
+4. COMUNICAZIONE SANZIONE
+                        </div>
+
+                        <h3>Documenti Disciplina</h3>
+                        <div class="doc-grid">
+                            <div class="doc-card">
+                                <h4>Procedura Disciplinare Interna</h4>
+                                <a href="documenti/disciplina/Procedura Disciplinare Interna Smiledoc.docx" class="btn btn-sm">Scarica</a>
+                            </div>
+                            <div class="doc-card">
+                                <h4>Procedura Licenziamento</h4>
+                                <a href="documenti/disciplina/Procedura Licenziamento Disciplinare Smiledoc.docx" class="btn btn-sm">Scarica</a>
+                            </div>
+                        </div>
+
+                        <h3>🚨 Ipotesi di Licenziamento per Giusta Causa</h3>
+                        <div class="warning-box" style="background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%); border-color: #dc2626;">
+                            <h4 style="color: #dc2626;">Comportamenti che giustificano il licenziamento immediato (senza preavviso)</h4>
+                            <ul style="margin: 10px 0 0 20px; font-size: 13px; color: #7f1d1d;">
+                                <li><strong>Furto o appropriazione indebita</strong> di beni aziendali o dei pazienti</li>
+                                <li><strong>Violazione grave del segreto professionale</strong> o divulgazione dati pazienti</li>
+                                <li><strong>Falsificazione documenti</strong> (timbrature, certificati, referti)</li>
+                                <li><strong>Stato di ubriachezza o uso di sostanze</strong> durante il servizio</li>
+                                <li><strong>Insubordinazione grave</strong> con rifiuto di eseguire ordini legittimi</li>
+                                <li><strong>Violenza fisica o verbale grave</strong> verso colleghi o pazienti</li>
+                                <li><strong>Abbandono del posto di lavoro</strong> che metta a rischio pazienti</li>
+                                <li><strong>Concorrenza sleale</strong> durante il rapporto di lavoro</li>
+                                <li><strong>Recidiva reiterata</strong> dopo contestazioni formali e gravi</li>
+                            </ul>
+                        </div>
+
+                        <h3>📋 Procedura di Licenziamento (Step by Step)</h3>
+                        <div class="phase-timeline">
+                            <div class="phase">
+                                <h4>STEP 1: Raccolta Prove</h4>
+                                <p>Documentare il fatto con testimonianze scritte, screenshot, registri presenze, valutazioni performance negative precedenti</p>
+                            </div>
+                            <div class="phase">
+                                <h4>STEP 2: Contestazione Scritta</h4>
+                                <p>Inviare contestazione dettagliata via Raccomandata AR o PEC (anche email se firmato Domicilio Digitale per casi meno gravi)</p>
+                            </div>
+                            <div class="phase">
+                                <h4>STEP 3: Attendere Difesa</h4>
+                                <p>Il dipendente ha 5 giorni per presentare giustificazioni scritte o richiedere audizione orale</p>
+                            </div>
+                            <div class="phase">
+                                <h4>STEP 4: Valutazione e Decisione</h4>
+                                <p>Valutare le difese. Se non sufficienti, procedere con il provvedimento</p>
+                            </div>
+                            <div class="phase">
+                                <h4>STEP 5: Comunicazione Licenziamento</h4>
+                                <p>Inviare lettera di licenziamento via Raccomandata AR o PEC entro i termini CCNL</p>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info" style="margin-top: 20px;">
+                            <strong>💡 CONSIGLIO:</strong> Prima di procedere al licenziamento, verifica sempre che nel fascicolo del dipendente siano presenti: Dichiarazione Domicilio Digitale + Accettazione Regolamento + eventuali richiami/contestazioni precedenti. Questi documenti rafforzano enormemente la posizione aziendale in caso di impugnazione.
+                        </div>
+                    </section>
+
+                    <!-- Admin Performance -->
+                    <section id="admin-performance" class="section">
+                        <h2>📈 Valutazione Performance</h2>
+
+                        <div class="info-box" style="background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%); border-color: #667eea;">
+                            <h4>Finalita della Valutazione</h4>
+                            <p>La valutazione della performance ha lo scopo di:</p>
+                            <ul style="margin: 10px 0 0 20px; font-size: 14px;">
+                                <li>Monitorare in modo <strong>oggettivo</strong> l'andamento professionale</li>
+                                <li>Favorire <strong>crescita, chiarezza e miglioramento</strong></li>
+                                <li>Fornire <strong>evidenze documentabili</strong> a tutela reciproca</li>
+                            </ul>
+                            <p style="margin-top: 15px; font-style: italic; color: #667eea;"><strong>"Questa non e una pagella. E uno strumento per lavorare meglio insieme."</strong></p>
+                        </div>
+
+                        <h3>Come Usare la Scheda (Modo Corretto, 0 Attriti)</h3>
+                        <div class="grid-2">
+                            <div class="doc-card" style="border-left-color: #48bb78;">
+                                <h4>Quando effettuare la valutazione</h4>
+                                <ul style="margin-left: 15px; font-size: 13px;">
+                                    <li><strong>1 volta l'anno</strong> per tutti i dipendenti</li>
+                                    <li><strong>Alla fine del periodo di prova</strong> per i nuovi</li>
+                                    <li><strong>Prima di qualsiasi decisione critica</strong></li>
+                                </ul>
+                            </div>
+                            <div class="doc-card" style="border-left-color: #667eea;">
+                                <h4>Come condurre il colloquio</h4>
+                                <ul style="margin-left: 15px; font-size: 13px;">
+                                    <li><strong>Durata:</strong> 15 minuti, non di piu</li>
+                                    <li><strong>Tono:</strong> calmo, oggettivo, professionale</li>
+                                    <li><strong>Luogo:</strong> riservato e tranquillo</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="warning-box" style="background: #ebf8ff; border-color: #4299e1;">
+                            <h4 style="color: #2b6cb0;">La valutazione NON ha carattere punitivo, ma organizzativo</h4>
+                            <p style="color: #2b6cb0;">E uno strumento di crescita reciproca. Evita giudizi personali e concentrati su fatti osservabili e misurabili.</p>
+                        </div>
+
+                        <h3>Scheda Valutazione - 5 Criteri</h3>
+                        <table>
+                            <thead>
+                                <tr><th>Criterio</th><th>Descrizione</th><th>Punteggio</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>3.1 Presenza Operativa e Affidabilita</strong></td>
+                                    <td>Capacita di garantire la presenza richiesta e la copertura del ruolo assegnato</td>
+                                    <td>1-5</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3.2 Rispetto Procedure e Protocolli</strong></td>
+                                    <td>Aderenza alle procedure cliniche, organizzative, di sicurezza e privacy</td>
+                                    <td>1-5</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3.3 Qualita del Lavoro e Precisione</strong></td>
+                                    <td>Accuratezza, attenzione al dettaglio, riduzione errori, affidabilita dell'output</td>
+                                    <td>1-5</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3.4 Collaborazione e Clima di Lavoro</strong></td>
+                                    <td>Capacita di lavorare in modo collaborativo, rispettoso e costruttivo</td>
+                                    <td>1-5</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3.5 Capacita di Apprendimento</strong></td>
+                                    <td>Disponibilita all'apprendimento, miglioramento e adattamento alle indicazioni</td>
+                                    <td>1-5</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Scala di Valutazione (1-5)</h3>
+                        <div class="doc-grid">
+                            <div class="doc-card" style="border-left-color: #c53030;">
+                                <span class="badge badge-required">1 - Insufficiente</span>
+                                <p>Non raggiunge gli standard minimi. Richiede intervento immediato.</p>
+                            </div>
+                            <div class="doc-card" style="border-left-color: #ed8936;">
+                                <span class="badge" style="background: #faf089; color: #975a16;">2 - Migliorabile</span>
+                                <p>Sotto le aspettative. Piano di miglioramento necessario.</p>
+                            </div>
+                            <div class="doc-card" style="border-left-color: #48bb78;">
+                                <span class="badge badge-optional">3 - Adeguato</span>
+                                <p>Soddisfa le aspettative. Performance nella norma.</p>
+                            </div>
+                            <div class="doc-card" style="border-left-color: #667eea;">
+                                <span class="badge badge-policy">4 - Buono</span>
+                                <p>Supera le aspettative. Contributo significativo.</p>
+                            </div>
+                            <div class="doc-card" style="border-left-color: #9f7aea;">
+                                <span class="badge" style="background: #e9d8fd; color: #553c9a;">5 - Eccellente</span>
+                                <p>Performance eccezionale. Modello per il team.</p>
+                            </div>
+                        </div>
+
+                        <h3>Valutazione Complessiva</h3>
+                        <div class="doc-card">
+                            <p><strong>Calcolo:</strong> Media dei 5 punteggi = Valutazione Complessiva</p>
+                            <table style="margin-top: 15px;">
+                                <tr><th>Media</th><th>Valutazione</th></tr>
+                                <tr><td>1.0 - 1.9</td><td><span class="badge badge-required">Insufficiente</span></td></tr>
+                                <tr><td>2.0 - 2.9</td><td><span class="badge" style="background: #faf089; color: #975a16;">Migliorabile</span></td></tr>
+                                <tr><td>3.0 - 3.9</td><td><span class="badge badge-optional">Adeguata</span></td></tr>
+                                <tr><td>4.0 - 4.4</td><td><span class="badge badge-policy">Buona</span></td></tr>
+                                <tr><td>4.5 - 5.0</td><td><span class="badge" style="background: #e9d8fd; color: #553c9a;">Eccellente</span></td></tr>
+                            </table>
+                        </div>
+
+                        <h3>Azioni Post-Valutazione</h3>
+                        <ul class="checklist">
+                            <li style="border-left-color: #48bb78;"><input type="checkbox"> <strong>Nessuna azione necessaria</strong> - Performance adeguata o superiore</li>
+                            <li style="border-left-color: #667eea;"><input type="checkbox"> <strong>Affiancamento</strong> - Supporto da collega esperto</li>
+                            <li style="border-left-color: #667eea;"><input type="checkbox"> <strong>Formazione</strong> - Corso specifico su area carente</li>
+                            <li style="border-left-color: #ed8936;"><input type="checkbox"> <strong>Chiarimento di ruolo</strong> - Ridefinizione aspettative</li>
+                            <li style="border-left-color: #c53030;"><input type="checkbox"> <strong>Verifica successiva</strong> - Nuovo colloquio entro 30-60 giorni</li>
+                        </ul>
+
+                        <h3>Calendario Valutazioni</h3>
+                        <table>
+                            <thead><tr><th>Periodo</th><th>Tipo</th><th>Azione</th></tr></thead>
+                            <tbody>
+                                <tr><td>Fine Periodo Prova (60gg)</td><td>Valutazione Iniziale</td><td>Conferma/Non conferma</td></tr>
+                                <tr><td>Dicembre</td><td>Review Annuale</td><td>Valutazione completa + obiettivi anno successivo</td></tr>
+                                <tr><td>Prima decisioni critiche</td><td>Valutazione Straordinaria</td><td>Documentazione per provvedimenti</td></tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Firma e Conservazione</h3>
+                        <div class="info-box">
+                            <p><strong>La scheda deve essere firmata da:</strong></p>
+                            <ul style="margin: 10px 0 0 20px; font-size: 14px;">
+                                <li><strong>Valutatore (Responsabile):</strong> Conferma del giudizio espresso</li>
+                                <li><strong>Dipendente (per presa visione):</strong> Attesta di aver visto la valutazione</li>
+                            </ul>
+                            <p style="margin-top: 15px; font-size: 12px; color: #718096;"><em>Nota: la firma del dipendente attesta la presa visione, NON implica accettazione del giudizio.</em></p>
+                            <p style="margin-top: 10px;"><strong>Conservazione:</strong> Fascicolo personale - 10 anni</p>
+                        </div>
+
+                        <div class="warning-box">
+                            <h4>Best Practice per il Valutatore</h4>
+                            <ul style="margin-left: 20px; font-size: 13px;">
+                                <li>Documenta sempre con <strong>date e fatti specifici</strong></li>
+                                <li>Evita giudizi generici ("e bravo", "non va bene")</li>
+                                <li>Indica elementi <strong>concreti e osservabili</strong></li>
+                                <li>Condividi la valutazione in modo <strong>costruttivo</strong></li>
+                                <li>Ascolta il punto di vista del dipendente</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Admin Scadenze -->
+                    <section id="admin-scadenze" class="section">
+                        <h2>⏰ Tracking Scadenze</h2>
+                        <div class="alert alert-info">
+                            <strong>Automazioni HR:</strong> Monitora tutte le scadenze critiche per ogni dipendente
+                        </div>
+
+                        <h3>Dashboard Scadenze</h3>
+                        <div class="doc-grid">
+                            <div class="doc-card" style="border-left-color: #c53030;">
+                                <span class="badge badge-required">Urgente</span>
+                                <h4>Scadenze Formazione</h4>
+                                <p>Corsi in scadenza o scaduti</p>
+                                <div style="font-size: 24px; font-weight: bold; color: #c53030;">0</div>
+                            </div>
+                            <div class="doc-card" style="border-left-color: #ed8936;">
+                                <span class="badge" style="background: #faf089; color: #975a16;">Attenzione</span>
+                                <h4>Rinnovi DPI</h4>
+                                <p>DPI da sostituire/rinnovare</p>
+                                <div style="font-size: 24px; font-weight: bold; color: #ed8936;">0</div>
+                            </div>
+                            <div class="doc-card" style="border-left-color: #667eea;">
+                                <span class="badge badge-policy">In Corso</span>
+                                <h4>Periodi Prova</h4>
+                                <p>Dipendenti in periodo prova</p>
+                                <div style="font-size: 24px; font-weight: bold; color: #667eea;">0</div>
+                            </div>
+                        </div>
+
+                        <h3>Registro Scadenze Formazione</h3>
+                        <table>
+                            <thead>
+                                <tr><th>Dipendente</th><th>Corso</th><th>Completato</th><th>Scadenza</th><th>Stato</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>[Nome 1]</td>
+                                    <td>Formazione Generale</td>
+                                    <td>--/--/----</td>
+                                    <td>Permanente</td>
+                                    <td><span class="badge badge-optional">OK</span></td>
+                                </tr>
+                                <tr>
+                                    <td>[Nome 1]</td>
+                                    <td>Formazione Specifica</td>
+                                    <td>--/--/----</td>
+                                    <td>--/--/----</td>
+                                    <td><span class="badge" style="background: #faf089; color: #975a16;">Da fare</span></td>
+                                </tr>
+                                <tr>
+                                    <td>[Nome 2]</td>
+                                    <td>Antincendio</td>
+                                    <td>--/--/----</td>
+                                    <td>--/--/----</td>
+                                    <td><span class="badge" style="background: #faf089; color: #975a16;">Da fare</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Registro Scadenze DPI</h3>
+                        <table>
+                            <thead>
+                                <tr><th>Dipendente</th><th>DPI</th><th>Consegnato</th><th>Sostituzione</th><th>Stato</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>[Nome 1]</td>
+                                    <td>Guanti monouso</td>
+                                    <td>--/--/----</td>
+                                    <td>Mensile</td>
+                                    <td><span class="badge badge-optional">OK</span></td>
+                                </tr>
+                                <tr>
+                                    <td>[Nome 1]</td>
+                                    <td>Mascherine FFP2</td>
+                                    <td>--/--/----</td>
+                                    <td>Settimanale</td>
+                                    <td><span class="badge badge-optional">OK</span></td>
+                                </tr>
+                                <tr>
+                                    <td>[Nome 1]</td>
+                                    <td>Divisa</td>
+                                    <td>--/--/----</td>
+                                    <td>Annuale</td>
+                                    <td><span class="badge badge-optional">OK</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Periodi Prova in Corso</h3>
+                        <table>
+                            <thead>
+                                <tr><th>Dipendente</th><th>Data Assunzione</th><th>Fine Prova</th><th>Giorni Rimasti</th><th>Azione</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="5" style="text-align: center; color: #718096;">Nessun periodo prova attivo</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Promemoria Automatici</h3>
+                        <div class="info-box">
+                            <h4>Checklist Reminder</h4>
+                            <ul style="margin-left: 20px; color: #2b6cb0; font-size: 14px;">
+                                <li><strong>30 giorni prima:</strong> Scadenza formazione - Inviare reminder dipendente</li>
+                                <li><strong>15 giorni prima:</strong> Fine periodo prova - Preparare valutazione</li>
+                                <li><strong>7 giorni prima:</strong> Scadenza DPI - Ordinare ricambi</li>
+                                <li><strong>Mensile:</strong> Review generale scadenze - Report direzione</li>
+                            </ul>
+                        </div>
+
+                        <h3>Esporta Report</h3>
+                        <div class="btn-group">
+                            <button class="btn btn-outline" onclick="alert('Funzionalita in sviluppo')">Esporta Excel</button>
+                            <button class="btn btn-outline" onclick="alert('Funzionalita in sviluppo')">Stampa Report</button>
+                            <button class="btn" onclick="alert('Funzionalita in sviluppo')">Invia Reminder Email</button>
+                        </div>
+                    </section>
+
+                    <!-- Admin Privacy GDPR -->
+                    <section id="admin-privacy" class="section">
+                        <h2>🔒 Privacy e GDPR</h2>
+                        <div class="alert alert-legal">
+                            <strong>Conformita GDPR:</strong> Reg. UE 2016/679 - Tutti i dati dei dipendenti devono essere trattati secondo i principi di liceita, minimizzazione e sicurezza.
+                        </div>
+
+                        <h3>Piano di Conservazione Fascicoli</h3>
+                        <table>
+                            <thead>
+                                <tr><th>Documento</th><th>Dati Contenuti</th><th>Durata Conservazione</th><th>Base Giuridica</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Fascicolo personale</td>
+                                    <td>Anagrafica, contratto, documenti</td>
+                                    <td>10 anni da cessazione rapporto</td>
+                                    <td>Art. 2220 C.C.</td>
+                                </tr>
+                                <tr>
+                                    <td>Buste paga e contributi</td>
+                                    <td>Retribuzione, INPS, IRPEF</td>
+                                    <td>5 anni da fine rapporto</td>
+                                    <td>Art. 2948 C.C.</td>
+                                </tr>
+                                <tr>
+                                    <td>Schede formazione sicurezza</td>
+                                    <td>Corsi, attestati, date</td>
+                                    <td>10 anni</td>
+                                    <td>D.Lgs. 81/2008</td>
+                                </tr>
+                                <tr>
+                                    <td>Registro DPI</td>
+                                    <td>Consegne, firme</td>
+                                    <td>10 anni da consegna</td>
+                                    <td>D.Lgs. 81/2008</td>
+                                </tr>
+                                <tr>
+                                    <td>Provvedimenti disciplinari</td>
+                                    <td>Contestazioni, sanzioni</td>
+                                    <td>10 anni (2 anni per recidiva)</td>
+                                    <td>L. 300/1970</td>
+                                </tr>
+                                <tr>
+                                    <td>Idoneita sanitaria</td>
+                                    <td>Giudizi medico competente</td>
+                                    <td>10 anni da cessazione</td>
+                                    <td>D.Lgs. 81/2008 Art. 25</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Dati Sensibili Trattati (Art. 9 GDPR)</h3>
+                        <div class="doc-grid">
+                            <div class="doc-card" style="border-left-color: #c53030;">
+                                <span class="badge badge-required">Categoria Particolare</span>
+                                <h4>Dati Sanitari</h4>
+                                <ul style="font-size: 12px; margin-left: 15px;">
+                                    <li>Idoneita alla mansione</li>
+                                    <li>Certificati malattia</li>
+                                    <li>Infortuni sul lavoro</li>
+                                    <li>Gravidanza/maternita</li>
+                                </ul>
+                                <p class="legal-ref">Base: Obbligo legale D.Lgs. 81/2008</p>
+                            </div>
+                            <div class="doc-card" style="border-left-color: #ed8936;">
+                                <span class="badge" style="background: #faf089; color: #975a16;">Sensibile</span>
+                                <h4>Dati Giudiziari</h4>
+                                <ul style="font-size: 12px; margin-left: 15px;">
+                                    <li>Casellario giudiziale (se richiesto)</li>
+                                    <li>Carichi pendenti</li>
+                                </ul>
+                                <p class="legal-ref">Base: Solo se previsto da legge per la mansione</p>
+                            </div>
+                            <div class="doc-card" style="border-left-color: #667eea;">
+                                <span class="badge badge-policy">Standard</span>
+                                <h4>Dati Identificativi</h4>
+                                <ul style="font-size: 12px; margin-left: 15px;">
+                                    <li>Anagrafica completa</li>
+                                    <li>Codice fiscale</li>
+                                    <li>IBAN</li>
+                                    <li>Contatti personali</li>
+                                </ul>
+                                <p class="legal-ref">Base: Esecuzione contratto</p>
+                            </div>
+                        </div>
+
+                        <h3>Misure di Sicurezza (Art. 32 GDPR)</h3>
+                        <ul class="checklist">
+                            <li style="border-left-color: #48bb78;"><input type="checkbox"> <strong>Accesso limitato:</strong> Solo personale HR autorizzato accede ai fascicoli</li>
+                            <li style="border-left-color: #48bb78;"><input type="checkbox"> <strong>Armadi chiusi a chiave:</strong> Documenti cartacei in archivio sicuro</li>
+                            <li style="border-left-color: #48bb78;"><input type="checkbox"> <strong>Password complesse:</strong> Accesso digitale con credenziali personali</li>
+                            <li style="border-left-color: #48bb78;"><input type="checkbox"> <strong>Backup regolari:</strong> Copia di sicurezza settimanale</li>
+                            <li style="border-left-color: #48bb78;"><input type="checkbox"> <strong>Cifratura:</strong> Dati sensibili cifrati in transito e a riposo</li>
+                            <li style="border-left-color: #48bb78;"><input type="checkbox"> <strong>Log accessi:</strong> Tracciamento di chi accede ai dati</li>
+                        </ul>
+
+                        <h3>DPA - Accordo con Cloud Provider</h3>
+                        <div class="info-box">
+                            <h4>Data Processing Agreement (Art. 28 GDPR)</h4>
+                            <p>Se utilizzi servizi cloud per conservare dati dipendenti (Google Drive, Dropbox, software HR), devi avere un DPA firmato.</p>
+                            <table style="margin-top: 15px;">
+                                <tr><th>Provider</th><th>DPA</th><th>Stato</th></tr>
+                                <tr><td>Google Workspace</td><td><a href="https://cloud.google.com/terms/data-processing-addendum" target="_blank">Link DPA</a></td><td><span class="badge" style="background: #faf089; color: #975a16;">Da verificare</span></td></tr>
+                                <tr><td>Microsoft 365</td><td><a href="https://www.microsoft.com/licensing/docs/view/Microsoft-Products-and-Services-Data-Protection-Addendum-DPA" target="_blank">Link DPA</a></td><td><span class="badge" style="background: #faf089; color: #975a16;">Da verificare</span></td></tr>
+                                <tr><td>Software gestionale HR</td><td>Richiedi al fornitore</td><td><span class="badge" style="background: #faf089; color: #975a16;">Da verificare</span></td></tr>
+                            </table>
+                        </div>
+
+                        <h3>Diritti dei Dipendenti (Artt. 15-22 GDPR)</h3>
+                        <div class="grid-2">
+                            <div class="doc-card">
+                                <h4>Il dipendente puo richiedere:</h4>
+                                <ul style="font-size: 13px; margin-left: 15px;">
+                                    <li>Accesso ai propri dati</li>
+                                    <li>Rettifica dati errati</li>
+                                    <li>Copia del fascicolo personale</li>
+                                    <li>Informazioni su chi accede ai dati</li>
+                                </ul>
+                            </div>
+                            <div class="doc-card">
+                                <h4>Tempistiche di risposta:</h4>
+                                <ul style="font-size: 13px; margin-left: 15px;">
+                                    <li><strong>30 giorni</strong> per rispondere a richieste</li>
+                                    <li>Prorogabile di 60gg se complesso</li>
+                                    <li>Risposta gratuita (salvo abuso)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="warning-box">
+                            <h4>Registro dei Trattamenti (Art. 30 GDPR)</h4>
+                            <p>E obbligatorio mantenere un registro delle attivita di trattamento. Documenta: finalita, categorie dati, destinatari, tempi conservazione, misure sicurezza.</p>
+                        </div>
+                    </section>
+
+                    <!-- Admin Workflow HR - DOCUMENTO INTERNO DI REGIA -->
+                    <section id="admin-workflow" class="section">
+                        <h2>⚙️ Workflow HR Automatico</h2>
+
+                        <div class="alert alert-legal" style="background: #faf089; border-left-color: #d69e2e;">
+                            <strong>DOCUMENTO INTERNO DI REGIA</strong> - Solo per Responsabile HR e Titolare. NON condividere con i dipendenti.
+                        </div>
+
+                        <div class="info-box">
+                            <h4>Obiettivo del Workflow</h4>
+                            <p>Garantire <strong>controllo, continuita e tutela legale</strong> del personale con il minimo sforzo gestionale.</p>
+                            <p style="margin-top: 10px;">Questo workflow e pensato per essere <strong>semplice, automatizzabile e difendibile</strong>, anche senza software HR complessi.</p>
+                        </div>
+
+                        <h3>Principio Guida</h3>
+                        <div class="warning-box" style="background: #ebf8ff; border-color: #4299e1;">
+                            <h4 style="color: #2b6cb0;">Nessuna decisione HR senza:</h4>
+                            <ul style="margin-left: 20px; color: #2b6cb0;">
+                                <li>Un <strong>evento tracciato</strong></li>
+                                <li>Un <strong>documento</strong></li>
+                                <li>Una <strong>firma o presa visione</strong></li>
+                            </ul>
+                            <p style="margin-top: 15px; color: #2b6cb0;"><em>Questo rende Smiledoc ordinata, difendibile e scalabile.</em></p>
+                        </div>
+
+                        <h3>I 4 Eventi Chiave del Sistema HR</h3>
+                        <p>Ogni evento ha: <strong>Trigger temporale</strong> → <strong>Azione automatica</strong> → <strong>Output documentale</strong></p>
+
+                        <div class="doc-grid" style="margin-top: 20px;">
+                            <div class="doc-card" style="border-left-color: #667eea;">
+                                <span class="badge badge-policy">Evento 1</span>
+                                <h4>Fine Periodo di Prova</h4>
+                                <p><strong>Trigger:</strong> Data assunzione + durata prova (CCNL)</p>
+                                <p><strong>Azione:</strong> Reminder al Responsabile + Apertura Scheda Valutazione</p>
+                                <p><strong>Output:</strong> Scheda compilata + Decisione (conferma/proroga/cessazione)</p>
+                                <p class="legal-ref">Valore legale: dimostra valutazione reale e non arbitraria</p>
+                            </div>
+
+                            <div class="doc-card" style="border-left-color: #48bb78;">
+                                <span class="badge badge-optional">Evento 2</span>
+                                <h4>Valutazione Annuale</h4>
+                                <p><strong>Trigger:</strong> 12 mesi dalla precedente valutazione</p>
+                                <p><strong>Azione:</strong> Reminder HR + Compilazione Scheda Performance</p>
+                                <p><strong>Output:</strong> Scheda firmata + Eventuali azioni concordate</p>
+                                <p class="legal-ref">Valore legale: storico performance documentato</p>
+                            </div>
+
+                            <div class="doc-card" style="border-left-color: #ed8936;">
+                                <span class="badge" style="background: #faf089; color: #975a16;">Evento 3</span>
+                                <h4>Formazione e Sicurezza</h4>
+                                <p><strong>Trigger:</strong> Scadenze formazione obbligatoria (81/08, privacy, ruolo)</p>
+                                <p><strong>Azione:</strong> Reminder formazione + Aggiornamento fascicolo</p>
+                                <p><strong>Output:</strong> Attestati + Registro formazione</p>
+                                <p class="legal-ref">Valore legale: riduce responsabilita del titolare</p>
+                            </div>
+
+                            <div class="doc-card" style="border-left-color: #9f7aea;">
+                                <span class="badge" style="background: #e9d8fd; color: #553c9a;">Evento 4</span>
+                                <h4>Documenti e Policy</h4>
+                                <p><strong>Trigger:</strong> Nuova policy / aggiornamento regolamento</p>
+                                <p><strong>Azione:</strong> Comunicazione interna + Presa visione digitale</p>
+                                <p><strong>Output:</strong> Tracciabilita presa visione</p>
+                                <p class="legal-ref">Valore legale: prova di informazione corretta</p>
+                            </div>
+                        </div>
+
+                        <h3>Implementazione Semplice (Consigliata)</h3>
+                        <div class="grid-2">
+                            <div class="doc-card">
+                                <h4>Strumenti Minimi</h4>
+                                <ul style="margin-left: 15px; font-size: 13px;">
+                                    <li><strong>Google Calendar</strong> - Eventi ricorrenti</li>
+                                    <li><strong>Google Drive / Geniusmile</strong> - Documenti</li>
+                                    <li><strong>Email o task interni</strong> - Comunicazioni</li>
+                                </ul>
+                            </div>
+                            <div class="doc-card">
+                                <h4>Calendari Consigliati</h4>
+                                <ul style="margin-left: 15px; font-size: 13px;">
+                                    <li>"HR Smiledoc - Prove"</li>
+                                    <li>"HR Smiledoc - Performance"</li>
+                                    <li>"HR Smiledoc - Formazione"</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h3>I 4 Promemoria da Creare (Qui Nasce l'Automatismo)</h3>
+                        <p>Apri Google Calendar (o quello che usi) e crea <strong>4 eventi ricorrenti</strong>:</p>
+
+                        <table style="margin-top: 15px;">
+                            <thead>
+                                <tr><th>Evento</th><th>Frequenza</th><th>Titolo Calendario</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>1. Fine periodo di prova</strong></td>
+                                    <td>Data = assunzione + durata prova</td>
+                                    <td><code style="background: #2d3748; color: #fff; padding: 3px 8px; border-radius: 4px;">HR - Valutazione fine prova - [Nome]</code></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2. Valutazione annuale</strong></td>
+                                    <td>Ricorrente ogni 12 mesi</td>
+                                    <td><code style="background: #2d3748; color: #fff; padding: 3px 8px; border-radius: 4px;">HR - Valutazione annuale - [Nome]</code></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3. Formazione obbligatoria</strong></td>
+                                    <td>1 volta l'anno</td>
+                                    <td><code style="background: #2d3748; color: #fff; padding: 3px 8px; border-radius: 4px;">HR - Formazione e sicurezza - Team</code></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>4. Verifica documenti HR</strong></td>
+                                    <td>1 volta l'anno</td>
+                                    <td><code style="background: #2d3748; color: #fff; padding: 3px 8px; border-radius: 4px;">HR - Verifica documenti e policy</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="info-box" style="margin-top: 20px; background: #f0fff4; border-color: #48bb78;">
+                            <h4 style="color: #276749;">Questo e il workflow automatico. Non serve altro.</h4>
+                            <p style="color: #276749;">Crea questi 4 eventi e il sistema ti ricordera automaticamente ogni scadenza HR critica.</p>
+                        </div>
+
+                        <h3>Responsabilita</h3>
+                        <table>
+                            <thead>
+                                <tr><th>Ruolo</th><th>Responsabilita</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><strong>Responsabile HR</strong></td><td>Gestione operativa e verifica scadenze</td></tr>
+                                <tr><td><strong>Titolare</strong></td><td>Decisioni finali (conferme, provvedimenti, cessazioni)</td></tr>
+                                <tr><td><strong>Dipendente</strong></td><td>Collaborazione e presa visione documenti</td></tr>
+                            </tbody>
+                        </table>
+
+                        <div class="info-box" style="margin-top: 20px;">
+                            <h4>Nota</h4>
+                            <p>Il workflow e adattabile e migliorabile <strong>senza necessita di nuova firma contrattuale</strong> da parte dei dipendenti.</p>
+                        </div>
+                    </section>
+
+                    <!-- Admin Guida -->
+                    <section id="admin-guida" class="section">
+                        <h2>❓ Guida Completa</h2>
+
+                        <h3>1. COME FUNZIONA IL SISTEMA</h3>
+                        <p>Sistema modulare fase-per-fase:</p>
+                        <ul style="margin-left: 20px; color: #4a5568; font-size: 14px; line-height: 1.8;">
+                            <li><strong>ONBOARDING (Giorni 1-3):</strong> Raccolta dati, contratto, privacy, regolamento</li>
+                            <li><strong>SICUREZZA (Giorni 1-30):</strong> DPI, DVR, formazione generale</li>
+                            <li><strong>FORMAZIONE (Giorni 30-60):</strong> Formazione specifica</li>
+                            <li><strong>MONITORAGGIO (Anni 1-10):</strong> Amministrazione, aggiornamenti, discipline</li>
+                        </ul>
+
+                        <h3>2. DOCUMENTI - QUANDO STAMPARE</h3>
+                        <table>
+                            <tr style="background: #667eea; color: white;">
+                                <th>DOCUMENTO</th><th>QUANDO</th><th>COPIE</th><th>FIRME</th>
+                            </tr>
+                            <tr><td>Modulo Dati Personali</td><td>Primo giorno</td><td>2</td><td>Dipendente + Titolare</td></tr>
+                            <tr><td>Regolamento Interno</td><td>Primo giorno</td><td>2</td><td>Presa visione dipendente</td></tr>
+                            <tr><td>Privacy GDPR + NDA</td><td>Primo giorno</td><td>2</td><td>Dipendente + Titolare</td></tr>
+                            <tr><td>Verbale DPI</td><td>Primo giorno</td><td>1</td><td>Dipendente + Titolare</td></tr>
+                            <tr><td>Scheda Formazione</td><td>Giorno 30-60</td><td>2</td><td>Formatore + Dipendente</td></tr>
+                        </table>
+
+                        <h3>3. CONSERVAZIONE LEGALE</h3>
+                        <ul style="margin-left: 20px; color: #4a5568; font-size: 14px; line-height: 1.8;">
+                            <li><strong>Fascicolo personale:</strong> 10 anni dopo cessazione</li>
+                            <li><strong>Scheda formazione:</strong> 10 anni</li>
+                            <li><strong>Registro DPI:</strong> 10 anni da consegna</li>
+                            <li><strong>Provvedimenti disciplinari:</strong> 10 anni (2 anni per recidiva)</li>
+                            <li><strong>Buste paga:</strong> 5 anni da fine rapporto</li>
+                        </ul>
+
+                        <h3>4. RIFERIMENTI NORMATIVI</h3>
+                        <ul style="margin-left: 20px; color: #4a5568; font-size: 14px;">
+                            <li><strong>D.Lgs. 81/2008</strong> - Testo Unico Sicurezza sul Lavoro</li>
+                            <li><strong>Accordo Stato-Regioni 17/04/2025</strong> - Formazione lavoratori (in vigore dal 24/05/2025)</li>
+                            <li><strong>L. 300/1970 Art. 7</strong> - Statuto dei Lavoratori (procedure disciplinari)</li>
+                            <li><strong>GDPR Reg. UE 2016/679</strong> - Privacy</li>
+                            <li><strong>CCNL Studi Professionali (Confprofessioni)</strong> - Contratto collettivo di riferimento</li>
+                            <li><strong>Codice ATECO 86.23.00</strong> - Attivita studi odontoiatrici (classificato <strong>RISCHIO ALTO</strong>)</li>
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p><strong>Smiledoc</strong> - Via Monte Circeo 12, Monterotondo (RM)</p>
+            <p>Portale Dipendenti e Gestione HR v2.0 | <a href="mailto:hr@smiledoc.it">Contatta HR</a></p>
+        </footer>
+    </div>
+
+    <script>
+        // Mode Switcher
+        function switchMode(mode) {
+            document.querySelectorAll('.portal').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+
+            document.getElementById('portal-' + mode).classList.add('active');
+            event.target.closest('.mode-btn').classList.add('active');
+        }
+
+        // Dipendente sections
+        function showDipSection(sectionId) {
+            document.querySelectorAll('#portal-dipendente .section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('#portal-dipendente .nav-tab').forEach(t => t.classList.remove('active'));
+
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        // Admin sections
+        function showAdminSection(sectionId) {
+            document.querySelectorAll('#portal-admin .section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
+
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Copy to clipboard
+        function copyToClipboard(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Testo copiato negli appunti!');
+            }).catch(err => {
+                alert('Errore copia. Prova manualmente.');
+            });
+        }
+
+        // Checklist persistence
+        document.querySelectorAll('.checklist input[type="checkbox"]').forEach(checkbox => {
+            const key = 'smiledoc_' + checkbox.id;
+
+            if (localStorage.getItem(key) === 'true') {
+                checkbox.checked = true;
+                checkbox.closest('li').classList.add('completed');
+            }
+
+            checkbox.addEventListener('change', function() {
+                localStorage.setItem(key, this.checked);
+                if (this.checked) {
+                    this.closest('li').classList.add('completed');
+                } else {
+                    this.closest('li').classList.remove('completed');
+                }
+            });
+        });
+
+        console.log('Smiledoc Portale Unificato v2.0 caricato');
+    </script>
+</body>
+</html>

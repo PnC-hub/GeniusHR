@@ -141,8 +141,7 @@ export default function LoginPage() {
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <Link href="/" className="text-3xl font-bold">
-            <span className="text-blue-600">Genius</span>
-            <span className="text-green-500">HR</span>
+            <span className="text-blue-600">Ordinia</span>
           </Link>
           <p className="mt-2 text-gray-600">Accedi al tuo portale HR</p>
         </div>

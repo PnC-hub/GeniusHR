@@ -72,8 +72,7 @@ export default function DashboardShell({
         {/* Logo */}
         <div className="p-6 border-b border-gray-200 dark:border-zinc-700">
           <Link href="/dashboard" className="text-2xl font-bold">
-            <span className={colors.primary}>Genius</span>
-            <span className={colors.secondary}>HR</span>
+            <span className={colors.primary}>Ordinia</span>
           </Link>
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
             {roleLabels[user.role]}

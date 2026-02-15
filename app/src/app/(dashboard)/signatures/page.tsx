@@ -373,6 +373,210 @@ export default function SignaturesManagementPage() {
           </table>
         </div>
       </div>
+      {/* Modal Nuova Richiesta Firma */}
+      {showNewModal && (
+        <NewSignatureModal
+          onClose={() => setShowNewModal(false)}
+          onSuccess={() => {
+            setShowNewModal(false)
+            fetchSignatures()
+          }}
+        />
+      )}
+    </div>
+  )
+}
+
+// Modal per creare nuova richiesta firma
+function NewSignatureModal({
+  onClose,
+  onSuccess,
+}: {
+  onClose: () => void
+  onSuccess: () => void
+}) {
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+  const [employees, setEmployees] = useState<Array<{ id: string; firstName: string; lastName: string }>>([])
+  const [documents, setDocuments] = useState<Array<{ id: string; name: string }>>([])
+  const [formData, setFormData] = useState({
+    employeeId: '',
+    documentId: '',
+    priority: 'NORMAL',
+    dueDate: '',
+    message: '',
+  })
+
+  useEffect(() => {
+    // Carica dipendenti
+    fetch('/api/employees')
+      .then((res) => res.json())
+      .then((data) => setEmployees(data.employees || data || []))
+      .catch(console.error)
+
+    // Carica documenti disponibili
+    fetch('/api/documents?type=TEMPLATE')
+      .then((res) => res.json())
+      .then((data) => setDocuments(data.documents || data || []))
+      .catch(console.error)
+  }, [])
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    setLoading(true)
+    setError('')
+
+    try {
+      const res = await fetch('/api/signatures', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
+
+      if (!res.ok) {
+        const data = await res.json()
+        throw new Error(data.error || 'Errore nella creazione')
+      }
+
+      onSuccess()
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Errore sconosciuto')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+      <div className="bg-white dark:bg-zinc-800 rounded-xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+        <div className="p-6 border-b border-gray-200 dark:border-zinc-700">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+              Nuova Richiesta Firma
+            </h2>
+            <button
+              onClick={onClose}
+              className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+
+        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+          {error && (
+            <div className="bg-red-50 text-red-700 p-3 rounded-lg text-sm">
+              {error}
+            </div>
+          )}
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Dipendente *
+            </label>
+            <select
+              value={formData.employeeId}
+              onChange={(e) =>
+                setFormData({ ...formData, employeeId: e.target.value })
+              }
+              required
+              className="w-full px-3 py-2 border border-gray-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-700 text-gray-900 dark:text-white"
+            >
+              <option value="">Seleziona dipendente</option>
+              {employees.map((emp) => (
+                <option key={emp.id} value={emp.id}>
+                  {emp.firstName} {emp.lastName}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Documento *
+            </label>
+            <select
+              value={formData.documentId}
+              onChange={(e) =>
+                setFormData({ ...formData, documentId: e.target.value })
+              }
+              required
+              className="w-full px-3 py-2 border border-gray-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-700 text-gray-900 dark:text-white"
+            >
+              <option value="">Seleziona documento</option>
+              {documents.map((doc) => (
+                <option key={doc.id} value={doc.id}>
+                  {doc.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Priorità
+            </label>
+            <select
+              value={formData.priority}
+              onChange={(e) =>
+                setFormData({ ...formData, priority: e.target.value })
+              }
+              className="w-full px-3 py-2 border border-gray-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-700 text-gray-900 dark:text-white"
+            >
+              <option value="LOW">Bassa</option>
+              <option value="NORMAL">Normale</option>
+              <option value="HIGH">Alta</option>
+              <option value="URGENT">Urgente</option>
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Scadenza
+            </label>
+            <input
+              type="date"
+              value={formData.dueDate}
+              onChange={(e) =>
+                setFormData({ ...formData, dueDate: e.target.value })
+              }
+              className="w-full px-3 py-2 border border-gray-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-700 text-gray-900 dark:text-white"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Messaggio (opzionale)
+            </label>
+            <textarea
+              value={formData.message}
+              onChange={(e) =>
+                setFormData({ ...formData, message: e.target.value })
+              }
+              rows={3}
+              placeholder="Aggiungi un messaggio per il dipendente..."
+              className="w-full px-3 py-2 border border-gray-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-700 text-gray-900 dark:text-white"
+            />
+          </div>
+
+          <div className="flex gap-3 pt-4">
+            <button
+              type="button"
+              onClick={onClose}
+              className="flex-1 py-2 px-4 border border-gray-300 dark:border-zinc-600 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-zinc-700"
+            >
+              Annulla
+            </button>
+            <button
+              type="submit"
+              disabled={loading}
+              className="flex-1 py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
+            >
+              {loading ? 'Invio...' : 'Invia Richiesta'}
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   )
 }

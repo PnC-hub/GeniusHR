@@ -70,8 +70,7 @@ export default function RegisterPage() {
       <div className="w-full max-w-4xl">
         <div className="text-center mb-8">
           <Link href="/" className="text-3xl font-bold">
-            <span className="text-blue-600">Genius</span>
-            <span className="text-green-500">HR</span>
+            <span className="text-blue-600">Ordinia</span>
           </Link>
           <p className="mt-2 text-gray-600">Inizia la tua prova gratuita di 14 giorni</p>
         </div>

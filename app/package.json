@@ -11,7 +11,11 @@
     "db:push": "prisma db push",
     "db:studio": "prisma studio",
     "db:seed": "npx ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts",
-    "db:seed-smiledoc": "ts-node -O '{\"module\":\"commonjs\"}' prisma/seed-smiledoc.ts"
+    "db:seed-smiledoc": "ts-node -O '{\"module\":\"commonjs\"}' prisma/seed-smiledoc.ts",
+    "backup": "ts-node ../scripts/backup-database.ts backup",
+    "backup:verify": "ts-node ../scripts/backup-database.ts verify",
+    "backup:cleanup": "ts-node ../scripts/backup-database.ts cleanup",
+    "backup:list": "ts-node ../scripts/backup-database.ts list"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.1",
@@ -23,6 +27,7 @@
     "lucide-react": "^0.563.0",
     "next": "16.1.4",
     "next-auth": "^4.24.13",
+    "openai": "^6.19.0",
     "prisma": "6.3.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",

@@ -29,8 +29,7 @@ export default async function AdminLayout({
       <aside className="fixed left-0 top-0 h-full w-64 bg-gray-800 border-r border-gray-700 z-30">
         <div className="p-6">
           <Link href="/admin" className="text-2xl font-bold">
-            <span className="text-blue-400">Genius</span>
-            <span className="text-green-400">HR</span>
+            <span className="text-blue-400">Ordinia</span>
             <span className="text-xs text-gray-400 ml-2">ADMIN</span>
           </Link>
         </div>

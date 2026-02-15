@@ -5,6 +5,7 @@ import DashboardShell from '@/components/layout/DashboardShell'
 import Sidebar from '@/components/sidebar'
 import { WelcomeGuide, HelpButton } from '@/components/onboarding'
 import FeedbackButton from '@/components/FeedbackButton'
+import { TrainingFAB } from '@/components/training'
 
 interface Client {
   id: string
@@ -84,6 +85,9 @@ export default function DashboardLayoutClient({
 
       {/* Feedback Button - always visible */}
       <FeedbackButton />
+
+      {/* AI Training FAB - quick access to training */}
+      <TrainingFAB />
 
       {/* Welcome Guide - first visit only */}
       {showWelcome && (
