@@ -1,0 +1,316 @@
+/**
+ * Feedback System Styles - Manuale Smiledoc
+ */
+
+/* Floating Action Button */
+#feedback-fab {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00bcd4, #0097a7);
+    color: white;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 188, 212, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: all 0.3s ease;
+}
+
+#feedback-fab:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 188, 212, 0.5);
+}
+
+#feedback-fab:active {
+    transform: scale(0.95);
+}
+
+#feedback-fab svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Modal */
+#feedback-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+#feedback-modal.open {
+    display: flex;
+}
+
+.feedback-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+}
+
+.feedback-modal-content {
+    position: relative;
+    background: var(--md-default-bg-color, #fff);
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow: hidden;
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Header */
+.feedback-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--md-default-fg-color--lightest, #e0e0e0);
+    background: linear-gradient(135deg, #00bcd4, #0097a7);
+    color: white;
+}
+
+.feedback-modal-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.feedback-modal-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.feedback-modal-close:hover {
+    opacity: 1;
+}
+
+/* Body */
+.feedback-modal-body {
+    padding: 24px;
+    overflow-y: auto;
+    max-height: calc(90vh - 80px);
+}
+
+/* Form Fields */
+.feedback-field {
+    margin-bottom: 20px;
+}
+
+.feedback-field label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: var(--md-default-fg-color, #333);
+    font-size: 0.9rem;
+}
+
+.feedback-field input,
+.feedback-field select,
+.feedback-field textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--md-default-fg-color--lightest, #e0e0e0);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    background: var(--md-default-bg-color, #fff);
+    color: var(--md-default-fg-color, #333);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-sizing: border-box;
+}
+
+.feedback-field input:focus,
+.feedback-field select:focus,
+.feedback-field textarea:focus {
+    outline: none;
+    border-color: #00bcd4;
+    box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.15);
+}
+
+.feedback-field textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.feedback-field input[readonly] {
+    background: var(--md-default-fg-color--lightest, #f5f5f5);
+    cursor: not-allowed;
+}
+
+.feedback-page-info {
+    background: var(--md-default-fg-color--lightest, #f5f5f5);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.feedback-page-info label {
+    font-size: 0.8rem;
+    color: var(--md-default-fg-color--light, #666);
+    margin-bottom: 4px;
+}
+
+.feedback-page-info input {
+    font-size: 0.85rem;
+    padding: 8px;
+}
+
+/* Actions */
+.feedback-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    padding-top: 12px;
+    border-top: 1px solid var(--md-default-fg-color--lightest, #e0e0e0);
+    margin-top: 8px;
+}
+
+.feedback-btn {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+}
+
+.feedback-btn-primary {
+    background: linear-gradient(135deg, #00bcd4, #0097a7);
+    color: white;
+}
+
+.feedback-btn-primary:hover {
+    box-shadow: 0 4px 12px rgba(0, 188, 212, 0.4);
+    transform: translateY(-1px);
+}
+
+.feedback-btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.feedback-btn-secondary {
+    background: var(--md-default-fg-color--lightest, #e0e0e0);
+    color: var(--md-default-fg-color, #333);
+}
+
+.feedback-btn-secondary:hover {
+    background: var(--md-default-fg-color--lighter, #d0d0d0);
+}
+
+/* Success & Error States */
+.feedback-success,
+.feedback-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.feedback-success svg {
+    color: #4caf50;
+    margin-bottom: 16px;
+}
+
+.feedback-error svg {
+    color: #f44336;
+    margin-bottom: 16px;
+}
+
+.feedback-success h4,
+.feedback-error h4 {
+    margin: 0 0 8px 0;
+    font-size: 1.25rem;
+}
+
+.feedback-success p,
+.feedback-error p {
+    margin: 0 0 20px 0;
+    color: var(--md-default-fg-color--light, #666);
+}
+
+/* Dark mode support */
+[data-md-color-scheme="slate"] #feedback-fab {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+[data-md-color-scheme="slate"] .feedback-modal-content {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    #feedback-fab {
+        bottom: 16px;
+        right: 16px;
+        width: 48px;
+        height: 48px;
+    }
+
+    #feedback-fab svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .feedback-modal-content {
+        max-height: 95vh;
+        border-radius: 12px 12px 0 0;
+        margin-top: auto;
+    }
+
+    #feedback-modal {
+        align-items: flex-end;
+        padding: 0;
+    }
+
+    .feedback-modal-body {
+        padding: 16px;
+    }
+
+    .feedback-actions {
+        flex-direction: column;
+    }
+
+    .feedback-btn {
+        width: 100%;
+    }
+}

@@ -1,0 +1,51 @@
+# Configurazione Clinica
+# Questo file centralizza tutti i dati specifici della clinica.
+# Per creare un manuale per una nuova clinica, basta copiare questo file
+# e modificare i valori. Lo script di build sostituisce automaticamente
+# le variabili {{ clinic.xxx }} nei file .md
+
+clinic:
+  # Dati identificativi
+  name: "Smiledoc"
+  full_name: "Studio Dentistico Smiledoc"
+  legal_name: "Smiledoc S.r.l."
+  piva: ""
+  pec: ""
+  codice_fiscale: ""
+
+  # Sede
+  address: "Via Monte Circeo 12"
+  cap: "00015"
+  city: "Monterotondo"
+  province: "RM"
+  full_address: "Via Monte Circeo 12, 00015 Monterotondo (RM)"
+
+  # Contatti
+  phone: "06 90623936"
+  email: "info@smiledoc.it"
+  email_privacy: "privacy@smiledoc.it"
+  email_direzione: "direzione@smiledoc.it"
+  website: "https://smiledoc.it"
+
+  # API e integrazione
+  clinic_id: 2
+  api_base: "https://api-test.geniusmile.com/api/v1"
+
+  # Branding
+  primary_color: "cyan"
+  accent_color: "cyan"
+  copyright_year: "2026"
+
+  # Manuale
+  site_name: "Manuale Smiledoc"
+  site_url: "https://manuale-smiledoc.geniusmile.com"
+
+  # Deploy
+  deploy_path: "/var/www/vhosts/geniusmile.com/manuale-smiledoc/"
+  deploy_server: "93.186.255.213"
+  deploy_user: "geniusfast"
+  deploy_owner: "geniusmile:psacln"
+
+  # Direttore/Responsabile
+  director_name: "Dott. Piernatale Civero"
+  director_role: "Direttore Sanitario"

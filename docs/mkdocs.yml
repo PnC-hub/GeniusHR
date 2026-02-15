@@ -1,0 +1,234 @@
+site_name: Manuale {{ clinic.name }}
+site_url: https://manuale-smiledoc.geniusmile.com
+site_description: Manuale operativo per la gestione delle cliniche {{ clinic.name }}
+
+theme:
+  name: material
+  language: it
+  palette:
+    - scheme: default
+      primary: cyan
+      accent: cyan
+      toggle:
+        icon: material/brightness-7
+        name: Modalità scura
+    - scheme: slate
+      primary: cyan
+      accent: cyan
+      toggle:
+        icon: material/brightness-4
+        name: Modalità chiara
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.indexes
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.tabs.link
+  icon:
+    logo: material/tooth
+  favicon: assets/favicon.png
+
+plugins:
+  - search:
+      lang: it
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - toc:
+      permalink: true
+  - attr_list
+  - md_in_html
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+nav:
+  - Home: index.md
+
+  - Sistema Documentale:
+    - sistema-documentale/index.md
+    - sistema-documentale/riepilogo-sistema.md
+    - sistema-documentale/politica-controllo.md
+    - sistema-documentale/registro-documenti.md
+    - sistema-documentale/registro-revisioni.md
+    - sistema-documentale/presa-visione.md
+    - sistema-documentale/registro-prese-visione.md
+    - sistema-documentale/verifica-integrita.md
+    - sistema-documentale/dichiarazione-conformita.md
+
+  - Generali:
+    - generali/index.md
+    - Protocolli:
+      - generali/protocolli/index.md
+      - generali/protocolli/igiene-mani.md
+    - Procedure:
+      - generali/procedure/index.md
+      - generali/procedure/reclami.md
+    - Moduli:
+      - generali/moduli/index.md
+      - Privacy:
+        - generali/moduli/privacy/informativa-privacy.md
+        - generali/moduli/privacy/consenso-trattamento.md
+        - generali/moduli/privacy/consenso-marketing.md
+
+  - Corporate:
+    - corporate/index.md
+    - Protocolli:
+      - corporate/protocolli/index.md
+      - Standard di Servizio:
+        - corporate/protocolli/standard/tempi-attesa.md
+        - corporate/protocolli/standard/comunicazione-paziente.md
+        - corporate/protocolli/standard/follow-up.md
+      - Indicatori KPI:
+        - corporate/protocolli/indicatori/kpi-clinici.md
+        - corporate/protocolli/indicatori/kpi-gestionali.md
+        - corporate/protocolli/indicatori/soddisfazione-paziente.md
+      - Miglioramento Continuo:
+        - corporate/protocolli/miglioramento/audit-interni.md
+        - corporate/protocolli/miglioramento/azioni-correttive.md
+        - corporate/protocolli/miglioramento/riunioni-staff.md
+    - Procedure:
+      - corporate/procedure/index.md
+      - Onboarding:
+        - corporate/procedure/onboarding/primo-giorno.md
+        - corporate/procedure/onboarding/prima-settimana.md
+        - corporate/procedure/onboarding/primo-mese.md
+      - Ruoli e Mansioni:
+        - corporate/procedure/ruoli/segretaria.md
+        - corporate/procedure/ruoli/assistente-poltrona.md
+        - corporate/procedure/ruoli/igienista.md
+        - corporate/procedure/ruoli/odontoiatra.md
+      - Formazione:
+        - corporate/procedure/formazione/formazione-obbligatoria.md
+        - corporate/procedure/formazione/aggiornamento-ecm.md
+        - corporate/procedure/formazione/formazione-software.md
+      - Valutazione:
+        - corporate/procedure/valutazione/obiettivi.md
+        - corporate/procedure/valutazione/feedback.md
+      - Amministrazione:
+        - corporate/procedure/amministrazione/fatturazione.md
+        - corporate/procedure/amministrazione/incassi.md
+        - corporate/procedure/amministrazione/prima-nota.md
+        - corporate/procedure/amministrazione/preventivi.md
+        - corporate/procedure/amministrazione/recupero-crediti.md
+
+  - Clinica:
+    - clinica/index.md
+    - Protocolli:
+      - clinica/protocolli/index.md
+      - Sterilizzazione:
+        - clinica/protocolli/sterilizzazione/ciclo-sterilizzazione.md
+        - clinica/protocolli/sterilizzazione/tracciabilita.md
+        - clinica/protocolli/sterilizzazione/manutenzione-autoclave.md
+      - Igiene e Disinfezione:
+        - clinica/protocolli/igiene/disinfezione-superfici.md
+        - clinica/protocolli/igiene/gestione-rifiuti.md
+      - Accoglienza Paziente:
+        - clinica/protocolli/accoglienza/prima-visita.md
+        - clinica/protocolli/accoglienza/visite-successive.md
+        - clinica/protocolli/accoglienza/gestione-attesa.md
+      - Emergenze:
+        - clinica/protocolli/emergenze/emergenze-mediche.md
+        - clinica/protocolli/emergenze/reazioni-allergiche.md
+        - clinica/protocolli/emergenze/sincope.md
+        - clinica/protocolli/emergenze/kit-emergenza.md
+      - Radiologia:
+        - clinica/protocolli/radiologia/rx-endorali.md
+        - clinica/protocolli/radiologia/panoramica.md
+        - clinica/protocolli/radiologia/protezione-paziente.md
+      - Sicurezza DVR:
+        - clinica/protocolli/dvr/rischi-specifici.md
+        - clinica/protocolli/dvr/dpi.md
+        - clinica/protocolli/dvr/piano-emergenza.md
+      - Normativa Sanitaria:
+        - clinica/protocolli/normativa/autorizzazioni.md
+        - clinica/protocolli/normativa/requisiti-strutturali.md
+        - clinica/protocolli/normativa/obblighi-sanitari.md
+      - Gestione Rifiuti:
+        - clinica/protocolli/rifiuti/classificazione.md
+        - clinica/protocolli/rifiuti/smaltimento.md
+        - clinica/protocolli/rifiuti/registro-carico-scarico.md
+      - Radioprotezione:
+        - clinica/protocolli/radioprotezione/esperto-qualificato.md
+        - clinica/protocolli/radioprotezione/dosimetria.md
+        - clinica/protocolli/radioprotezione/controlli-periodici.md
+    - Procedure:
+      - clinica/procedure/index.md
+      - Segreteria:
+        - clinica/procedure/segreteria/gestione-telefonate.md
+        - clinica/procedure/segreteria/gestione-appuntamenti.md
+        - clinica/procedure/segreteria/conferma-appuntamenti.md
+        - clinica/procedure/segreteria/gestione-disdette.md
+        - clinica/procedure/segreteria/lista-attesa.md
+      - Comunicazione:
+        - clinica/procedure/comunicazione/recall-pazienti.md
+        - clinica/procedure/comunicazione/campagne-sms.md
+        - clinica/procedure/comunicazione/recensioni.md
+      - Magazzino:
+        - clinica/procedure/magazzino/gestione-ordini.md
+        - clinica/procedure/magazzino/inventario.md
+        - clinica/procedure/magazzino/scadenze.md
+        - clinica/procedure/magazzino/fornitori.md
+    - Checklist:
+      - clinica/checklist/index.md
+      - clinica/checklist/apertura-studio.md
+      - clinica/checklist/chiusura-studio.md
+      - clinica/checklist/preparazione-riunito.md
+      - clinica/checklist/controllo-settimanale.md
+      - clinica/checklist/controllo-mensile.md
+    - Moduli:
+      - clinica/moduli/index.md
+      - Consensi Informati:
+        - clinica/moduli/consensi/consenso-generale.md
+        - clinica/moduli/consensi/consenso-chirurgia.md
+        - clinica/moduli/consensi/consenso-implantologia.md
+        - clinica/moduli/consensi/consenso-ortodonzia.md
+        - clinica/moduli/consensi/consenso-endodonzia.md
+        - clinica/moduli/consensi/consenso-sbiancamento.md
+        - clinica/moduli/consensi/consenso-minori.md
+      - Anamnesi:
+        - clinica/moduli/anamnesi/anamnesi-adulti.md
+        - clinica/moduli/anamnesi/anamnesi-pediatrica.md
+        - clinica/moduli/anamnesi/aggiornamento-anamnesi.md
+      - Documenti Clinici:
+        - clinica/moduli/clinici/piano-trattamento.md
+        - clinica/moduli/clinici/diario-clinico.md
+
+  - Sede:
+    - sede/index.md
+
+  - Sistema HR:
+    - sistema-hr/index.md
+    - sistema-hr/assistente-ai.md
+    - sistema-hr/formazione.md
+    - sistema-hr/documenti.md
+
+  - Feedback:
+    - feedback/index.md
+
+extra:
+  social:
+    - icon: fontawesome/solid/globe
+      link: https://smiledoc.it
+  generator: false
+
+extra_css:
+  - assets/stylesheets/feedback.css
+
+extra_javascript:
+  - assets/javascripts/feedback.js
+
+copyright: "&copy; 2026 {{ clinic.legal_name }} - Tutti i diritti riservati"
